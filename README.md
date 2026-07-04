@@ -30,10 +30,21 @@ pnpm build
 ## Project Structure
 
 ```text
-src/app
-├── globals.css
-├── layout.tsx
-└── page.tsx
+src/
+├── app/                 # App Router entrypoints and metadata routes
+├── components/
+│   ├── landing/         # Marketing page composition and sections
+│   ├── layout/          # Header, footer, mobile nav, app badges
+│   └── ui/              # shadcn/ui source components
+├── config/              # Site URL, navigation, global links
+├── data/                # Typed static marketing content
+├── lib/                 # Shared utilities and server helpers
+└── types/               # Shared TypeScript contracts
+
+public/
+├── app/                 # Screenshots, store badges, QR code
+├── brand/               # Logo and brand marks
+└── social/              # Static social sharing assets
 ```
 
-The marketing architecture, shadcn/ui components, app metadata, and public assets will be added in the next checkpoints.
+Current landing content is static and typed in `src/data/landing.ts`. Dynamic Strapi-backed content can be added later from Server Components without exposing API tokens to the browser.
