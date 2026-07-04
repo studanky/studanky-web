@@ -22,6 +22,11 @@ export type Feature = {
   icon: "map" | "droplet" | "filter" | "report";
 };
 
+export type ProblemPoint = {
+  title: string;
+  description: string;
+};
+
 export type HowItWorksStep = {
   step: string;
   title: string;

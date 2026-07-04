@@ -2,6 +2,7 @@ import type {
   FaqItem,
   Feature,
   HowItWorksStep,
+  ProblemPoint,
   Screenshot,
   Statistic,
   Testimonial,
@@ -18,6 +19,24 @@ export const statistics: Statistic[] = [
   { value: "1 000+", label: "míst pro objevování" },
   { value: "CZ", label: "navrženo pro českou krajinu" },
   { value: "Offline", label: "připraveno pro terénní použití" },
+];
+
+export const problemPoints: ProblemPoint[] = [
+  {
+    title: "Mapy ukazují místo, ale ne aktuální stav",
+    description:
+      "Studánka může být krásně značená a přesto netéct. Landing page musí rychle vysvětlit, proč je aktuální hlášení důležité.",
+  },
+  {
+    title: "Informace z terénu se ztrácejí",
+    description:
+      "Návštěvníci často vědí, co se u pramene děje, ale nemají jednoduché místo, kam poznatek bezpečně přidat.",
+  },
+  {
+    title: "Správci i turisté potřebují stejný přehled",
+    description:
+      "Jedna přehledná aplikace může propojit výletníky, dobrovolníky i lidi, kteří se o konkrétní místo starají.",
+  },
 ];
 
 export const features: Feature[] = [
@@ -61,7 +80,8 @@ export const howItWorks: HowItWorksStep[] = [
   {
     step: "03",
     title: "Přidejte report",
-    description: "Po návštěvě doplňte, zda voda teče, a pomozte dalším návštěvníkům.",
+    description:
+      "Po návštěvě doplňte, zda voda teče, a pomozte dalším návštěvníkům.",
   },
 ];
 
@@ -69,19 +89,19 @@ export const screenshots: Screenshot[] = [
   {
     title: "Mapa okolních studánek",
     description: "Přehledné hledání míst ve vašem okolí.",
-    imageSrc: "/app/screenshot-map.webp",
+    imageSrc: "/app/screenshot-map.svg",
     imageAlt: "Mapa studánek v mobilní aplikaci Studánky",
   },
   {
     title: "Detail studánky",
     description: "Stav vody, poloha, popis a poslední reporty na jednom místě.",
-    imageSrc: "/app/screenshot-detail.webp",
+    imageSrc: "/app/screenshot-detail.svg",
     imageAlt: "Detail studánky v mobilní aplikaci Studánky",
   },
   {
     title: "Přidání hlášení",
     description: "Rychlé sdílení informace z terénu.",
-    imageSrc: "/app/screenshot-report.webp",
+    imageSrc: "/app/screenshot-report.svg",
     imageAlt: "Formulář pro přidání hlášení ve Studánkách",
   },
 ];

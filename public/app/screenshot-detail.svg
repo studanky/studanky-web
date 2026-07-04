@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="420" height="746" viewBox="0 0 420 746" role="img" aria-labelledby="title desc">
+  <title id="title">Detail studánky</title>
+  <desc id="desc">Placeholder obrazovka pro landing page Studánky.</desc>
+  <rect width="420" height="746" rx="44" fill="oklch(0.988 0.012 169)"/>
+  <rect x="28" y="28" width="364" height="690" rx="32" fill="white" stroke="oklch(0.87 0.025 150)" stroke-width="2"/>
+  <rect x="164" y="48" width="92" height="8" rx="4" fill="oklch(0.87 0.025 150)"/>
+  <text x="52" y="96" fill="oklch(0.205 0.045 154)" font-family="Arial, sans-serif" font-size="24" font-weight="700">Studánky</text>
+  <rect x="52" y="120" width="316" height="44" rx="14" fill="oklch(0.946 0.018 115)"/>
+  <text x="72" y="148" fill="oklch(0.446 0.035 155)" font-family="Arial, sans-serif" font-size="15">Detail studánky</text>
+  
+  <circle cx="210" cy="260" r="78" fill="oklch(0.886 0.075 198)"/>
+  <path d="M210 192 C246 238 268 270 268 304 C268 340 242 366 210 366 C178 366 152 340 152 304 C152 270 174 238 210 192Z" fill="oklch(0.62 0.12 205)"/>
+  <rect x="52" y="392" width="316" height="40" rx="12" fill="oklch(0.934 0.055 142)"/>
+  <rect x="52" y="452" width="258" height="20" rx="10" fill="oklch(0.87 0.025 150)"/>
+  <rect x="52" y="488" width="300" height="20" rx="10" fill="oklch(0.87 0.025 150)"/>
+  <rect x="52" y="548" width="316" height="88" rx="20" fill="oklch(0.946 0.018 115)"/>
+
+  <circle cx="210" cy="690" r="20" fill="oklch(0.62 0.12 205)" opacity="0.18"/>
+</svg>

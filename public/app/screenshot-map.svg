@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="420" height="746" viewBox="0 0 420 746" role="img" aria-labelledby="title desc">
+  <title id="title">Mapa okolních studánek</title>
+  <desc id="desc">Placeholder obrazovka pro landing page Studánky.</desc>
+  <rect width="420" height="746" rx="44" fill="oklch(0.988 0.012 169)"/>
+  <rect x="28" y="28" width="364" height="690" rx="32" fill="white" stroke="oklch(0.87 0.025 150)" stroke-width="2"/>
+  <rect x="164" y="48" width="92" height="8" rx="4" fill="oklch(0.87 0.025 150)"/>
+  <text x="52" y="96" fill="oklch(0.205 0.045 154)" font-family="Arial, sans-serif" font-size="24" font-weight="700">Studánky</text>
+  <rect x="52" y="120" width="316" height="44" rx="14" fill="oklch(0.946 0.018 115)"/>
+  <text x="72" y="148" fill="oklch(0.446 0.035 155)" font-family="Arial, sans-serif" font-size="15">Mapa okolních studánek</text>
+  
+  <rect x="52" y="190" width="316" height="360" rx="24" fill="oklch(0.886 0.075 198)" opacity="0.55"/>
+  <path d="M52 306 C128 240 166 378 238 318 C286 278 316 292 368 252" fill="none" stroke="oklch(0.47 0.105 132)" stroke-width="16" stroke-linecap="round" opacity="0.55"/>
+  <path d="M72 470 C132 430 182 488 236 438 C290 386 330 424 356 384" fill="none" stroke="oklch(0.62 0.12 205)" stroke-width="10" stroke-linecap="round"/>
+  <circle cx="158" cy="286" r="18" fill="oklch(0.405 0.122 164)"/>
+  <circle cx="272" cy="410" r="18" fill="oklch(0.405 0.122 164)"/>
+  <circle cx="322" cy="300" r="18" fill="oklch(0.82 0.12 82)"/>
+  <rect x="52" y="580" width="146" height="54" rx="18" fill="oklch(0.934 0.055 142)"/>
+  <rect x="222" y="580" width="146" height="54" rx="18" fill="oklch(0.934 0.055 142)"/>
+
+  <circle cx="210" cy="690" r="20" fill="oklch(0.405 0.122 164)" opacity="0.18"/>
+</svg>

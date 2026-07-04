@@ -10,6 +10,7 @@ export const siteConfig = {
     github: "https://github.com/",
     appStore: "#app-store",
     googlePlay: "#google-play",
+    download: "#stahnout",
   },
 } as const;
 
