@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Studánky">
+  <rect width="512" height="512" rx="112" fill="#2f6f4f" />
+  <path d="M256 86c54 72 112 142 112 214 0 68-50 122-112 122S144 368 144 300c0-72 58-142 112-214Z" fill="#f6fbf5" />
+  <path d="M192 314c24 30 56 46 96 46 28 0 54-8 76-24-14 50-56 86-108 86-56 0-102-44-110-100 12-13 28-16 46-8Z" fill="#9ccfdd" />
+  <path d="M218 274c18-42 46-78 68-108 18 24 36 50 50 76-36-8-82 0-118 32Z" fill="#ffffff" opacity="0.72" />
+</svg>
