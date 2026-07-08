@@ -2,6 +2,13 @@
 
 Landing page for the Studánky mobile app, built with Next.js App Router and Tailwind CSS.
 
+## Documentation
+
+Feature docs describing what the web app supports:
+
+- [Deep Linking — Universal Links & App Links](docs/deep-linking.md) — how shared `/s/*` links open in the native app, with a platform-aware web fallback (download page + QR).
+- [App Store / Play Store Banners](docs/app-banners.md) — site-wide native-app promotion: iOS Smart App Banner, custom Android banner, and the manifest `related_applications` signal.
+
 ## TODO (before production)
 
 Deep linking (Universal Links / App Links) + `/s/*` fallback page:
@@ -65,6 +72,8 @@ public/
 ├── app/                 # Screenshots, store badges, QR code
 ├── brand/               # Logo and brand marks
 └── social/              # Static social sharing assets
+
+docs/                    # Feature documentation (deep linking, app banners)
 ```
 
 Current landing content is static and typed in `src/data/landing.ts`. Dynamic Strapi-backed content can be added later from Server Components without exposing API tokens to the browser.
