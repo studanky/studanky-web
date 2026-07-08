@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 
+import { AndroidAppBanner } from "@/components/app-links/android-app-banner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { siteConfig } from "@/config/site";
 import "./globals.css";
@@ -74,6 +75,11 @@ export const metadata: Metadata = {
   formatDetection: {
     telephone: false,
   },
+  // iOS Smart App Banner site-wide (Safari). Only when the App Store ID is set.
+  // The /s/* page also adds an app-argument with the specific URL via generateMetadata.
+  ...(siteConfig.appStoreId
+    ? { itunes: { appId: siteConfig.appStoreId } }
+    : {}),
 };
 
 export const viewport: Viewport = {
@@ -96,6 +102,7 @@ export default function RootLayout({
       )}
     >
       <body className="flex min-h-full flex-col">
+        <AndroidAppBanner />
         <TooltipProvider>{children}</TooltipProvider>
       </body>
     </html>

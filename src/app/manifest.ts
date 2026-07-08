@@ -45,5 +45,19 @@ export default function manifest(): MetadataRoute.Manifest {
         label: "Detail studánky s průtokem vody",
       },
     ],
+    // Android equivalent of the Smart App Banner: tells Chrome to prefer the
+    // native Google Play app (verified via assetlinks.json) over installing the PWA.
+    ...(siteConfig.androidPackageId
+      ? {
+          prefer_related_applications: true,
+          related_applications: [
+            {
+              platform: "play",
+              id: siteConfig.androidPackageId,
+              url: `https://play.google.com/store/apps/details?id=${siteConfig.androidPackageId}`,
+            },
+          ],
+        }
+      : {}),
   };
 }

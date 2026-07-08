@@ -2,6 +2,26 @@
 
 Landing page for the Studánky mobile app, built with Next.js App Router and Tailwind CSS.
 
+## TODO (before production)
+
+Deep linking (Universal Links / App Links) + `/s/*` fallback page:
+
+- [ ] **Real store URLs** — in `src/config/site.ts` (`links.appStore`, `links.googlePlay`) replace the `#app-store` / `#google-play` placeholders with the real App Store and Google Play links. They propagate to the landing page badges and the fallback page.
+- [ ] **Verify Android fingerprints** — `src/app/.well-known/assetlinks.json/route.ts` must include the **App signing key** SHA-256 from the Play Console (App integrity), not just the upload/debug key.
+- [ ] **Verify iOS appID** — `TEAMID.BundleID` in `src/app/.well-known/apple-app-site-association/route.ts` must match the Apple Developer account and the `applinks:studankyapp.cz` entitlement.
+- [ ] **iOS Smart App Banner** — set the **numeric App Store ID** (not the bundle ID) in `src/config/site.ts` (`appStoreId`) once the app is published. Empty = banner is not rendered.
+- [ ] **Android app banner** — `src/config/site.ts` (`androidPackageId`) is pre-filled with `cz.studankyapp.studanky`; verify the **Play listing is live** (otherwise "Open" leads to a non-existent page). Empty = disables both the banner and the manifest `related_applications`.
+- [ ] **Verify endpoints after deploy** (must return `200`, `application/json`, `redirs=0`):
+
+  ```bash
+  curl -sS -o /dev/null -w "%{http_code} ct=%{content_type} redirs=%{num_redirects}\n" \
+    https://studankyapp.cz/.well-known/apple-app-site-association
+  curl -sS -o /dev/null -w "%{http_code} ct=%{content_type} redirs=%{num_redirects}\n" \
+    https://studankyapp.cz/.well-known/assetlinks.json
+  ```
+
+- [ ] **Coolify / Traefik** — ensure the apex `studankyapp.cz` serves `.well-known` **without redirecting** to `www` (otherwise deep links break); valid HTTPS cert; no basic-auth in front of `.well-known`.
+
 ## Stack
 
 - Next.js 16
