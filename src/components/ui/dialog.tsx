@@ -7,6 +7,26 @@ import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import { XIcon } from "lucide-react"
 
+type DialogContentCloseProps =
+  | {
+      showCloseButton?: true
+      closeLabel: string
+    }
+  | {
+      showCloseButton: false
+      closeLabel?: string
+    }
+
+type DialogFooterCloseProps =
+  | {
+      showCloseButton?: false
+      closeLabel?: string
+    }
+  | {
+      showCloseButton: true
+      closeLabel: string
+    }
+
 function Dialog({ ...props }: DialogPrimitive.Root.Props) {
   return <DialogPrimitive.Root data-slot="dialog" {...props} />
 }
@@ -43,10 +63,9 @@ function DialogContent({
   className,
   children,
   showCloseButton = true,
+  closeLabel,
   ...props
-}: DialogPrimitive.Popup.Props & {
-  showCloseButton?: boolean
-}) {
+}: DialogPrimitive.Popup.Props & DialogContentCloseProps) {
   return (
     <DialogPortal>
       <DialogOverlay />
@@ -72,7 +91,7 @@ function DialogContent({
           >
             <XIcon
             />
-            <span className="sr-only">Close</span>
+            <span className="sr-only">{closeLabel}</span>
           </DialogPrimitive.Close>
         )}
       </DialogPrimitive.Popup>
@@ -93,11 +112,10 @@ function DialogHeader({ className, ...props }: React.ComponentProps<"div">) {
 function DialogFooter({
   className,
   showCloseButton = false,
+  closeLabel,
   children,
   ...props
-}: React.ComponentProps<"div"> & {
-  showCloseButton?: boolean
-}) {
+}: React.ComponentProps<"div"> & DialogFooterCloseProps) {
   return (
     <div
       data-slot="dialog-footer"
@@ -110,7 +128,7 @@ function DialogFooter({
       {children}
       {showCloseButton && (
         <DialogPrimitive.Close render={<Button variant="outline" />}>
-          Close
+          {closeLabel}
         </DialogPrimitive.Close>
       )}
     </div>

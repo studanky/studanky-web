@@ -1,14 +1,19 @@
 import type { MetadataRoute } from "next";
 
 import { siteConfig } from "@/config/site";
+import { defaultLocale, localeMeta } from "@/i18n/config";
+import { getDictionary } from "@/i18n/dictionaries";
 
-export default function manifest(): MetadataRoute.Manifest {
+// A web app manifest is single-language; we render it in the default locale.
+export default async function manifest(): Promise<MetadataRoute.Manifest> {
+  const dict = await getDictionary(defaultLocale);
+
   return {
     id: "/",
     name: siteConfig.name,
     short_name: siteConfig.name,
-    description: siteConfig.description,
-    lang: "cs-CZ",
+    description: dict.manifest.description,
+    lang: localeMeta[defaultLocale].hrefLang,
     start_url: "/",
     scope: "/",
     display: "standalone",
@@ -35,14 +40,14 @@ export default function manifest(): MetadataRoute.Manifest {
         sizes: "390x844",
         type: "image/svg+xml",
         form_factor: "narrow",
-        label: "Mapa studánek v okolí",
+        label: dict.manifest.screenshotMap,
       },
       {
         src: "/app/screenshot-detail.svg",
         sizes: "390x844",
         type: "image/svg+xml",
         form_factor: "narrow",
-        label: "Detail studánky s průtokem vody",
+        label: dict.manifest.screenshotDetail,
       },
     ],
     // Android equivalent of the Smart App Banner: tells Chrome to prefer the

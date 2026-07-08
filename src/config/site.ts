@@ -1,11 +1,11 @@
-import type { CtaLink, NavItem } from "@/types/landing";
-
+/**
+ * Locale-independent site configuration. All user-facing copy lives in
+ * `messages/*.json`; this file only holds structural data (brand, URLs, nav
+ * targets, store identifiers) that is the same in every language.
+ */
 export const siteConfig = {
   name: "Studánky",
   url: "https://studankyapp.cz",
-  description:
-    "Mobilní aplikace pro hledání studánek a sdílení aktuálního průtoku vody.",
-  locale: "cs_CZ",
   // Numeric App Store ID (not the bundle ID) for the iOS Smart App Banner.
   // Empty = banner is not rendered. Fill in once the app is on the App Store.
   appStoreId: "" as string,
@@ -21,24 +21,24 @@ export const siteConfig = {
   },
 } as const;
 
-export const mainNav: NavItem[] = [
-  { label: "Aplikace", href: "#aplikace" },
-  { label: "Funkce", href: "#funkce" },
-  { label: "Jak to funguje", href: "#jak-to-funguje" },
-  { label: "FAQ", href: "#faq" },
-];
+/**
+ * Primary navigation. `id` keys into `dict.nav.items[id]` for the label; `href`
+ * is a same-page anchor and identical across locales.
+ */
+export const mainNav = [
+  { id: "app", href: "#aplikace" },
+  { id: "features", href: "#funkce" },
+  { id: "howItWorks", href: "#jak-to-funguje" },
+  { id: "faq", href: "#faq" },
+] as const;
 
-export const primaryCtas: CtaLink[] = [
-  {
-    label: "Stáhnout pro iPhone",
-    href: siteConfig.links.appStore,
-    variant: "store",
-    platform: "ios",
-  },
-  {
-    label: "Stáhnout pro Android",
-    href: siteConfig.links.googlePlay,
-    variant: "store",
-    platform: "android",
-  },
-];
+export type NavItemId = (typeof mainNav)[number]["id"];
+
+/**
+ * Store call-to-actions. `platform` selects the badge asset and the localized
+ * label (`dict.storeBadges`); `href` is the store link.
+ */
+export const primaryCtas = [
+  { platform: "ios", href: siteConfig.links.appStore },
+  { platform: "android", href: siteConfig.links.googlePlay },
+] as const;

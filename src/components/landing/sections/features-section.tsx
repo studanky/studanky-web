@@ -13,29 +13,32 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { features } from "@/data/landing";
-import type { Feature } from "@/types/landing";
+import type { Dictionary } from "@/i18n/dictionary";
 import { SectionHeading } from "../section-heading";
 
-const featureIcons: Record<Feature["icon"], ComponentType<SVGProps<SVGSVGElement>>> = {
-  map: MapIcon,
-  droplet: DropletIcon,
-  filter: FilterIcon,
-  report: MessageSquarePlusIcon,
-};
+// Icons are structural (locale-independent) and paired with the translated
+// feature copy by index.
+const featureIcons: ComponentType<SVGProps<SVGSVGElement>>[] = [
+  MapIcon,
+  DropletIcon,
+  FilterIcon,
+  MessageSquarePlusIcon,
+];
 
-export function FeaturesSection() {
+export function FeaturesSection({ dict }: { dict: Dictionary }) {
+  const features = dict.features;
+
   return (
     <section id="funkce" className="px-4 py-16 sm:px-6 lg:px-8">
       <div className="mx-auto flex w-full max-w-6xl flex-col gap-10">
         <SectionHeading
-          eyebrow="Funkce"
-          title="Všechno důležité před zastávkou u pramene"
-          description="Sekce zatím funguje jako kostra pro finální obsah, screenshoty a napojení na reálná data."
+          eyebrow={features.eyebrow}
+          title={features.title}
+          description={features.description}
         />
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {features.map((feature) => {
-            const Icon = featureIcons[feature.icon];
+          {features.items.map((feature, index) => {
+            const Icon = featureIcons[index] ?? MapIcon;
 
             return (
               <Card key={feature.title}>
@@ -47,9 +50,7 @@ export function FeaturesSection() {
                   <CardDescription>{feature.description}</CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-sm text-muted-foreground">
-                    Připraveno pro rozšíření o konkrétní UI stav aplikace.
-                  </p>
+                  <p className="text-sm text-muted-foreground">{features.cardNote}</p>
                 </CardContent>
               </Card>
             );

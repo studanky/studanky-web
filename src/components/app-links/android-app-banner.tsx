@@ -5,6 +5,8 @@ import { DropletsIcon, XIcon } from "lucide-react";
 
 import { buttonVariants } from "@/components/ui/button";
 import { siteConfig } from "@/config/site";
+import type { Dictionary } from "@/i18n/dictionary";
+import { format } from "@/i18n/format";
 import { cn } from "@/lib/utils";
 
 const DISMISS_KEY = "studanky-android-banner-dismissed";
@@ -47,7 +49,13 @@ function getServerSnapshot() {
  * shows an automatic native banner, so we render our own. Client-only detection
  * via useSyncExternalStore keeps pages statically renderable.
  */
-export function AndroidAppBanner() {
+export function AndroidAppBanner({
+  messages,
+  appName,
+}: {
+  messages: Dictionary["androidBanner"];
+  appName: string;
+}) {
   const visible = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
 
   if (!visible) return null;
@@ -68,14 +76,14 @@ export function AndroidAppBanner() {
   return (
     <div
       role="region"
-      aria-label={`Nabídka mobilní aplikace ${siteConfig.name}`}
+      aria-label={format(messages.regionAria, { name: appName })}
       className="w-full border-b bg-card text-card-foreground duration-300 animate-in fade-in-0 slide-in-from-top-4 motion-reduce:animate-none"
     >
       <div className="mx-auto flex w-full max-w-6xl items-center gap-3 px-3 py-2 sm:px-4">
         <button
           type="button"
           onClick={dismiss}
-          aria-label="Zavřít nabídku aplikace"
+          aria-label={messages.dismissAria}
           className="inline-flex size-7 shrink-0 items-center justify-center rounded-lg text-muted-foreground outline-none transition-colors hover:bg-muted hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring/50"
         >
           <XIcon className="size-4" aria-hidden="true" />
@@ -87,15 +95,15 @@ export function AndroidAppBanner() {
 
         <div className="flex min-w-0 flex-1 flex-col">
           <span className="truncate text-sm font-semibold tracking-tight">
-            {siteConfig.name}
+            {appName}
           </span>
           <span className="truncate text-xs text-muted-foreground">
-            Zdarma na Google Play
+            {messages.subtitle}
           </span>
         </div>
 
         <a href={playUrl} className={cn(buttonVariants({ size: "sm" }), "shrink-0")}>
-          Otevřít
+          {messages.open}
         </a>
       </div>
     </div>

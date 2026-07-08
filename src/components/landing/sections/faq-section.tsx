@@ -4,21 +4,23 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { faqs } from "@/data/landing";
+import type { Dictionary } from "@/i18n/dictionary";
 import { SectionHeading } from "../section-heading";
 
-export function FaqSection() {
+export function FaqSection({ dict }: { dict: Dictionary }) {
+  const faq = dict.faq;
+
   return (
     <section id="faq" className="px-4 py-16 sm:px-6 lg:px-8">
       <div className="mx-auto grid w-full max-w-6xl gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:items-start">
         <SectionHeading
           align="left"
-          eyebrow="FAQ"
-          title="Otázky pro první verzi landing page"
-          description="FAQ je připravené jako shadcn Accordion nad Base UI, tedy s polem hodnot v defaultValue."
+          eyebrow={faq.eyebrow}
+          title={faq.title}
+          description={faq.description}
         />
         <Accordion defaultValue={["item-0"]}>
-          {faqs.map((item, index) => (
+          {faq.items.map((item, index) => (
             <AccordionItem key={item.question} value={"item-" + index}>
               <AccordionTrigger>{item.question}</AccordionTrigger>
               <AccordionContent>{item.answer}</AccordionContent>

@@ -1,0 +1,233 @@
+{
+  "meta": {
+    "description": "Mobilní aplikace pro hledání studánek a sdílení aktuálního průtoku vody.",
+    "keywords": [
+      "Studánky",
+      "mobilní aplikace",
+      "prameny",
+      "pitná voda",
+      "turistika",
+      "mapa studánek"
+    ]
+  },
+  "nav": {
+    "aria": "Hlavní navigace",
+    "footerAria": "Patička",
+    "mobileAria": "Mobilní navigace",
+    "menuDescription": "Navigace landing page a odkazy ke stažení aplikace.",
+    "openMenu": "Otevřít navigaci",
+    "close": "Zavřít",
+    "download": "Stáhnout aplikaci",
+    "items": {
+      "app": "Aplikace",
+      "features": "Funkce",
+      "howItWorks": "Jak to funguje",
+      "faq": "FAQ"
+    }
+  },
+  "languageSwitcher": {
+    "label": "Změnit jazyk",
+    "cs": "Čeština",
+    "en": "English"
+  },
+  "hero": {
+    "eyebrow": "Mobilní aplikace pro výlety a péči o krajinu",
+    "title": "Najděte studánky, které právě tečou",
+    "description": "Studánky ukazují prameny ve vašem okolí, aktuální hlášení vody a jednoduchý způsob, jak přidat vlastní pozorování z terénu.",
+    "viewApp": "Prohlédnout aplikaci",
+    "qrDownload": "QR kód ke stažení",
+    "domainNote": "Doména: {domain}. Odkazy na obchody jsou zatím připravené jako placeholdery."
+  },
+  "stats": {
+    "aria": "Rychlá fakta",
+    "items": [
+      { "value": "1 000+", "label": "míst pro objevování" },
+      { "value": "CZ", "label": "navrženo pro českou krajinu" },
+      { "value": "Offline", "label": "připraveno pro terénní použití" }
+    ]
+  },
+  "problem": {
+    "eyebrow": "Proč to řešit",
+    "title": "Studánka není jen bod v mapě",
+    "description": "U vody v krajině rozhoduje aktuální stav, důvěra a jednoduché sdílení poznatků z návštěvy.",
+    "points": [
+      {
+        "title": "Mapy ukazují místo, ale ne aktuální stav",
+        "description": "Studánka může být krásně značená a přesto netéct. Landing page musí rychle vysvětlit, proč je aktuální hlášení důležité."
+      },
+      {
+        "title": "Informace z terénu se ztrácejí",
+        "description": "Návštěvníci často vědí, co se u pramene děje, ale nemají jednoduché místo, kam poznatek bezpečně přidat."
+      },
+      {
+        "title": "Správci i turisté potřebují stejný přehled",
+        "description": "Jedna přehledná aplikace může propojit výletníky, dobrovolníky i lidi, kteří se o konkrétní místo starají."
+      }
+    ]
+  },
+  "features": {
+    "eyebrow": "Funkce",
+    "title": "Všechno důležité před zastávkou u pramene",
+    "description": "Sekce zatím funguje jako kostra pro finální obsah, screenshoty a napojení na reálná data.",
+    "cardNote": "Připraveno pro rozšíření o konkrétní UI stav aplikace.",
+    "items": [
+      {
+        "title": "Mapa studánek",
+        "description": "Rychle najdete prameny v okolí a zjistíte, zda stojí za zastávku na trase."
+      },
+      {
+        "title": "Aktuální stav vody",
+        "description": "Hlášení z terénu pomáhají poznat, jestli studánka teče a kdy ji někdo naposledy kontroloval."
+      },
+      {
+        "title": "Filtry pro výlet",
+        "description": "Vyberete si místo podle dostupnosti, okolí a informací, které jsou pro cestu důležité."
+      },
+      {
+        "title": "Sdílení pozorování",
+        "description": "Jednoduše doplníte nový report a pomůžete dalším lidem i správcům studánek."
+      }
+    ]
+  },
+  "howItWorks": {
+    "eyebrow": "Jak to funguje",
+    "title": "Tři kroky od mapy k užitečnému hlášení",
+    "description": "Tahle kostra drží workflow, které bude potřeba ukázat nad screenshoty a mikrocopy.",
+    "steps": [
+      {
+        "title": "Otevřete mapu",
+        "description": "Najděte studánky poblíž vás nebo v místě plánovaného výletu."
+      },
+      {
+        "title": "Zkontrolujte stav",
+        "description": "Podívejte se na poslední hlášení a informace o průtoku vody."
+      },
+      {
+        "title": "Přidejte report",
+        "description": "Po návštěvě doplňte, zda voda teče, a pomozte dalším návštěvníkům."
+      }
+    ]
+  },
+  "screenshots": {
+    "eyebrow": "Aplikace",
+    "title": "Místo pro screenshoty a budoucí animovaný mockup",
+    "description": "Carousel už používá Embla a umí swipování. V této fázi obsahuje SVG placeholdery, které později nahradí reálné screenshoty aplikace.",
+    "prev": "Předchozí screenshot",
+    "next": "Další screenshot",
+    "items": [
+      {
+        "title": "Mapa okolních studánek",
+        "description": "Přehledné hledání míst ve vašem okolí.",
+        "imageAlt": "Mapa studánek v mobilní aplikaci Studánky"
+      },
+      {
+        "title": "Detail studánky",
+        "description": "Stav vody, poloha, popis a poslední reporty na jednom místě.",
+        "imageAlt": "Detail studánky v mobilní aplikaci Studánky"
+      },
+      {
+        "title": "Přidání hlášení",
+        "description": "Rychlé sdílení informace z terénu.",
+        "imageAlt": "Formulář pro přidání hlášení ve Studánkách"
+      }
+    ]
+  },
+  "testimonials": {
+    "eyebrow": "Ohlasy",
+    "title": "Placeholder pro důvěryhodnost před vydáním",
+    "description": "Před spuštěním sem patří konkrétní citace testerů, správců studánek nebo partnerů projektu.",
+    "items": [
+      {
+        "quote": "Na výletech často hledám vodu mimo hlavní trasu. Aktuální hlášení mi šetří zbytečné odbočky.",
+        "author": "Turista",
+        "context": "pěší výlety a běh v přírodě"
+      },
+      {
+        "quote": "U studánek je důležité vědět, co se děje teď. Sdílené reporty dávají mapě praktický smysl.",
+        "author": "Dobrovolník",
+        "context": "péče o prameny a okolí"
+      }
+    ]
+  },
+  "faq": {
+    "eyebrow": "FAQ",
+    "title": "Otázky pro první verzi landing page",
+    "description": "FAQ je připravené jako shadcn Accordion nad Base UI, tedy s polem hodnot v defaultValue.",
+    "items": [
+      {
+        "question": "Je aplikace zdarma?",
+        "answer": "Základní používání landing page i plánované aplikace počítá s volným přístupem. Přesný model bude upřesněn před vydáním."
+      },
+      {
+        "question": "Můžu přidat vlastní hlášení o stavu vody?",
+        "answer": "Ano. Architektura počítá s reporty z terénu, které pomohou ostatním poznat aktuální stav studánky."
+      },
+      {
+        "question": "Budou Studánky fungovat i bez signálu?",
+        "answer": "Landing page zatím jen představí aplikaci. Samotná aplikace má být navržená s ohledem na použití v terénu a horší připojení."
+      },
+      {
+        "question": "Odkud pochází data o studánkách?",
+        "answer": "Projekt počítá s kombinací existujících dat, vlastního backendu a uživatelských hlášení. Detailní zdroje budou popsány před veřejným spuštěním."
+      }
+    ]
+  },
+  "finalCta": {
+    "note": "Připraveno pro release CTA",
+    "title": "Stáhněte si Studánky do telefonu",
+    "description": "Finální verze doplní ostré odkazy do App Store a Google Play, QR kód a měření kliknutí.",
+    "qrNote": "QR placeholder pro rychlé otevření odkazu v mobilu.",
+    "qrAlt": "QR kód pro stažení aplikace Studánky"
+  },
+  "footer": {
+    "copyright": "© {year} {name}. Landing page skeleton pro mobilní aplikaci."
+  },
+  "phonePreview": {
+    "aria": "Náhled mobilní aplikace Studánky",
+    "imageAlt": "Ukázka mapy v mobilní aplikaci Studánky"
+  },
+  "storeBadges": {
+    "iosLabel": "Stáhnout pro iPhone",
+    "androidLabel": "Stáhnout pro Android",
+    "iosAlt": "Stáhnout v App Store",
+    "androidAlt": "Stáhnout na Google Play"
+  },
+  "deepLink": {
+    "metaTitle": "Otevřít v aplikaci",
+    "metaDescription": "Otevřete sdílený odkaz v aplikaci Studánky nebo si ji stáhněte pro iPhone či Android.",
+    "badge": "Sdílená studánka",
+    "title": "Otevřete odkaz v aplikaci Studánky",
+    "platform": {
+      "ios": "Tento odkaz vede na konkrétní studánku. Stáhněte si aplikaci pro iPhone a otevřete ho přímo v telefonu.",
+      "android": "Tento odkaz vede na konkrétní studánku. Stáhněte si aplikaci pro Android a otevřete ho přímo v telefonu.",
+      "other": "Tento odkaz vede na konkrétní studánku. Naskenujte QR kód telefonem nebo si stáhněte aplikaci a otevřete ho v mobilu."
+    },
+    "alreadyInstalled": "Aplikaci už máte nainstalovanou? Odkaz se v ní otevře automaticky.",
+    "scanTitle": "Naskenujte telefonem",
+    "scanNote": "Namiřte fotoaparát na QR kód a stáhněte si Studánky do mobilu.",
+    "qrAlt": "QR kód pro stažení aplikace Studánky",
+    "backHome": "Zpět na hlavní stránku"
+  },
+  "androidBanner": {
+    "regionAria": "Nabídka mobilní aplikace {name}",
+    "subtitle": "Zdarma na Google Play",
+    "dismissAria": "Zavřít nabídku aplikace",
+    "open": "Otevřít"
+  },
+  "notFound": {
+    "title": "Stránka nenalezena",
+    "description": "Tuhle stránku se nepodařilo najít. Možná byla přesunutá nebo už neexistuje.",
+    "backHome": "Zpět na úvod"
+  },
+  "og": {
+    "subtitle": "Mobilní aplikace pro prameny a vodní místa",
+    "title": "Najděte studánky ve svém okolí.",
+    "description": "Sdílejte aktuální průtok vody, stav místa a fotky z terénu.",
+    "alt": "Studánky – mobilní aplikace pro hledání studánek"
+  },
+  "manifest": {
+    "description": "Mobilní aplikace pro hledání studánek a sdílení aktuálního průtoku vody.",
+    "screenshotMap": "Mapa studánek v okolí",
+    "screenshotDetail": "Detail studánky s průtokem vody"
+  }
+}

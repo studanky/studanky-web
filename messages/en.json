@@ -1,0 +1,233 @@
+{
+  "meta": {
+    "description": "A mobile app for finding natural springs and sharing their current water flow.",
+    "keywords": [
+      "Studánky",
+      "mobile app",
+      "springs",
+      "drinking water",
+      "hiking",
+      "spring map"
+    ]
+  },
+  "nav": {
+    "aria": "Main navigation",
+    "footerAria": "Footer",
+    "mobileAria": "Mobile navigation",
+    "menuDescription": "Landing page navigation and links to download the app.",
+    "openMenu": "Open navigation",
+    "close": "Close",
+    "download": "Get the app",
+    "items": {
+      "app": "App",
+      "features": "Features",
+      "howItWorks": "How it works",
+      "faq": "FAQ"
+    }
+  },
+  "languageSwitcher": {
+    "label": "Change language",
+    "cs": "Čeština",
+    "en": "English"
+  },
+  "hero": {
+    "eyebrow": "A mobile app for trips and caring for the countryside",
+    "title": "Find the springs that are flowing right now",
+    "description": "Studánky shows springs near you, up-to-date water reports, and a simple way to add your own observations from the field.",
+    "viewApp": "Explore the app",
+    "qrDownload": "QR code to download",
+    "domainNote": "Domain: {domain}. Store links are still placeholders for now."
+  },
+  "stats": {
+    "aria": "Quick facts",
+    "items": [
+      { "value": "1,000+", "label": "places to discover" },
+      { "value": "CZ", "label": "designed for the Czech countryside" },
+      { "value": "Offline", "label": "ready for use in the field" }
+    ]
+  },
+  "problem": {
+    "eyebrow": "Why it matters",
+    "title": "A spring is more than a pin on the map",
+    "description": "With water out in the countryside, what matters is the current state, trust, and an easy way to share what you saw on your visit.",
+    "points": [
+      {
+        "title": "Maps show the place, but not its current state",
+        "description": "A spring can be beautifully marked and still not be flowing. The landing page has to quickly explain why an up-to-date report matters."
+      },
+      {
+        "title": "Information from the field gets lost",
+        "description": "Visitors often know what's happening at a spring, but have no easy place to add that knowledge safely."
+      },
+      {
+        "title": "Caretakers and hikers need the same overview",
+        "description": "One clear app can connect day-trippers, volunteers, and the people who look after a specific place."
+      }
+    ]
+  },
+  "features": {
+    "eyebrow": "Features",
+    "title": "Everything that matters before you stop at a spring",
+    "description": "For now this section works as a skeleton for the final content, screenshots, and a connection to real data.",
+    "cardNote": "Ready to be extended with a specific UI state of the app.",
+    "items": [
+      {
+        "title": "Spring map",
+        "description": "Quickly find springs nearby and see whether they're worth a stop along your route."
+      },
+      {
+        "title": "Current water state",
+        "description": "Reports from the field help you tell whether a spring is flowing and when someone last checked it."
+      },
+      {
+        "title": "Filters for your trip",
+        "description": "Pick a place by accessibility, surroundings, and the details that matter for your journey."
+      },
+      {
+        "title": "Share observations",
+        "description": "Easily add a new report and help other people and spring caretakers."
+      }
+    ]
+  },
+  "howItWorks": {
+    "eyebrow": "How it works",
+    "title": "Three steps from the map to a useful report",
+    "description": "This skeleton holds the workflow that will need to be shown alongside screenshots and microcopy.",
+    "steps": [
+      {
+        "title": "Open the map",
+        "description": "Find springs near you or at the spot of a planned trip."
+      },
+      {
+        "title": "Check the state",
+        "description": "Look at the latest report and information about the water flow."
+      },
+      {
+        "title": "Add a report",
+        "description": "After your visit, note whether the water is flowing and help the next visitors."
+      }
+    ]
+  },
+  "screenshots": {
+    "eyebrow": "App",
+    "title": "Space for screenshots and a future animated mockup",
+    "description": "The carousel already uses Embla and supports swiping. At this stage it holds SVG placeholders that will later be replaced by real app screenshots.",
+    "prev": "Previous screenshot",
+    "next": "Next screenshot",
+    "items": [
+      {
+        "title": "Map of nearby springs",
+        "description": "A clear way to search for places near you.",
+        "imageAlt": "Spring map in the Studánky mobile app"
+      },
+      {
+        "title": "Spring detail",
+        "description": "Water state, location, description, and the latest reports in one place.",
+        "imageAlt": "Spring detail in the Studánky mobile app"
+      },
+      {
+        "title": "Adding a report",
+        "description": "Quickly share information from the field.",
+        "imageAlt": "Report form in the Studánky app"
+      }
+    ]
+  },
+  "testimonials": {
+    "eyebrow": "Feedback",
+    "title": "A placeholder for credibility before launch",
+    "description": "Before launch, this is where specific quotes from testers, spring caretakers, or project partners belong.",
+    "items": [
+      {
+        "quote": "On trips I often look for water off the main route. Up-to-date reports save me pointless detours.",
+        "author": "Hiker",
+        "context": "hiking and trail running in nature"
+      },
+      {
+        "quote": "With springs it's important to know what's happening right now. Shared reports give the map practical meaning.",
+        "author": "Volunteer",
+        "context": "caring for springs and their surroundings"
+      }
+    ]
+  },
+  "faq": {
+    "eyebrow": "FAQ",
+    "title": "Questions for the first version of the landing page",
+    "description": "The FAQ is built as a shadcn Accordion on top of Base UI, i.e. with an array of values in defaultValue.",
+    "items": [
+      {
+        "question": "Is the app free?",
+        "answer": "Basic use of both the landing page and the planned app assumes free access. The exact model will be specified before release."
+      },
+      {
+        "question": "Can I add my own water-state report?",
+        "answer": "Yes. The architecture assumes reports from the field that help others learn a spring's current state."
+      },
+      {
+        "question": "Will Studánky work without a signal?",
+        "answer": "For now the landing page only introduces the app. The app itself is meant to be designed with field use and poor connectivity in mind."
+      },
+      {
+        "question": "Where does the spring data come from?",
+        "answer": "The project assumes a combination of existing data, our own backend, and user reports. Detailed sources will be described before the public launch."
+      }
+    ]
+  },
+  "finalCta": {
+    "note": "Ready for the release CTA",
+    "title": "Download Studánky to your phone",
+    "description": "The final version will add live App Store and Google Play links, a QR code, and click tracking.",
+    "qrNote": "QR placeholder for quickly opening the link on mobile.",
+    "qrAlt": "QR code to download the Studánky app"
+  },
+  "footer": {
+    "copyright": "© {year} {name}. Landing page skeleton for the mobile app."
+  },
+  "phonePreview": {
+    "aria": "Preview of the Studánky mobile app",
+    "imageAlt": "Map preview in the Studánky mobile app"
+  },
+  "storeBadges": {
+    "iosLabel": "Download for iPhone",
+    "androidLabel": "Download for Android",
+    "iosAlt": "Download on the App Store",
+    "androidAlt": "Get it on Google Play"
+  },
+  "deepLink": {
+    "metaTitle": "Open in the app",
+    "metaDescription": "Open the shared link in the Studánky app or download it for iPhone or Android.",
+    "badge": "Shared spring",
+    "title": "Open the link in the Studánky app",
+    "platform": {
+      "ios": "This link points to a specific spring. Download the app for iPhone and open it right on your phone.",
+      "android": "This link points to a specific spring. Download the app for Android and open it right on your phone.",
+      "other": "This link points to a specific spring. Scan the QR code with your phone or download the app and open it on mobile."
+    },
+    "alreadyInstalled": "Already have the app installed? The link will open in it automatically.",
+    "scanTitle": "Scan with your phone",
+    "scanNote": "Point your camera at the QR code and download Studánky to your phone.",
+    "qrAlt": "QR code to download the Studánky app",
+    "backHome": "Back to the home page"
+  },
+  "androidBanner": {
+    "regionAria": "{name} mobile app offer",
+    "subtitle": "Free on Google Play",
+    "dismissAria": "Dismiss app offer",
+    "open": "Open"
+  },
+  "notFound": {
+    "title": "Page not found",
+    "description": "We couldn't find this page. It may have been moved or no longer exists.",
+    "backHome": "Back to home"
+  },
+  "og": {
+    "subtitle": "A mobile app for springs and water spots",
+    "title": "Find springs near you.",
+    "description": "Share the current water flow, the state of a place, and photos from the field.",
+    "alt": "Studánky – a mobile app for finding springs"
+  },
+  "manifest": {
+    "description": "A mobile app for finding natural springs and sharing their current water flow.",
+    "screenshotMap": "Map of nearby springs",
+    "screenshotDetail": "Spring detail with water flow"
+  }
+}

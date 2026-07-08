@@ -8,7 +8,15 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import type { Screenshot } from "@/types/landing";
 
-export function ScreenshotCarousel({ screenshots }: { screenshots: Screenshot[] }) {
+export function ScreenshotCarousel({
+  screenshots,
+  prevLabel,
+  nextLabel,
+}: {
+  screenshots: Screenshot[];
+  prevLabel: string;
+  nextLabel: string;
+}) {
   const [emblaRef, emblaApi] = useEmblaCarousel({ align: "start", loop: false });
 
   return (
@@ -51,7 +59,7 @@ export function ScreenshotCarousel({ screenshots }: { screenshots: Screenshot[] 
           onClick={() => emblaApi?.scrollPrev()}
         >
           <ArrowLeftIcon aria-hidden="true" />
-          <span className="sr-only">Předchozí screenshot</span>
+          <span className="sr-only">{prevLabel}</span>
         </Button>
         <Button
           type="button"
@@ -60,7 +68,7 @@ export function ScreenshotCarousel({ screenshots }: { screenshots: Screenshot[] 
           onClick={() => emblaApi?.scrollNext()}
         >
           <ArrowRightIcon aria-hidden="true" />
-          <span className="sr-only">Další screenshot</span>
+          <span className="sr-only">{nextLabel}</span>
         </Button>
       </div>
     </div>

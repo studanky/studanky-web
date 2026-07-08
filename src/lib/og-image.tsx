@@ -1,15 +1,20 @@
 import { ImageResponse } from "next/og";
 
-import { siteConfig } from "@/config/site";
+export const OG_SIZE = { width: 1200, height: 630 };
+export const OG_CONTENT_TYPE = "image/png";
 
-export const alt = "Studánky - mobilní aplikace pro hledání studánek";
-export const size = {
-  width: 1200,
-  height: 630,
-};
-export const contentType = "image/png";
-
-export default function OpenGraphImage() {
+/**
+ * Renders the shared OpenGraph image. Text is passed in so both the localized
+ * route (`app/[locale]/opengraph-image`) and the default fallback
+ * (`app/opengraph-image`, used by `/s/*`) stay visually identical.
+ */
+export function renderOgImage(strings: {
+  name: string;
+  subtitle: string;
+  title: string;
+  description: string;
+  domain: string;
+}) {
   return new ImageResponse(
     (
       <div
@@ -54,10 +59,8 @@ export default function OpenGraphImage() {
               S
             </div>
             <div style={{ display: "flex", flexDirection: "column" }}>
-              <div style={{ fontSize: 34, fontWeight: 700 }}>{siteConfig.name}</div>
-              <div style={{ color: "#5c705f", fontSize: 24 }}>
-                Mobilní aplikace pro prameny a vodní místa
-              </div>
+              <div style={{ fontSize: 34, fontWeight: 700 }}>{strings.name}</div>
+              <div style={{ color: "#5c705f", fontSize: 24 }}>{strings.subtitle}</div>
             </div>
           </div>
 
@@ -71,20 +74,28 @@ export default function OpenGraphImage() {
                 letterSpacing: -1,
               }}
             >
-              Najděte studánky ve svém okolí.
+              {strings.title}
             </div>
             <div style={{ maxWidth: 820, color: "#415442", fontSize: 32, lineHeight: 1.35 }}>
-              Sdílejte aktuální průtok vody, stav místa a fotky z terénu.
+              {strings.description}
             </div>
           </div>
 
-          <div style={{ display: "flex", alignItems: "center", gap: 16, color: "#2f6f4f", fontSize: 26 }}>
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              gap: 16,
+              color: "#2f6f4f",
+              fontSize: 26,
+            }}
+          >
             <div style={{ width: 18, height: 18, borderRadius: 999, background: "#78a66b" }} />
-            studankyapp.cz
+            {strings.domain}
           </div>
         </div>
       </div>
     ),
-    size,
+    OG_SIZE,
   );
 }

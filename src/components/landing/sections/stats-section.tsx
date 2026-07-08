@@ -1,11 +1,11 @@
-import { statistics } from "@/data/landing";
+import type { Dictionary } from "@/i18n/dictionary";
 
-export function StatsSection() {
+export function StatsSection({ dict }: { dict: Dictionary }) {
   return (
-    <section className="px-4 py-10 sm:px-6 lg:px-8" aria-label="Rychlá fakta">
+    <section className="px-4 py-10 sm:px-6 lg:px-8" aria-label={dict.stats.aria}>
       <div className="mx-auto grid w-full max-w-6xl gap-3 sm:grid-cols-3">
-        {statistics.map((item) => (
-          <div key={item.label} className="rounded-xl bg-card p-5 ring-1 ring-border">
+        {dict.stats.items.map((item, index) => (
+          <div key={index} className="rounded-xl bg-card p-5 ring-1 ring-border">
             <p className="text-3xl font-semibold tracking-tight text-foreground">
               {item.value}
             </p>

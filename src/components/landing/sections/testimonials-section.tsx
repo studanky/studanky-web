@@ -1,18 +1,20 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { testimonials } from "@/data/landing";
+import type { Dictionary } from "@/i18n/dictionary";
 import { SectionHeading } from "../section-heading";
 
-export function TestimonialsSection() {
+export function TestimonialsSection({ dict }: { dict: Dictionary }) {
+  const testimonials = dict.testimonials;
+
   return (
     <section className="px-4 py-16 sm:px-6 lg:px-8">
       <div className="mx-auto flex w-full max-w-6xl flex-col gap-10">
         <SectionHeading
-          eyebrow="Ohlasy"
-          title="Placeholder pro důvěryhodnost před vydáním"
-          description="Před spuštěním sem patří konkrétní citace testerů, správců studánek nebo partnerů projektu."
+          eyebrow={testimonials.eyebrow}
+          title={testimonials.title}
+          description={testimonials.description}
         />
         <div className="grid gap-4 md:grid-cols-2">
-          {testimonials.map((testimonial) => (
+          {testimonials.items.map((testimonial) => (
             <Card key={testimonial.author}>
               <CardHeader>
                 <CardTitle>{testimonial.author}</CardTitle>

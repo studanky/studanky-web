@@ -58,15 +58,18 @@ pnpm build
 
 ```text
 src/
-├── app/                 # App Router entrypoints and metadata routes
+├── app/                 # App Router; localized routes under app/[locale]/
 ├── components/
 │   ├── landing/         # Marketing page composition and sections
-│   ├── layout/          # Header, footer, mobile nav, app badges
+│   ├── layout/          # Header, footer, mobile nav, app badges, language switcher
 │   └── ui/              # shadcn/ui source components
 ├── config/              # Site URL, navigation, global links
-├── data/                # Typed static marketing content
+├── i18n/                # Locale config, dictionary loading, request helpers
 ├── lib/                 # Shared utilities and server helpers
-└── types/               # Shared TypeScript contracts
+├── types/               # Shared TypeScript contracts
+└── proxy.ts             # Locale detection + prefix redirects (Next.js proxy)
+
+messages/                # Translation catalogs, one JSON per locale — see messages/README.md
 
 public/
 ├── app/                 # Screenshots, store badges, QR code
@@ -76,4 +79,4 @@ public/
 docs/                    # Feature documentation (deep linking, app banners)
 ```
 
-Current landing content is static and typed in `src/data/landing.ts`. Dynamic Strapi-backed content can be added later from Server Components without exposing API tokens to the browser.
+Landing copy is localized: all user-facing text lives in `messages/<locale>.json` (typed by `Dictionary` in `src/i18n/`) and is rendered from Server Components, so catalogs never reach the client bundle. Dynamic Strapi-backed content can be added later from Server Components without exposing API tokens to the browser.
