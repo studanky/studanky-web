@@ -1,6 +1,6 @@
 /**
  * Shape of a translation catalog. Every `messages/<locale>.json` file must
- * satisfy this type (see `messages/*.ts` wrappers), which guarantees that all
+ * satisfy this type (see `messages/validate.ts`), which guarantees that all
  * locales stay in sync — a missing key is a compile error.
  *
  * Strings containing `{placeholder}` tokens are templates; render them through
@@ -14,15 +14,12 @@ export type Dictionary = {
   nav: {
     aria: string;
     footerAria: string;
-    mobileAria: string;
-    menuDescription: string;
-    openMenu: string;
-    close: string;
     download: string;
     items: {
       app: string;
       features: string;
       howItWorks: string;
+      roadmap: string;
       faq: string;
     };
   };
@@ -31,51 +28,111 @@ export type Dictionary = {
     cs: string;
     en: string;
   };
+  /** Labels inside the hand-crafted app UI mocks (map + detail sheet). */
+  mock: {
+    mapAria: string;
+    detailAria: string;
+    searchPlaceholder: string;
+    disclaimerPill: string;
+    callout: { name: string; status: string; updated: string };
+    detail: {
+      name: string;
+      status: string;
+      updated: string;
+      navigate: string;
+      share: string;
+      save: string;
+      historyTitle: string;
+      history: { date: string; value: string }[];
+    };
+  };
   hero: {
+    eyebrow: string;
+    titleLine1: string;
+    /** Second headline line, rendered as a water-gradient accent. */
+    titleLine2: string;
+    description: string;
+    /** Single primary CTA on phones — links to the /get platform redirect. */
+    ctaMobile: string;
+    /** Short trust notes ("Zdarma", "Bez registrace", …), rendered inline. */
+    chips: string[];
+    qrTitle: string;
+    qrNote: string;
+    qrAlt: string;
+    disclaimer: string;
+  };
+  /** Narrative problem section — a sequence of big statements + the punchline. */
+  story: {
+    eyebrow: string;
+    lines: string[];
+    punch: string;
+  };
+  /** Feature bento grid; named tiles because each has a bespoke visual. */
+  bento: {
     eyebrow: string;
     title: string;
     description: string;
-    viewApp: string;
-    qrDownload: string;
-    /** Template with `{domain}`. */
-    domainNote: string;
+    map: { title: string; text: string };
+    freshness: { title: string; text: string; value: string };
+    history: { title: string; text: string };
+    navigate: { title: string; text: string };
+    favorites: { title: string; text: string };
+    share: { title: string; text: string };
+    states: {
+      flowing: string;
+      notFlowing: string;
+      stale: string;
+    };
   };
-  stats: {
-    aria: string;
-    items: { value: string; label: string }[];
+  /** App showcase — two phone mocks with captions. */
+  showcase: {
+    eyebrow: string;
+    title: string;
+    description: string;
+    note: string;
+    screens: {
+      map: { title: string; caption: string };
+      detail: { title: string; caption: string };
+    };
   };
-  problem: {
+  steps: {
+    eyebrow: string;
+    title: string;
+    description: string;
+    items: { title: string; description: string }[];
+  };
+  /** ČHMÚ data band with stat tiles + full potability disclaimer. */
+  data: {
+    eyebrow: string;
+    title: string;
+    description: string;
+    stats: { value: string; label: string }[];
+    disclaimer: string;
+  };
+  roadmap: {
+    eyebrow: string;
+    title: string;
+    description: string;
+    phases: { status: string; title: string; description: string }[];
+    newsletter: {
+      title: string;
+      description: string;
+      emailLabel: string;
+      emailPlaceholder: string;
+      submit: string;
+      submitting: string;
+      success: string;
+      errorInvalid: string;
+      errorServer: string;
+      privacyNote: string;
+    };
+  };
+  community: {
     eyebrow: string;
     title: string;
     description: string;
     points: { title: string; description: string }[];
-  };
-  features: {
-    eyebrow: string;
-    title: string;
-    description: string;
-    cardNote: string;
-    items: { title: string; description: string }[];
-  };
-  howItWorks: {
-    eyebrow: string;
-    title: string;
-    description: string;
-    steps: { title: string; description: string }[];
-  };
-  screenshots: {
-    eyebrow: string;
-    title: string;
-    description: string;
-    prev: string;
-    next: string;
-    items: { title: string; description: string; imageAlt: string }[];
-  };
-  testimonials: {
-    eyebrow: string;
-    title: string;
-    description: string;
-    items: { quote: string; author: string; context: string }[];
+    githubCta: string;
   };
   faq: {
     eyebrow: string;
@@ -83,20 +140,21 @@ export type Dictionary = {
     description: string;
     items: { question: string; answer: string }[];
   };
-  finalCta: {
-    note: string;
+  /** Final download section — QR-dominant. */
+  download: {
     title: string;
     description: string;
+    qrTitle: string;
     qrNote: string;
     qrAlt: string;
+    disclaimer: string;
   };
   footer: {
+    tagline: string;
     /** Template with `{year}` and `{name}`. */
     copyright: string;
-  };
-  phonePreview: {
-    aria: string;
-    imageAlt: string;
+    disclaimer: string;
+    githubLabel: string;
   };
   storeBadges: {
     /** aria-label for the whole link (e.g. "Download for iPhone"). */
@@ -106,6 +164,7 @@ export type Dictionary = {
     iosAlt: string;
     androidAlt: string;
   };
+  /** Generic `/s/*` fallback when Strapi is unreachable. */
   deepLink: {
     metaTitle: string;
     metaDescription: string;
@@ -113,15 +172,15 @@ export type Dictionary = {
     title: string;
     platform: { ios: string; android: string; other: string };
     alreadyInstalled: string;
-    scanTitle: string;
-    scanNote: string;
+    qrTitle: string;
+    qrNote: string;
     qrAlt: string;
     backHome: string;
   };
   springPreview: {
     /** Template with `{name}`. */
     metaTitle: string;
-    sharedBadge: string;
+    badge: string;
     status: { isFlowing: string; isNotFlowing: string; unknown: string };
     /** Prefixes the relative time, e.g. "Aktualizováno " + "před 3 dny". */
     updatedPrefix: string;
@@ -133,15 +192,16 @@ export type Dictionary = {
     copyAria: string;
     /** Template with `{name}`. */
     photoAlt: string;
-    teaserTitle: string;
-    teaserItems: string[];
-    ctaTitle: string;
-    ctaText: string;
-    disclaimer: string;
-    alreadyInstalled: string;
-    scanTitle: string;
-    scanNote: string;
+    /** Curiosity hook: what the app reveals beyond this preview. */
+    hookTitle: string;
+    hookItems: string[];
+    qrTitle: string;
+    qrNote: string;
     qrAlt: string;
+    /** CTA heading shown on mobile above the store button. */
+    storeTitle: string;
+    alreadyInstalled: string;
+    disclaimer: string;
     backHome: string;
   };
   springNotFound: {
@@ -149,10 +209,10 @@ export type Dictionary = {
     badge: string;
     title: string;
     description: string;
-    ctaTitle: string;
-    scanTitle: string;
-    scanNote: string;
+    qrTitle: string;
+    qrNote: string;
     qrAlt: string;
+    storeTitle: string;
     backHome: string;
   };
   androidBanner: {

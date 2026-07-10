@@ -39,14 +39,16 @@
   --color-popover: var(--popover);
   --color-card-foreground: var(--card-foreground);
   --color-card: var(--card);
-  --color-spring: var(--spring);
-  --color-spring-foreground: var(--spring-foreground);
   --color-water: var(--water);
   --color-water-foreground: var(--water-foreground);
-  --color-moss: var(--moss);
-  --color-moss-foreground: var(--moss-foreground);
-  --color-stone: var(--stone);
-  --color-stone-foreground: var(--stone-foreground);
+  --color-deep: var(--deep);
+  --color-deep-foreground: var(--deep-foreground);
+  --color-flowing: var(--flowing);
+  --color-flowing-foreground: var(--flowing-foreground);
+  --color-not-flowing: var(--not-flowing);
+  --color-not-flowing-foreground: var(--not-flowing-foreground);
+  --color-stale: var(--stale);
+  --color-stale-foreground: var(--stale-foreground);
   --color-sun: var(--sun);
   --color-sun-foreground: var(--sun-foreground);
   --radius-sm: calc(var(--radius) * 0.6);
@@ -56,97 +58,224 @@
   --radius-2xl: calc(var(--radius) * 1.8);
   --radius-3xl: calc(var(--radius) * 2.2);
   --radius-4xl: calc(var(--radius) * 2.6);
+  --animate-float: float 7s ease-in-out infinite;
+  --animate-drift: drift 18s ease-in-out infinite;
+  --animate-ping-soft: ping-soft 2.6s cubic-bezier(0, 0, 0.2, 1) infinite;
 }
 
+/*
+ * "Daylight on water" palette — exact oklch conversions of the mobile app's
+ * Flutter colour schemes so app mocks/screenshots sit naturally on the page.
+ * Brand sky-blue #0B97D2 lives in `--water` (decorative surfaces, gradients,
+ * the "flowing" status); `--primary` is a darker step of the same hue so small
+ * text and controls keep AA contrast on white. `--deep` is the app's dark
+ * "night water" background (#0A1628) used for dark bands and the share page.
+ */
 :root {
   color-scheme: light;
-  --background: oklch(0.988 0.012 169);
-  --foreground: oklch(0.205 0.045 154);
-  --card: oklch(1 0.004 150);
-  --card-foreground: oklch(0.205 0.045 154);
-  --popover: oklch(1 0.004 150);
-  --popover-foreground: oklch(0.205 0.045 154);
-  --primary: oklch(0.405 0.122 164);
-  --primary-foreground: oklch(0.985 0.012 170);
-  --secondary: oklch(0.934 0.055 142);
-  --secondary-foreground: oklch(0.245 0.065 150);
-  --muted: oklch(0.946 0.018 115);
-  --muted-foreground: oklch(0.446 0.035 155);
-  --accent: oklch(0.886 0.075 198);
-  --accent-foreground: oklch(0.235 0.055 178);
-  --destructive: oklch(0.58 0.18 32);
-  --border: oklch(0.87 0.025 150);
-  --input: oklch(0.87 0.025 150);
-  --ring: oklch(0.57 0.12 164);
-  --chart-1: oklch(0.405 0.122 164);
-  --chart-2: oklch(0.62 0.12 205);
-  --chart-3: oklch(0.55 0.115 132);
-  --chart-4: oklch(0.72 0.12 82);
-  --chart-5: oklch(0.58 0.18 32);
-  --radius: 0.5rem;
-  --sidebar: oklch(0.968 0.018 154);
-  --sidebar-foreground: oklch(0.205 0.045 154);
-  --sidebar-primary: oklch(0.405 0.122 164);
-  --sidebar-primary-foreground: oklch(0.985 0.012 170);
-  --sidebar-accent: oklch(0.934 0.055 142);
-  --sidebar-accent-foreground: oklch(0.245 0.065 150);
-  --sidebar-border: oklch(0.87 0.025 150);
-  --sidebar-ring: oklch(0.57 0.12 164);
-  --spring: oklch(0.405 0.122 164);
-  --spring-foreground: oklch(0.985 0.012 170);
-  --water: oklch(0.62 0.12 205);
-  --water-foreground: oklch(0.985 0.012 210);
-  --moss: oklch(0.47 0.105 132);
-  --moss-foreground: oklch(0.985 0.012 145);
-  --stone: oklch(0.55 0.018 125);
-  --stone-foreground: oklch(0.985 0.008 120);
-  --sun: oklch(0.82 0.12 82);
-  --sun-foreground: oklch(0.24 0.055 88);
+  --background: oklch(0.977 0.005 240);
+  --foreground: oklch(0.245 0.03 250);
+  --card: oklch(1 0.002 240);
+  --card-foreground: oklch(0.245 0.03 250);
+  --popover: oklch(1 0.002 240);
+  --popover-foreground: oklch(0.245 0.03 250);
+  --primary: oklch(0.55 0.124 239);
+  --primary-foreground: oklch(0.985 0.005 235);
+  --secondary: oklch(0.925 0.03 228);
+  --secondary-foreground: oklch(0.42 0.086 243);
+  --muted: oklch(0.951 0.009 240);
+  --muted-foreground: oklch(0.49 0.03 246);
+  --accent: oklch(0.936 0.024 230);
+  --accent-foreground: oklch(0.4 0.086 243);
+  --destructive: oklch(0.6 0.19 37);
+  --border: oklch(0.902 0.012 238);
+  --input: oklch(0.902 0.012 238);
+  --ring: oklch(0.64 0.135 236);
+  --chart-1: oklch(0.64 0.135 236);
+  --chart-2: oklch(0.652 0.151 60);
+  --chart-3: oklch(0.457 0.086 243);
+  --chart-4: oklch(0.795 0.162 86);
+  --chart-5: oklch(0.542 0.109 142);
+  --radius: 0.75rem;
+  --sidebar: oklch(0.965 0.007 248);
+  --sidebar-foreground: oklch(0.245 0.03 250);
+  --sidebar-primary: oklch(0.55 0.124 239);
+  --sidebar-primary-foreground: oklch(0.985 0.005 235);
+  --sidebar-accent: oklch(0.925 0.03 228);
+  --sidebar-accent-foreground: oklch(0.42 0.086 243);
+  --sidebar-border: oklch(0.902 0.012 238);
+  --sidebar-ring: oklch(0.64 0.135 236);
+  /* Brand water-blue (app primaryMain #0B97D2) — decorative, not for small text. */
+  --water: oklch(0.64 0.135 236);
+  --water-foreground: oklch(0.985 0.005 235);
+  /* App dark background #0A1628 — dark bands, share page, phone frames. */
+  --deep: oklch(0.2 0.04 258);
+  --deep-foreground: oklch(0.949 0.013 252);
+  /* Spring status trio — matches the app's marker palette. */
+  --flowing: oklch(0.64 0.135 236);
+  --flowing-foreground: oklch(0.985 0.005 235);
+  --not-flowing: oklch(0.65 0.198 37);
+  --not-flowing-foreground: oklch(0.985 0.005 235);
+  --stale: oklch(0.523 0.028 254);
+  --stale-foreground: oklch(0.985 0.005 235);
+  /* Warm accent (app secondaryVariant1 #D1750A) — disclaimers, highlights. */
+  --sun: oklch(0.652 0.151 60);
+  --sun-foreground: oklch(0.985 0.005 235);
 }
 
+/* "Night water" — mirrors AppColorsDark (deep navy surfaces, brighter blues). */
 .dark {
   color-scheme: dark;
-  --background: oklch(0.17 0.03 158);
-  --foreground: oklch(0.94 0.018 120);
-  --card: oklch(0.21 0.035 160);
-  --card-foreground: oklch(0.94 0.018 120);
-  --popover: oklch(0.21 0.035 160);
-  --popover-foreground: oklch(0.94 0.018 120);
-  --primary: oklch(0.78 0.105 162);
-  --primary-foreground: oklch(0.16 0.04 160);
-  --secondary: oklch(0.28 0.045 145);
-  --secondary-foreground: oklch(0.92 0.025 130);
-  --muted: oklch(0.25 0.025 150);
-  --muted-foreground: oklch(0.74 0.035 145);
-  --accent: oklch(0.34 0.075 202);
-  --accent-foreground: oklch(0.94 0.018 190);
-  --destructive: oklch(0.68 0.16 28);
-  --border: oklch(0.33 0.03 150);
-  --input: oklch(0.31 0.035 150);
-  --ring: oklch(0.7 0.1 168);
-  --chart-1: oklch(0.78 0.105 162);
-  --chart-2: oklch(0.68 0.105 205);
-  --chart-3: oklch(0.66 0.1 132);
-  --chart-4: oklch(0.78 0.11 82);
-  --chart-5: oklch(0.68 0.16 28);
-  --sidebar: oklch(0.19 0.032 158);
-  --sidebar-foreground: oklch(0.94 0.018 120);
-  --sidebar-primary: oklch(0.78 0.105 162);
-  --sidebar-primary-foreground: oklch(0.16 0.04 160);
-  --sidebar-accent: oklch(0.28 0.045 145);
-  --sidebar-accent-foreground: oklch(0.92 0.025 130);
-  --sidebar-border: oklch(0.33 0.03 150);
-  --sidebar-ring: oklch(0.7 0.1 168);
-  --spring: oklch(0.78 0.105 162);
-  --spring-foreground: oklch(0.16 0.04 160);
-  --water: oklch(0.68 0.105 205);
-  --water-foreground: oklch(0.14 0.04 205);
-  --moss: oklch(0.66 0.1 132);
-  --moss-foreground: oklch(0.14 0.04 132);
-  --stone: oklch(0.72 0.025 125);
-  --stone-foreground: oklch(0.14 0.02 125);
-  --sun: oklch(0.78 0.11 82);
-  --sun-foreground: oklch(0.18 0.05 88);
+  --background: oklch(0.2 0.04 258);
+  --foreground: oklch(0.949 0.013 252);
+  --card: oklch(0.24 0.053 259);
+  --card-foreground: oklch(0.949 0.013 252);
+  --popover: oklch(0.24 0.053 259);
+  --popover-foreground: oklch(0.949 0.013 252);
+  --primary: oklch(0.754 0.139 233);
+  --primary-foreground: oklch(0.18 0.04 255);
+  --secondary: oklch(0.302 0.055 250);
+  --secondary-foreground: oklch(0.867 0.026 250);
+  --muted: oklch(0.261 0.049 261);
+  --muted-foreground: oklch(0.726 0.042 250);
+  --accent: oklch(0.302 0.055 250);
+  --accent-foreground: oklch(0.9 0.02 245);
+  --destructive: oklch(0.707 0.187 34);
+  --border: oklch(0.341 0.065 261);
+  --input: oklch(0.32 0.055 260);
+  --ring: oklch(0.754 0.139 233);
+  --chart-1: oklch(0.754 0.139 233);
+  --chart-2: oklch(0.69 0.148 65);
+  --chart-3: oklch(0.583 0.051 250);
+  --chart-4: oklch(0.83 0.15 88);
+  --chart-5: oklch(0.65 0.11 145);
+  --sidebar: oklch(0.22 0.045 258);
+  --sidebar-foreground: oklch(0.949 0.013 252);
+  --sidebar-primary: oklch(0.754 0.139 233);
+  --sidebar-primary-foreground: oklch(0.18 0.04 255);
+  --sidebar-accent: oklch(0.302 0.055 250);
+  --sidebar-accent-foreground: oklch(0.867 0.026 250);
+  --sidebar-border: oklch(0.341 0.065 261);
+  --sidebar-ring: oklch(0.754 0.139 233);
+  --water: oklch(0.754 0.139 233);
+  --water-foreground: oklch(0.18 0.04 255);
+  --deep: oklch(0.17 0.035 258);
+  --deep-foreground: oklch(0.949 0.013 252);
+  --flowing: oklch(0.754 0.139 233);
+  --flowing-foreground: oklch(0.18 0.04 255);
+  --not-flowing: oklch(0.707 0.187 34);
+  --not-flowing-foreground: oklch(0.18 0.04 255);
+  --stale: oklch(0.656 0.046 254);
+  --stale-foreground: oklch(0.18 0.04 255);
+  --sun: oklch(0.69 0.148 65);
+  --sun-foreground: oklch(0.18 0.04 255);
+}
+
+/*
+ * Liquid glass materials (mirrors the app's glassFill/glassBorder tokens).
+ * Rules of use (readability first): glass carries chrome — nav, chips, tiles,
+ * overlays. Long-form text and forms sit on solid `--card`. Every glass panel
+ * keeps a translucent *tint* behind its text so contrast survives any backdrop.
+ */
+
+/* Light frosted panel for light backdrops (app: white @ 55% + white border). */
+@utility glass {
+  background: color-mix(in oklab, var(--card) 62%, transparent);
+  -webkit-backdrop-filter: blur(16px) saturate(160%);
+  backdrop-filter: blur(16px) saturate(160%);
+  border: 1px solid color-mix(in oklab, white 60%, transparent);
+  box-shadow:
+    inset 0 1px 0 0 color-mix(in oklab, white 65%, transparent),
+    0 10px 32px -14px oklch(0.457 0.086 242.8 / 0.28);
+}
+
+/* Denser variant where text needs extra backing (bento tiles, callouts). */
+@utility glass-strong {
+  background: color-mix(in oklab, var(--card) 80%, transparent);
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
+  backdrop-filter: blur(20px) saturate(160%);
+  border: 1px solid color-mix(in oklab, white 70%, transparent);
+  box-shadow:
+    inset 0 1px 0 0 color-mix(in oklab, white 75%, transparent),
+    0 12px 36px -16px oklch(0.457 0.086 242.8 / 0.3);
+}
+
+/* Dark glass for "night water" surfaces (app: deep navy @ 55% + white @ 10%). */
+@utility glass-deep {
+  background: oklch(0.24 0.053 259 / 0.55);
+  -webkit-backdrop-filter: blur(20px) saturate(140%);
+  backdrop-filter: blur(20px) saturate(140%);
+  border: 1px solid rgb(255 255 255 / 0.12);
+  box-shadow:
+    inset 0 1px 0 0 rgb(255 255 255 / 0.08),
+    0 24px 60px -24px rgb(0 0 0 / 0.55);
+}
+
+/*
+ * Water-gradient display text. Stops are deliberately dark (L 0.42–0.62) so the
+ * lightest point still clears the 3:1 AA threshold for large text on the
+ * near-white page background.
+ */
+@utility text-water-gradient {
+  background-image: linear-gradient(
+    92deg,
+    oklch(0.42 0.09 243),
+    oklch(0.55 0.124 239) 45%,
+    oklch(0.62 0.135 236)
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Transparency can be a hazard — honour the OS setting with opaque fallbacks. */
+@media (prefers-reduced-transparency: reduce) {
+  .glass,
+  .glass-strong {
+    background: var(--card);
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+  .glass-deep {
+    background: oklch(0.24 0.053 259);
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+}
+
+/* Gentle bobbing for floating chips (always guarded by `motion-safe:`). */
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+/* Slow ambient movement for background glow blobs. */
+@keyframes drift {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(2%, -3%, 0) scale(1.06);
+  }
+}
+
+/* Soft radar ping for the selected map marker in mocks. */
+@keyframes ping-soft {
+  0% {
+    transform: scale(1);
+    opacity: 0.6;
+  }
+  75%,
+  100% {
+    transform: scale(2.1);
+    opacity: 0;
+  }
 }
 
 @layer base {
@@ -157,6 +286,11 @@
     @apply bg-background text-foreground;
   }
   html {
-    @apply font-sans;
+    @apply scroll-smooth font-sans;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
   }
 }

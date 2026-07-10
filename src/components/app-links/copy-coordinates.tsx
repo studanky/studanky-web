@@ -4,8 +4,8 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { CheckIcon, CopyIcon, MapPinIcon } from "lucide-react";
 
 // Client island: shows the spring's coordinates and copies them to the clipboard
-// so the reader can paste them into any map app. The rest of the preview page
-// stays server-rendered.
+// so the reader can paste them into any map app. Linear styling — a single
+// hairline row, no box. The rest of the preview page stays server-rendered.
 export function CopyCoordinates({
   value,
   label,
@@ -36,10 +36,10 @@ export function CopyCoordinates({
   }, [value]);
 
   return (
-    <div className="flex w-full flex-col gap-1.5 text-left">
+    <div className="flex w-full max-w-sm flex-col gap-1.5 text-left">
       <span className="text-xs font-medium text-muted-foreground">{label}</span>
-      <div className="flex items-center gap-2 rounded-xl border border-border bg-card p-1.5 pl-3">
-        <MapPinIcon aria-hidden="true" className="size-4 shrink-0 text-primary" />
+      <div className="flex items-center gap-2 border-b border-border pb-2">
+        <MapPinIcon aria-hidden="true" className="size-4 shrink-0 text-water" />
         <code className="flex-1 truncate font-mono text-sm text-foreground tabular-nums">
           {value}
         </code>

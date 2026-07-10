@@ -22,7 +22,7 @@ export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   colorScheme: "light",
-  themeColor: "#2f6f4f",
+  themeColor: "#F0F4F8",
 };
 
 export default async function DeepLinkLayout({

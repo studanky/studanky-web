@@ -72,6 +72,11 @@ export async function generateMetadata({
   };
 }
 
+/** Serializes JSON-LD safely for a native <script> tag (escapes `<` per docs). */
+function jsonLdScript(data: object): string {
+  return JSON.stringify(data).replace(/</g, "\\u003c");
+}
+
 export default async function Home({
   params,
 }: {
@@ -81,5 +86,43 @@ export default async function Home({
   if (!isLocale(locale)) notFound();
 
   const dict = await getDictionary(locale);
-  return <LandingPage dict={dict} locale={locale} />;
+
+  // Structured data: the app entity (rich results for "app" queries) and the
+  // FAQ — both localized, mirroring what the page itself shows.
+  const appJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "MobileApplication",
+    name: siteConfig.name,
+    description: dict.meta.description,
+    url: `${siteConfig.url}${localizedPathname(locale)}`,
+    applicationCategory: "TravelApplication",
+    operatingSystem: "iOS, Android",
+    inLanguage: localeMeta[locale].htmlLang,
+    offers: { "@type": "Offer", price: "0", priceCurrency: "CZK" },
+    isAccessibleForFree: true,
+  };
+
+  const faqJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: dict.faq.items.map((item) => ({
+      "@type": "Question",
+      name: item.question,
+      acceptedAnswer: { "@type": "Answer", text: item.answer },
+    })),
+  };
+
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: jsonLdScript(appJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: jsonLdScript(faqJsonLd) }}
+      />
+      <LandingPage dict={dict} locale={locale} />
+    </>
+  );
 }

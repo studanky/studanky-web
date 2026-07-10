@@ -10,18 +10,20 @@ const badgeSrc: Record<StorePlatform, string> = {
   android: "/app/google-play-badge.svg",
 };
 
+// Until the real store URLs are configured, fall back to the universal /get
+// redirect (which itself lands on the homepage download section for now).
 const badgeHref: Record<StorePlatform, string> = {
-  ios: siteConfig.links.appStore,
-  android: siteConfig.links.googlePlay,
+  ios: siteConfig.links.appStore || siteConfig.getPath,
+  android: siteConfig.links.googlePlay || siteConfig.getPath,
 };
 
-// Official store badge = the recommended (and store-guidelines-compliant) way to link.
 const BADGE_RATIO = 48 / 160;
 
-export function StoreBadge({
+/** One official store badge (the store-guidelines-compliant way to link). */
+export function StoreButton({
   platform,
   labels,
-  width = 200,
+  width = 180,
   priority = false,
   className,
 }: {
@@ -51,5 +53,25 @@ export function StoreBadge({
         priority={priority}
       />
     </a>
+  );
+}
+
+/** Both store badges side by side. */
+export function StoreButtons({
+  labels,
+  width = 168,
+  priority = false,
+  className,
+}: {
+  labels: Dictionary["storeBadges"];
+  width?: number;
+  priority?: boolean;
+  className?: string;
+}) {
+  return (
+    <div className={cn("flex flex-wrap items-center gap-3", className)}>
+      <StoreButton platform="ios" labels={labels} width={width} priority={priority} />
+      <StoreButton platform="android" labels={labels} width={width} priority={priority} />
+    </div>
   );
 }

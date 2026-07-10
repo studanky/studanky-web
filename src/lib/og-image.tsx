@@ -3,9 +3,10 @@ import { ImageResponse } from "next/og";
 export const OG_SIZE = { width: 1200, height: 630 };
 export const OG_CONTENT_TYPE = "image/png";
 
+// Matches the app's spring-status palette (flowing blue / not-flowing warm red).
 const STATUS_TONE = {
-  is_flowing: "#2f9e5f",
-  is_not_flowing: "#d9822b",
+  is_flowing: "#0B97D2",
+  is_not_flowing: "#EE5521",
   unknown: "rgba(255,255,255,0.22)",
 } as const;
 
@@ -32,7 +33,7 @@ export function renderSpringOgImage(opts: {
           width: "100%",
           height: "100%",
           display: "flex",
-          background: "linear-gradient(135deg, #2f6f4f, #1b3f2c)",
+          background: "linear-gradient(135deg, #255C83, #0A1628)",
           fontFamily: "Arial, sans-serif",
         }}
       >
@@ -52,8 +53,8 @@ export function renderSpringOgImage(opts: {
             inset: 0,
             display: "flex",
             background: opts.photoUrl
-              ? "linear-gradient(180deg, rgba(12,28,18,0.25) 0%, rgba(12,28,18,0.82) 100%)"
-              : "linear-gradient(180deg, rgba(12,28,18,0) 0%, rgba(12,28,18,0.35) 100%)",
+              ? "linear-gradient(180deg, rgba(10,22,40,0.25) 0%, rgba(10,22,40,0.82) 100%)"
+              : "linear-gradient(180deg, rgba(10,22,40,0) 0%, rgba(10,22,40,0.35) 100%)",
           }}
         />
 
@@ -76,7 +77,7 @@ export function renderSpringOgImage(opts: {
                 height: 64,
                 borderRadius: 18,
                 background: "#ffffff",
-                color: "#2f6f4f",
+                color: "#0B97D2",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
@@ -109,7 +110,7 @@ export function renderSpringOgImage(opts: {
               {opts.name}
             </div>
             <div style={{ display: "flex", alignItems: "center", gap: 16, color: "rgba(255,255,255,0.85)", fontSize: 28 }}>
-              <div style={{ width: 16, height: 16, borderRadius: 999, background: "#9cd6a8" }} />
+              <div style={{ width: 16, height: 16, borderRadius: 999, background: "#60C1EE" }} />
               {opts.domain}
             </div>
           </div>
@@ -139,8 +140,8 @@ export function renderOgImage(strings: {
           width: "100%",
           height: "100%",
           display: "flex",
-          background: "#f6fbf5",
-          color: "#14251a",
+          background: "#F0F4F8",
+          color: "#12212E",
           fontFamily: "Arial, sans-serif",
           padding: 64,
         }}
@@ -152,7 +153,7 @@ export function renderOgImage(strings: {
             display: "flex",
             flexDirection: "column",
             justifyContent: "space-between",
-            border: "2px solid #c5d8c2",
+            border: "2px solid #CCE6F1",
             borderRadius: 40,
             padding: 56,
             background: "#ffffff",
@@ -164,7 +165,7 @@ export function renderOgImage(strings: {
                 width: 72,
                 height: 72,
                 borderRadius: 20,
-                background: "#2f6f4f",
+                background: "#0B97D2",
                 color: "#ffffff",
                 display: "flex",
                 alignItems: "center",
@@ -177,7 +178,7 @@ export function renderOgImage(strings: {
             </div>
             <div style={{ display: "flex", flexDirection: "column" }}>
               <div style={{ fontSize: 34, fontWeight: 700 }}>{strings.name}</div>
-              <div style={{ color: "#5c705f", fontSize: 24 }}>{strings.subtitle}</div>
+              <div style={{ color: "#4A6478", fontSize: 24 }}>{strings.subtitle}</div>
             </div>
           </div>
 
@@ -193,7 +194,7 @@ export function renderOgImage(strings: {
             >
               {strings.title}
             </div>
-            <div style={{ maxWidth: 820, color: "#415442", fontSize: 32, lineHeight: 1.35 }}>
+            <div style={{ maxWidth: 820, color: "#41586B", fontSize: 32, lineHeight: 1.35 }}>
               {strings.description}
             </div>
           </div>
@@ -203,11 +204,11 @@ export function renderOgImage(strings: {
               display: "flex",
               alignItems: "center",
               gap: 16,
-              color: "#2f6f4f",
+              color: "#255C83",
               fontSize: 26,
             }}
           >
-            <div style={{ width: 18, height: 18, borderRadius: 999, background: "#78a66b" }} />
+            <div style={{ width: 18, height: 18, borderRadius: 999, background: "#0B97D2" }} />
             {strings.domain}
           </div>
         </div>
