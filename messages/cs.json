@@ -208,6 +208,48 @@
     "qrAlt": "QR kód pro stažení aplikace Studánky",
     "backHome": "Zpět na hlavní stránku"
   },
+  "springPreview": {
+    "metaTitle": "{name} — Studánky",
+    "sharedBadge": "Sdílená studánka",
+    "status": {
+      "isFlowing": "Voda teče",
+      "isNotFlowing": "Voda neteče",
+      "unknown": "Stav neznámý"
+    },
+    "updatedPrefix": "Aktualizováno",
+    "updatedNever": "Zatím bez měření stavu",
+    "descriptionFallback": "Zjistěte v aplikaci Studánky, jestli tady teče voda.",
+    "coordinatesLabel": "Souřadnice",
+    "copy": "Kopírovat",
+    "copied": "Zkopírováno",
+    "copyAria": "Kopírovat souřadnice studánky",
+    "photoAlt": "{name} — foto studánky",
+    "teaserTitle": "V aplikaci zjistíte víc",
+    "teaserItems": [
+      "Proč voda zrovna teče nebo neteče",
+      "Historii měření a vývoj v čase",
+      "Studánky ve svém okolí na mapě"
+    ],
+    "ctaTitle": "Otevřete v aplikaci Studánky",
+    "ctaText": "Stáhněte si aplikaci a mějte přehled o studánkách ve svém okolí.",
+    "disclaimer": "Aplikace informuje o průtoku, netvrdí, že je voda pitná.",
+    "alreadyInstalled": "Aplikaci už máte? Odkaz se v ní otevře automaticky.",
+    "scanTitle": "Naskenujte telefonem",
+    "scanNote": "Namiřte fotoaparát na QR kód a stáhněte si Studánky do mobilu.",
+    "qrAlt": "QR kód pro stažení aplikace Studánky",
+    "backHome": "Zpět na hlavní stránku"
+  },
+  "springNotFound": {
+    "metaTitle": "Studánka nenalezena — Studánky",
+    "badge": "Studánka nenalezena",
+    "title": "Tuhle studánku se nepodařilo najít",
+    "description": "Odkaz může být neplatný nebo byla studánka odebrána. Objevte ostatní studánky ve svém okolí v aplikaci Studánky.",
+    "ctaTitle": "Objevte studánky ve svém okolí",
+    "scanTitle": "Naskenujte telefonem",
+    "scanNote": "Namiřte fotoaparát na QR kód a stáhněte si Studánky do mobilu.",
+    "qrAlt": "QR kód pro stažení aplikace Studánky",
+    "backHome": "Zpět na hlavní stránku"
+  },
   "androidBanner": {
     "regionAria": "Nabídka mobilní aplikace {name}",
     "subtitle": "Zdarma na Google Play",

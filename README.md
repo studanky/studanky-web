@@ -6,8 +6,9 @@ Landing page for the Studánky mobile app, built with Next.js App Router and Tai
 
 Feature docs describing what the web app supports:
 
-- [Deep Linking — Universal Links & App Links](docs/deep-linking.md) — how shared `/s/*` links open in the native app, with a platform-aware web fallback (download page + QR).
+- [Deep Linking — Universal Links & App Links](docs/deep-linking.md) — how shared `/s/{id}` links open in the native app, with a platform-aware web fallback that previews the shared spring (fetched from Strapi) and links to the stores.
 - [App Store / Play Store Banners](docs/app-banners.md) — site-wide native-app promotion: iOS Smart App Banner, custom Android banner, and the manifest `related_applications` signal.
+- [Strapi share endpoint (backend brief)](docs/strapi-share-endpoint.md) — the contract for the public Strapi `preview` endpoint that feeds the `/s/{id}` fallback; a handoff for the backend/Strapi team.
 
 ## TODO (before production)
 
@@ -28,6 +29,7 @@ Deep linking (Universal Links / App Links) + `/s/*` fallback page:
   ```
 
 - [ ] **Coolify / Traefik** — ensure the apex `studankyapp.cz` serves `.well-known` **without redirecting** to `www` (otherwise deep links break); valid HTTPS cert; no basic-auth in front of `.well-known`.
+- [ ] **`STRAPI_API_BASE` env** — set it in Coolify to the public Strapi API base (incl. `/api`) so the `/s/{id}` fallback shows real spring data. Confirm the endpoint contract with the Strapi team ([docs/strapi-share-endpoint.md](docs/strapi-share-endpoint.md)).
 
 ## Stack
 
@@ -37,9 +39,25 @@ Deep linking (Universal Links / App Links) + `/s/*` fallback page:
 - Tailwind CSS 4
 - pnpm
 
+## Environment variables
+
+Local values go in `.env.local` (git-ignored). Copy the template and fill it in:
+
+```bash
+cp .env.example .env.local
+```
+
+| Variable | Required | Purpose |
+| --- | --- | --- |
+| `STRAPI_API_BASE` | For live `/s/{id}` data | Base URL of the public Strapi API (incl. `/api`). Feeds the deep-link preview page — see [docs/strapi-share-endpoint.md](docs/strapi-share-endpoint.md). Without it the preview degrades to a generic install page; the rest of the site is unaffected. |
+
+Production values are configured in Coolify, not in a committed file. See
+[`.env.example`](.env.example) for the documented shape.
+
 ## Development
 
 ```bash
+cp .env.example .env.local   # first time only
 pnpm dev
 ```
 

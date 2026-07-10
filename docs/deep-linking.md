@@ -54,24 +54,37 @@ The files are implemented as Next.js **route handlers**, not static files in
 
 ## Fallback page
 
-Route: [`src/app/s/[[...slug]]/page.tsx`](../src/app/s/%5B%5B...slug%5D%5D/page.tsx)
-(optional catch-all, so `/s`, `/s/<id>`, and deeper paths all resolve).
+Route: [`src/app/s/[documentId]/page.tsx`](../src/app/s/%5BdocumentId%5D/page.tsx).
+A deep link is always `/s/{documentId}`, so the segment is a required dynamic one
+(a metadata `opengraph-image` file can't live under an optional catch-all).
 
-- **Platform detection is server-side** via [`detectPlatform()`](../src/lib/platform.ts),
-  which reads the `User-Agent` header (`userAgent` from `next/server`). This
-  avoids a flash of the wrong content and works without client JS.
-- The [`AppFallback`](../src/components/app-links/app-fallback.tsx) component
-  renders platform-specific calls to action using the shared
-  [`StoreBadge`](../src/components/app-links/store-badge.tsx):
+The page fetches a **teaser-level** payload for the shared spring from Strapi
+([`fetchSpringPreview`](../src/lib/springs.ts)) and renders one of three states:
 
-| Detected platform | Shown |
-| --- | --- |
-| iOS | App Store badge |
-| Android | Google Play badge |
-| Other (desktop) | Both badges + QR code to scan |
+| `fetchSpringPreview` result | Renders | Notes |
+| --- | --- | --- |
+| `ok` | [`SpringPreview`](../src/components/app-links/spring-preview.tsx) | photo (or placeholder), flow status + "updated X ago", name, description, copyable coordinates, an "in the app you get more" teaser, and the store CTA |
+| `not_found` (404 / unknown / malformed id) | [`SpringNotFound`](../src/components/app-links/spring-not-found.tsx) | friendly "spring not found" screen that still keeps the install CTA |
+| `error` (Strapi unreachable) | [`AppFallback`](../src/components/app-links/app-fallback.tsx) | generic install page — the route never crashes on a backend outage |
 
-- The page is marked `robots: noindex, nofollow` (per-share links are not indexed).
-- Because it reads headers, the route renders dynamically per request.
+- **Contract & data source:** the public Strapi endpoint is documented in
+  [`docs/strapi-share-endpoint.md`](./strapi-share-endpoint.md); its base URL comes
+  from the `STRAPI_API_BASE` env var. Fetches are cached (`revalidate: 300`) so
+  preview crawlers don't hammer the backend.
+- **OG card:** a per-spring social card is generated server-side at
+  [`s/[documentId]/opengraph-image.tsx`](../src/app/s/%5BdocumentId%5D/opengraph-image.tsx)
+  (spring photo as background when present, branded gradient otherwise) so shares
+  render a rich card in every chat app.
+- **Security:** untrusted spring `name`/`description` go through React
+  auto-escaping; `photo.url` is validated as an absolute `http(s)` URL and the
+  `documentId` against an alphanumeric format (see `src/lib/springs.ts`).
+- **Platform detection is server-side** via [`detectPlatform()`](../src/lib/platform.ts):
+  iOS → App Store badge, Android → Google Play, desktop → both + QR. There is no
+  auto-redirect (an installed app would have intercepted the link already).
+- The page is `robots: noindex, nofollow` (per-share links are not indexed) and,
+  because it reads headers, renders dynamically per request.
+- **Future `/r/{id}` (QR → report)** reuses the same `fetchSpringPreview` layer;
+  only the fallback copy differs.
 
 ## Configuration
 
@@ -81,6 +94,8 @@ Route: [`src/app/s/[[...slug]]/page.tsx`](../src/app/s/%5B%5B...slug%5D%5D/page.
 | Matched path pattern (`/s/*`) | same file, `components` |
 | Android package + fingerprints | [`assetlinks.json/route.ts`](../src/app/.well-known/assetlinks.json/route.ts) |
 | Store links (badges) | [`src/config/site.ts`](../src/config/site.ts) → `links.appStore`, `links.googlePlay` |
+| iOS App Store numeric ID (Smart App Banner) | [`src/config/site.ts`](../src/config/site.ts) → `appStoreId` (empty until published) |
+| Strapi preview API base | `STRAPI_API_BASE` env var (e.g. Coolify) |
 
 ## Verification
 

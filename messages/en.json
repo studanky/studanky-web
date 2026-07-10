@@ -208,6 +208,48 @@
     "qrAlt": "QR code to download the Studánky app",
     "backHome": "Back to the home page"
   },
+  "springPreview": {
+    "metaTitle": "{name} — Studánky",
+    "sharedBadge": "Shared spring",
+    "status": {
+      "isFlowing": "Water is flowing",
+      "isNotFlowing": "Not flowing",
+      "unknown": "Status unknown"
+    },
+    "updatedPrefix": "Updated",
+    "updatedNever": "No status reading yet",
+    "descriptionFallback": "See in the Studánky app whether water is flowing here.",
+    "coordinatesLabel": "Coordinates",
+    "copy": "Copy",
+    "copied": "Copied",
+    "copyAria": "Copy the spring's coordinates",
+    "photoAlt": "{name} — spring photo",
+    "teaserTitle": "See more in the app",
+    "teaserItems": [
+      "Why the water is or isn't flowing right now",
+      "Measurement history and trends over time",
+      "Springs near you on the map"
+    ],
+    "ctaTitle": "Open in the Studánky app",
+    "ctaText": "Download the app and keep track of the springs around you.",
+    "disclaimer": "The app reports on water flow; it does not claim the water is drinkable.",
+    "alreadyInstalled": "Already have the app? The link opens in it automatically.",
+    "scanTitle": "Scan with your phone",
+    "scanNote": "Point your camera at the QR code and download Studánky to your phone.",
+    "qrAlt": "QR code to download the Studánky app",
+    "backHome": "Back to the home page"
+  },
+  "springNotFound": {
+    "metaTitle": "Spring not found — Studánky",
+    "badge": "Spring not found",
+    "title": "We couldn't find this spring",
+    "description": "The link may be invalid or the spring was removed. Discover other springs near you in the Studánky app.",
+    "ctaTitle": "Discover springs near you",
+    "scanTitle": "Scan with your phone",
+    "scanNote": "Point your camera at the QR code and download Studánky to your phone.",
+    "qrAlt": "QR code to download the Studánky app",
+    "backHome": "Back to the home page"
+  },
   "androidBanner": {
     "regionAria": "{name} mobile app offer",
     "subtitle": "Free on Google Play",

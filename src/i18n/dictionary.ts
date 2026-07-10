@@ -118,6 +118,43 @@ export type Dictionary = {
     qrAlt: string;
     backHome: string;
   };
+  springPreview: {
+    /** Template with `{name}`. */
+    metaTitle: string;
+    sharedBadge: string;
+    status: { isFlowing: string; isNotFlowing: string; unknown: string };
+    /** Prefixes the relative time, e.g. "Aktualizováno " + "před 3 dny". */
+    updatedPrefix: string;
+    updatedNever: string;
+    descriptionFallback: string;
+    coordinatesLabel: string;
+    copy: string;
+    copied: string;
+    copyAria: string;
+    /** Template with `{name}`. */
+    photoAlt: string;
+    teaserTitle: string;
+    teaserItems: string[];
+    ctaTitle: string;
+    ctaText: string;
+    disclaimer: string;
+    alreadyInstalled: string;
+    scanTitle: string;
+    scanNote: string;
+    qrAlt: string;
+    backHome: string;
+  };
+  springNotFound: {
+    metaTitle: string;
+    badge: string;
+    title: string;
+    description: string;
+    ctaTitle: string;
+    scanTitle: string;
+    scanNote: string;
+    qrAlt: string;
+    backHome: string;
+  };
   androidBanner: {
     /** Template with `{name}`. */
     regionAria: string;

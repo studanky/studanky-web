@@ -3,6 +3,123 @@ import { ImageResponse } from "next/og";
 export const OG_SIZE = { width: 1200, height: 630 };
 export const OG_CONTENT_TYPE = "image/png";
 
+const STATUS_TONE = {
+  is_flowing: "#2f9e5f",
+  is_not_flowing: "#d9822b",
+  unknown: "rgba(255,255,255,0.22)",
+} as const;
+
+/**
+ * Per-spring social card for `/s/{id}` shares. Uses the spring photo as the
+ * background when available, otherwise a branded gradient — either way it ends
+ * up 1200×630 with the spring name and a flow-status pill, so a shared link
+ * renders a rich, consistent card in every chat app.
+ */
+export function renderSpringOgImage(opts: {
+  name: string;
+  statusLabel: string;
+  status: keyof typeof STATUS_TONE;
+  domain: string;
+  photoUrl?: string;
+}) {
+  const tone = STATUS_TONE[opts.status];
+
+  return new ImageResponse(
+    (
+      <div
+        style={{
+          position: "relative",
+          width: "100%",
+          height: "100%",
+          display: "flex",
+          background: "linear-gradient(135deg, #2f6f4f, #1b3f2c)",
+          fontFamily: "Arial, sans-serif",
+        }}
+      >
+        {opts.photoUrl ? (
+          // Rendered by Satori inside ImageResponse, not the DOM — next/image N/A.
+          // eslint-disable-next-line @next/next/no-img-element
+          <img
+            src={opts.photoUrl}
+            alt=""
+            style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }}
+          />
+        ) : null}
+
+        <div
+          style={{
+            position: "absolute",
+            inset: 0,
+            display: "flex",
+            background: opts.photoUrl
+              ? "linear-gradient(180deg, rgba(12,28,18,0.25) 0%, rgba(12,28,18,0.82) 100%)"
+              : "linear-gradient(180deg, rgba(12,28,18,0) 0%, rgba(12,28,18,0.35) 100%)",
+          }}
+        />
+
+        <div
+          style={{
+            position: "relative",
+            width: "100%",
+            height: "100%",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "space-between",
+            padding: 72,
+            color: "#ffffff",
+          }}
+        >
+          <div style={{ display: "flex", alignItems: "center", gap: 18 }}>
+            <div
+              style={{
+                width: 64,
+                height: 64,
+                borderRadius: 18,
+                background: "#ffffff",
+                color: "#2f6f4f",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                fontSize: 38,
+                fontWeight: 800,
+              }}
+            >
+              S
+            </div>
+            <div style={{ fontSize: 30, fontWeight: 700 }}>Studánky</div>
+          </div>
+
+          <div style={{ display: "flex", flexDirection: "column", gap: 26 }}>
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                alignSelf: "flex-start",
+                gap: 12,
+                padding: "12px 24px",
+                borderRadius: 999,
+                background: tone,
+                fontSize: 30,
+                fontWeight: 700,
+              }}
+            >
+              {opts.statusLabel}
+            </div>
+            <div style={{ display: "flex", maxWidth: 980, fontSize: 88, lineHeight: 1.02, fontWeight: 800, letterSpacing: -1 }}>
+              {opts.name}
+            </div>
+            <div style={{ display: "flex", alignItems: "center", gap: 16, color: "rgba(255,255,255,0.85)", fontSize: 28 }}>
+              <div style={{ width: 16, height: 16, borderRadius: 999, background: "#9cd6a8" }} />
+              {opts.domain}
+            </div>
+          </div>
+        </div>
+      </div>
+    ),
+    OG_SIZE,
+  );
+}
+
 /**
  * Renders the shared OpenGraph image. Text is passed in so both the localized
  * route (`app/[locale]/opengraph-image`) and the default fallback
