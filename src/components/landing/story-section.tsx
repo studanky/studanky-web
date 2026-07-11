@@ -10,14 +10,8 @@ export function StorySection({ dict }: { dict: Dictionary }) {
   const story = dict.story;
 
   return (
-    <section className="flex flex-col justify-center px-4 py-24 sm:px-6 sm:py-28 lg:min-h-svh lg:px-8">
+    <section className="flex flex-col justify-center px-4 py-24 sm:px-6 sm:py-28 min-h-svh lg:px-8">
       <div className="mx-auto flex w-full max-w-3xl flex-col items-center gap-12 text-center">
-        <Reveal>
-          <span className="text-xs font-semibold tracking-[0.22em] text-primary uppercase">
-            {story.eyebrow}
-          </span>
-        </Reveal>
-
         <div className="flex flex-col gap-7">
           {story.lines.map((line, index) => (
             <Reveal key={line} delay={index * 0.12}>

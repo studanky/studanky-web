@@ -14,11 +14,11 @@ export function FaqSection({ dict }: { dict: Dictionary }) {
   return (
     <section
       id="faq"
-      className="flex scroll-mt-20 flex-col justify-center border-y border-border/60 bg-secondary/25 px-4 py-20 sm:px-6 sm:py-24 lg:min-h-svh lg:px-8"
+      className="flex flex-col justify-center border-y border-border/60 bg-secondary/25 px-4 py-20 sm:px-6 sm:py-24 min-h-svh lg:px-8"
     >
       <div className="mx-auto flex w-full max-w-3xl flex-col gap-10">
         <Reveal>
-          <SectionIntro eyebrow={faq.eyebrow} title={faq.title} description={faq.description} />
+          <SectionIntro title={faq.title} description={faq.description} />
         </Reveal>
 
         <Reveal delay={0.1}>

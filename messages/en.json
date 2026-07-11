@@ -49,26 +49,38 @@
       "save": "Save",
       "historyTitle": "Measurement history",
       "history": [
-        { "date": "Jul 8", "value": "2.1 l/s" },
-        { "date": "Jul 1", "value": "1.8 l/s" },
-        { "date": "Jun 24", "value": "1.2 l/s" }
+        {
+          "date": "Jul 8",
+          "value": "2.1 l/s"
+        },
+        {
+          "date": "Jul 1",
+          "value": "1.8 l/s"
+        },
+        {
+          "date": "Jun 24",
+          "value": "1.2 l/s"
+        }
       ]
     }
   },
   "hero": {
-    "eyebrow": "Free for iPhone and Android",
+    "eyebrow": "For iPhone and Android",
     "titleLine1": "Stop hauling litres on your back.",
     "titleLine2": "Route your trip past a spring.",
     "description": "Studánky shows where water is flowing right now — from CHMI measurements, refreshed every night. Check the map, plan your route past water, and leave the spare bottle at home.",
     "ctaMobile": "Download free",
-    "chips": ["Free", "No account", "Open source"],
+    "chips": [
+      "Free",
+      "No account",
+      "Open source"
+    ],
     "qrTitle": "Scan to download",
     "qrNote": "Point your camera at the code",
     "qrAlt": "QR code to download the Studánky app",
     "disclaimer": "Flowing water does not mean drinkable water."
   },
   "story": {
-    "eyebrow": "Why Studánky exists",
     "lines": [
       "An extra litre of water is an extra kilo on your back.",
       "Maps show you the spring. Whether it flows, they won't say.",
@@ -77,8 +89,7 @@
     "punch": "So we built Studánky."
   },
   "bento": {
-    "eyebrow": "Features",
-    "title": "Everything you need. Nothing extra.",
+    "title": "What the app does",
     "description": "No accounts, no route planners, no ads. Just a map that knows where water flows.",
     "map": {
       "title": "Flowing? Dry? See it instantly",
@@ -112,8 +123,7 @@
     }
   },
   "showcase": {
-    "eyebrow": "The app",
-    "title": "An environment you know from the trail.",
+    "title": "What the app looks like",
     "description": "Search, pins, detail — like the maps you're used to. Just water-blue and readable in direct sun.",
     "note": "Illustrative interface — the final app may differ.",
     "screens": {
@@ -128,8 +138,7 @@
     }
   },
   "steps": {
-    "eyebrow": "How it works",
-    "title": "Three steps, a lighter backpack.",
+    "title": "How it works",
     "description": "Studánky doesn't plan routes — it's your eyes in the field. You plan where you always have.",
     "items": [
       {
@@ -147,20 +156,30 @@
     ]
   },
   "data": {
-    "eyebrow": "Data",
-    "title": "From hydrometeorologists, not hearsay.",
+    "title": "Data from CHMI measurements",
     "description": "Spring status comes from regular measurements by the Czech Hydrometeorological Institute. We fetch it every night so your morning planning holds up.",
     "stats": [
-      { "value": "~300", "label": "springs measured by CHMI across Czechia" },
-      { "value": "Nightly", "label": "full data refresh" },
-      { "value": "3 states", "label": "flowing · dry · outdated" },
-      { "value": "$0", "label": "no ads, no account, for good" }
+      {
+        "value": "~300",
+        "label": "springs measured by CHMI across Czechia"
+      },
+      {
+        "value": "Nightly",
+        "label": "full data refresh"
+      },
+      {
+        "value": "3 states",
+        "label": "flowing · dry · outdated"
+      },
+      {
+        "value": "CZ",
+        "label": "coverage across the country"
+      }
     ],
     "disclaimer": "Flowing water does not mean drinkable water. Studánky reports the measured flow; it does not verify water safety — use at your own risk."
   },
   "roadmap": {
-    "eyebrow": "Where we're headed",
-    "title": "This is just the warm-up.",
+    "title": "Where we're headed",
     "description": "We're starting with the springs CHMI measures. The goal is bigger: a living map updated by hikers themselves. People helping people.",
     "phases": [
       {
@@ -193,8 +212,7 @@
     }
   },
   "community": {
-    "eyebrow": "A community project",
-    "title": "People helping people. Literally.",
+    "title": "People helping people",
     "description": "Studánky runs on a simple exchange: you plan your trip by other people's reports — and next time you're the one reporting whether the water flows. No company behind it. Just people who go outside.",
     "points": [
       {
@@ -213,13 +231,12 @@
     "githubCta": "Project on GitHub"
   },
   "faq": {
-    "eyebrow": "FAQ",
-    "title": "What people ask most.",
+    "title": "Common questions",
     "description": "Short and straight — money, data, drinkability.",
     "items": [
       {
         "question": "Is the app free?",
-        "answer": "Yes, completely and for good. No sign-up, no ads, no premium tiers. Studánky is a community open source project."
+        "answer": "Yes. The app is free, with no sign-up and no ads. Studánky is a community open source project."
       },
       {
         "question": "Is spring water drinkable?",
@@ -244,8 +261,8 @@
     ]
   },
   "download": {
-    "title": "A lighter backpack starts here.",
-    "description": "Studánky, free for iPhone and Android. No account, no ads.",
+    "title": "Get Studánky",
+    "description": "For iPhone and Android. Free and ad-free.",
     "qrTitle": "Point your camera",
     "qrNote": "The code takes you straight to the download.",
     "qrAlt": "QR code to download the Studánky app",

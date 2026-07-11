@@ -47,6 +47,7 @@ export type Dictionary = {
     };
   };
   hero: {
+    /** Small kicker above the H1 — platform info, not a section label. */
     eyebrow: string;
     titleLine1: string;
     /** Second headline line, rendered as a water-gradient accent. */
@@ -54,7 +55,6 @@ export type Dictionary = {
     description: string;
     /** Single primary CTA on phones — links to the /get platform redirect. */
     ctaMobile: string;
-    /** Short trust notes ("Zdarma", "Bez registrace", …), rendered inline. */
     chips: string[];
     qrTitle: string;
     qrNote: string;
@@ -63,13 +63,11 @@ export type Dictionary = {
   };
   /** Narrative problem section — a sequence of big statements + the punchline. */
   story: {
-    eyebrow: string;
     lines: string[];
     punch: string;
   };
   /** Feature bento grid; named tiles because each has a bespoke visual. */
   bento: {
-    eyebrow: string;
     title: string;
     description: string;
     map: { title: string; text: string };
@@ -86,7 +84,6 @@ export type Dictionary = {
   };
   /** App showcase — two phone mocks with captions. */
   showcase: {
-    eyebrow: string;
     title: string;
     description: string;
     note: string;
@@ -96,21 +93,18 @@ export type Dictionary = {
     };
   };
   steps: {
-    eyebrow: string;
     title: string;
     description: string;
     items: { title: string; description: string }[];
   };
   /** ČHMÚ data band with stat tiles + full potability disclaimer. */
   data: {
-    eyebrow: string;
     title: string;
     description: string;
     stats: { value: string; label: string }[];
     disclaimer: string;
   };
   roadmap: {
-    eyebrow: string;
     title: string;
     description: string;
     phases: { status: string; title: string; description: string }[];
@@ -128,14 +122,12 @@ export type Dictionary = {
     };
   };
   community: {
-    eyebrow: string;
     title: string;
     description: string;
     points: { title: string; description: string }[];
     githubCta: string;
   };
   faq: {
-    eyebrow: string;
     title: string;
     description: string;
     items: { question: string; answer: string }[];

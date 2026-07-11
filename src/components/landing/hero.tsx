@@ -14,7 +14,7 @@ export function Hero({ dict }: { dict: Dictionary }) {
   return (
     <section
       id="top"
-      className="relative flex flex-col justify-center overflow-hidden px-4 pt-28 pb-16 sm:px-6 sm:pt-36 sm:pb-24 lg:min-h-svh lg:px-8"
+      className="relative flex flex-col justify-center overflow-hidden px-4 pt-28 pb-16 sm:px-6 sm:pt-36 sm:pb-24 min-h-svh lg:px-8"
     >
       {/* Ambient water scene behind the whole hero. */}
       <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10">

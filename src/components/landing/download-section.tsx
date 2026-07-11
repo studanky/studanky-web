@@ -13,7 +13,7 @@ export function DownloadSection({ dict }: { dict: Dictionary }) {
   const download = dict.download;
 
   return (
-    <section className="relative flex flex-col justify-center overflow-hidden px-4 py-20 sm:px-6 sm:py-28 lg:min-h-svh lg:px-8">
+    <section className="relative flex flex-col justify-center overflow-hidden px-4 py-20 sm:px-6 sm:py-28 min-h-svh lg:px-8">
       <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10">
         <div className="absolute -top-32 left-[8%] size-96 rounded-full bg-water/20 blur-3xl motion-safe:animate-drift" />
         <div className="absolute right-[-10%] bottom-[-10rem] size-[26rem] rounded-full bg-primary/12 blur-3xl" />

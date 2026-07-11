@@ -1,16 +1,14 @@
 import { cn } from "@/lib/utils";
 
 /**
- * Shared section opener: plain tracked-uppercase eyebrow (no pill — keeps the
- * page airy and linear), display-size title, muted lead.
+ * Shared section opener: display-size title + muted lead. No eyebrow labels —
+ * sections introduce themselves through the heading alone.
  */
 export function SectionIntro({
-  eyebrow,
   title,
   description,
   align = "center",
 }: {
-  eyebrow: string;
   title: string;
   description?: string;
   align?: "center" | "left";
@@ -22,9 +20,6 @@ export function SectionIntro({
         align === "center" ? "mx-auto items-center text-center" : "items-start text-left",
       )}
     >
-      <span className="text-xs font-semibold tracking-[0.22em] text-primary uppercase">
-        {eyebrow}
-      </span>
       <h2 className="text-4xl font-semibold tracking-tight text-balance text-foreground sm:text-5xl">
         {title}
       </h2>

@@ -20,13 +20,12 @@ export function RoadmapSection({ dict, locale }: { dict: Dictionary; locale: Loc
   return (
     <section
       id="roadmapa"
-      className="flex scroll-mt-20 flex-col justify-center px-4 py-20 sm:px-6 sm:py-24 lg:min-h-svh lg:px-8"
+      className="flex flex-col justify-center px-4 py-20 sm:px-6 sm:py-24 min-h-svh lg:px-8"
     >
       <div className="mx-auto flex w-full max-w-6xl flex-col gap-14">
         <Reveal>
           <SectionIntro
             align="left"
-            eyebrow={roadmap.eyebrow}
             title={roadmap.title}
             description={roadmap.description}
           />

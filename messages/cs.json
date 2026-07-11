@@ -49,26 +49,38 @@
       "save": "Uložit",
       "historyTitle": "Historie měření",
       "history": [
-        { "date": "8. 7.", "value": "2,1 l/s" },
-        { "date": "1. 7.", "value": "1,8 l/s" },
-        { "date": "24. 6.", "value": "1,2 l/s" }
+        {
+          "date": "8. 7.",
+          "value": "2,1 l/s"
+        },
+        {
+          "date": "1. 7.",
+          "value": "1,8 l/s"
+        },
+        {
+          "date": "24. 6.",
+          "value": "1,2 l/s"
+        }
       ]
     }
   },
   "hero": {
-    "eyebrow": "Zdarma pro iPhone i Android",
+    "eyebrow": "Pro iPhone a Android",
     "titleLine1": "Netahejte litry na zádech.",
     "titleLine2": "Vezměte to kolem studánky.",
     "description": "Studánky ukazují, kde právě teče voda — z měření ČHMÚ, každou noc čerstvých. Mrknete na mapu, naplánujete trasu kolem vody a náhradní lahev necháte doma.",
     "ctaMobile": "Stáhnout zdarma",
-    "chips": ["Zdarma", "Bez účtu", "Open source"],
+    "chips": [
+      "Zdarma",
+      "Bez účtu",
+      "Open source"
+    ],
     "qrTitle": "Naskenujte a stáhněte",
     "qrNote": "Namiřte foťák na kód",
     "qrAlt": "QR kód pro stažení aplikace Studánky",
     "disclaimer": "Tekoucí voda neznamená pitná voda."
   },
   "story": {
-    "eyebrow": "Proč Studánky vznikly",
     "lines": [
       "Litr vody navíc je kilo na zádech navíc.",
       "Mapa studánku ukáže. Jestli teče, neprozradí.",
@@ -77,8 +89,7 @@
     "punch": "Tak jsme postavili Studánky."
   },
   "bento": {
-    "eyebrow": "Funkce",
-    "title": "Všechno, co potřebujete. Nic navíc.",
+    "title": "Co aplikace umí",
     "description": "Žádné účty, žádné plánovače, žádné reklamy. Jen mapa, která ví, kde teče.",
     "map": {
       "title": "Teče? Neteče? Vidíte hned",
@@ -112,8 +123,7 @@
     }
   },
   "showcase": {
-    "eyebrow": "Aplikace",
-    "title": "Prostředí, které znáte z výletů.",
+    "title": "Jak aplikace vypadá",
     "description": "Vyhledávání, špendlíky, detail — jako v mapách, na které jste zvyklí. Jen modré jako voda a čitelné i na ostrém slunci.",
     "note": "Ilustrační rozhraní — finální podoba aplikace se může lišit.",
     "screens": {
@@ -128,8 +138,7 @@
     }
   },
   "steps": {
-    "eyebrow": "Jak to funguje",
-    "title": "Tři kroky, lehčí batoh.",
+    "title": "Jak to funguje",
     "description": "Studánky trasy neplánují — jsou to vaše oči v terénu. Plánujete tam, kde jste zvyklí.",
     "items": [
       {
@@ -147,20 +156,30 @@
     ]
   },
   "data": {
-    "eyebrow": "Data",
-    "title": "Od hydrometeorologů, ne z doslechu.",
+    "title": "Data z měření ČHMÚ",
     "description": "Stav studánek přebíráme z pravidelných měření Českého hydrometeorologického ústavu. Stahujeme je každou noc, aby ranní plánování sedělo.",
     "stats": [
-      { "value": "~300", "label": "studánek měřených ČHMÚ po celé ČR" },
-      { "value": "1× za noc", "label": "aktualizace všech dat" },
-      { "value": "3 stavy", "label": "teče · neteče · neaktuální" },
-      { "value": "0 Kč", "label": "bez reklam, bez účtu, napořád" }
+      {
+        "value": "~300",
+        "label": "studánek měřených ČHMÚ po celé ČR"
+      },
+      {
+        "value": "1× za noc",
+        "label": "aktualizace všech dat"
+      },
+      {
+        "value": "3 stavy",
+        "label": "teče · neteče · neaktuální"
+      },
+      {
+        "value": "ČR",
+        "label": "od Šumavy po Beskydy"
+      }
     ],
     "disclaimer": "Tekoucí voda neznamená pitná voda. Studánky informují o hlášeném průtoku, zdravotní nezávadnost vody neověřují — použití je na vlastní odpovědnost."
   },
   "roadmap": {
-    "eyebrow": "Kam míříme",
-    "title": "Tohle je teprve rozjezd.",
+    "title": "Kam míříme",
     "description": "Začínáme se studánkami, které měří ČHMÚ. Cíl je větší: živá mapa, kterou aktualizují sami výletníci. Lidé lidem.",
     "phases": [
       {
@@ -193,8 +212,7 @@
     }
   },
   "community": {
-    "eyebrow": "Komunitní projekt",
-    "title": "Lidé lidem. Doslova.",
+    "title": "Lidé lidem",
     "description": "Studánky fungují na jednoduché výměně: podle hlášení ostatních si naplánujete výlet — a příště zase vy dáte vědět, jestli voda teče. Žádná firma za tím není. Jen lidé, co chodí ven.",
     "points": [
       {
@@ -213,13 +231,12 @@
     "githubCta": "Projekt na GitHubu"
   },
   "faq": {
-    "eyebrow": "Časté dotazy",
-    "title": "Na co se ptáte nejčastěji.",
+    "title": "Časté dotazy",
     "description": "Stručně a na rovinu — o penězích, datech i pitnosti.",
     "items": [
       {
         "question": "Je aplikace zdarma?",
-        "answer": "Ano, úplně a napořád. Bez registrace, bez reklam, bez prémiových verzí. Studánky jsou komunitní open source projekt."
+        "answer": "Ano. Aplikace je zdarma, bez registrace a bez reklam. Studánky jsou komunitní open source projekt."
       },
       {
         "question": "Je voda ze studánek pitná?",
@@ -244,8 +261,8 @@
     ]
   },
   "download": {
-    "title": "Lehčí batoh začíná tady.",
-    "description": "Studánky zdarma pro iPhone i Android. Bez účtu a bez reklam.",
+    "title": "Stáhněte si Studánky",
+    "description": "Pro iPhone i Android. Zdarma a bez reklam.",
     "qrTitle": "Namiřte foťák",
     "qrNote": "Kód vás vezme rovnou ke stažení.",
     "qrAlt": "QR kód pro stažení aplikace Studánky",

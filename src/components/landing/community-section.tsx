@@ -13,11 +13,10 @@ export function CommunitySection({ dict }: { dict: Dictionary }) {
   const community = dict.community;
 
   return (
-    <section className="flex flex-col justify-center px-4 py-20 sm:px-6 sm:py-24 lg:min-h-svh lg:px-8">
+    <section className="flex flex-col justify-center px-4 py-20 sm:px-6 sm:py-24 min-h-svh lg:px-8">
       <div className="mx-auto flex w-full max-w-6xl flex-col gap-14">
         <Reveal>
           <SectionIntro
-            eyebrow={community.eyebrow}
             title={community.title}
             description={community.description}
           />

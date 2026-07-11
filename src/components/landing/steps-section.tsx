@@ -9,11 +9,11 @@ export function StepsSection({ dict }: { dict: Dictionary }) {
   return (
     <section
       id="jak-to-funguje"
-      className="flex scroll-mt-20 flex-col justify-center px-4 py-20 sm:px-6 sm:py-24 lg:min-h-svh lg:px-8"
+      className="flex flex-col justify-center px-4 py-20 sm:px-6 sm:py-24 min-h-svh lg:px-8"
     >
       <div className="mx-auto flex w-full max-w-6xl flex-col gap-14">
         <Reveal>
-          <SectionIntro eyebrow={steps.eyebrow} title={steps.title} description={steps.description} />
+          <SectionIntro title={steps.title} description={steps.description} />
         </Reveal>
 
         <div className="grid gap-10 md:grid-cols-3 md:gap-8">
