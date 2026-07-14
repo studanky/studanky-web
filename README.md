@@ -55,6 +55,20 @@ cp .env.example .env.local
 Production values are configured in Coolify, not in a committed file. See
 [`.env.example`](.env.example) for the documented shape.
 
+## Deployment
+
+The production container is built from the repository `Dockerfile`, which uses
+Next.js standalone output and starts the traced server with `node server.js`.
+
+Coolify settings:
+
+- `Build Pack`: `Dockerfile`
+- `Ports Exposes`: `3000`
+- `STRAPI_API_BASE`: set as a runtime environment variable
+
+The Dockerfile pins the runtime to Node.js 22 and uses Corepack to install the
+`pnpm` version declared in `package.json`.
+
 ## Development
 
 ```bash

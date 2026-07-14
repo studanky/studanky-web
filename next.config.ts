@@ -1,6 +1,7 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  output: "standalone",
   experimental: {
     // Enables `app/global-not-found.tsx` — the documented way to render a
     // consistent 404 when the root layout lives under a dynamic segment
