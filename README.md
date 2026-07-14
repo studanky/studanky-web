@@ -57,17 +57,20 @@ Production values are configured in Coolify, not in a committed file. See
 
 ## Deployment
 
-The production container is built from the repository `Dockerfile`, which uses
-Next.js standalone output and starts the traced server with `node server.js`.
+The production build uses Next.js standalone output and starts the traced server
+with `node .next/standalone/server.js`.
 
-Coolify settings:
+Coolify Nixpacks settings:
 
-- `Build Pack`: `Dockerfile`
+- `Build Pack`: `Nixpacks`
 - `Ports Exposes`: `3000`
+- `Is it a static site?`: disabled
 - `STRAPI_API_BASE`: set as a runtime environment variable
 
-The Dockerfile pins the runtime to Node.js 22 and uses Corepack to install the
-`pnpm` version declared in `package.json`.
+The repository `nixpacks.toml` pins Node.js 22, activates pnpm 11 via Corepack,
+copies the standalone static assets, and overrides the start command. A
+`Dockerfile` is kept as a fallback if the deployment server cannot complete the
+Nixpacks setup phase.
 
 ## Development
 
