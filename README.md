@@ -68,9 +68,7 @@ Coolify Nixpacks settings:
 - `STRAPI_API_BASE`: set as a runtime environment variable
 
 The repository `nixpacks.toml` pins Node.js 22, activates pnpm 11 via Corepack,
-copies the standalone static assets, and overrides the start command. A
-`Dockerfile` is kept as a fallback if the deployment server cannot complete the
-Nixpacks setup phase.
+copies the standalone static assets, and overrides the start command.
 
 ## Development
 
