@@ -1,8 +1,8 @@
 # Newsletter signup
 
-Public landing-page signup is handled by a Next.js Server Action, not directly
-from the browser. The action validates the form, derives `sourceUrl` from the
-request headers, and posts JSON to Strapi:
+Public landing-page signup is handled by a Next.js Server Action. The browser
+does not post to Strapi directly. The action validates the form, rate-limits by
+the visitor IP hash, and posts top-level camelCase JSON to Strapi:
 
 ```text
 POST {STRAPI_API_BASE}/newsletter/subscribe
@@ -20,7 +20,7 @@ POST {STRAPI_API_BASE}/newsletter/subscribe
   "source": "prelaunch-page",
   "preferredLanguage": "cs",
   "consentVersion": "2026-07-10",
-  "sourceUrl": "https://studankyapp.cz/cs",
+  "sourceRef": "https://studankyapp.cz/#roadmap",
   "website": ""
 }
 ```
@@ -29,11 +29,16 @@ POST {STRAPI_API_BASE}/newsletter/subscribe
   treated as a neutral success without storing anything.
 - `consent` is sent as `true`; missing or tampered consent is rejected before
   Strapi is called.
-- `preferredLanguage` is the active locale (`cs`, `en`, later more).
+- `preferredLanguage` is the active locale (`cs`, `en`).
 - `source` is whitelisted in the action. The current landing-page form uses
   `prelaunch-page`.
+- `sourceRef` is whitelisted in the action. The current landing-page form uses
+  `https://studankyapp.cz/#roadmap`. Do not put secrets, tokens, session data,
+  or free user text into it.
 - `consentVersion` is pinned to `2026-07-10`; update it whenever the consent
   wording materially changes.
+- The Strapi request is a plain top-level object, never a REST envelope such as
+  `{ "data": { ... } }`.
 
 ## Response handling
 
@@ -45,21 +50,31 @@ honeypot-neutral submissions:
 ```
 
 The UI always shows the same localized success message for any 2xx response and
-does not expose whether the email already exists. A `400` maps to the localized
-invalid-input state; other failures map to the generic retry state.
+does not expose whether the email already exists. Local email validation maps to
+the localized invalid-input state. Strapi `400`, Strapi `429`, Next rate limits,
+and other failures map to the generic retry state.
 
 ## Abuse prevention
 
-The frontend can reduce casual abuse, but a public write endpoint must be
-protected server-side. Recommended production controls:
+The web layer reduces casual abuse, but both public entry points must remain
+protected: the Next Server Action can be called directly, and the Strapi endpoint
+can also be called directly if it is publicly routable.
 
 - Keep browser traffic on the Next.js Server Action and do not expose any API
   token to the client.
-- Rate-limit in front of Strapi by IP/subnet and by normalized email hash.
+- The Next action applies an in-memory fixed-window IP limiter using a hashed
+  IP key: 5 attempts/minute and 100 attempts/day. This is per process and resets
+  on restart.
+- Keep edge/proxy rate limiting in front of the deployed web/Strapi services;
+  use the real client IP from a trusted proxy chain.
+- Rate-limit in Strapi by normalized email hash as a second layer, especially
+  because the Strapi endpoint is public.
 - Keep Strapi validation strict: email length/format, `consent === true`,
-  whitelisted `source`, valid absolute `sourceUrl`, and empty `website`.
+  valid optional metadata lengths, and empty `website`.
 - Add a unique constraint on normalized email and keep duplicate responses
   idempotent.
+- Keep request body limits small at every layer. The Next Server Action parser
+  limit is configured to 32 KB.
 - Consider Turnstile/hCaptcha only after suspicious velocity, verified
   server-side before writing.
 - Use double opt-in before sending newsletter campaigns; store unconfirmed

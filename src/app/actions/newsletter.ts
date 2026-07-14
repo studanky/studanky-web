@@ -2,27 +2,57 @@
 
 import "server-only";
 
+import { createHash } from "node:crypto";
+import { isIP } from "node:net";
 import { headers } from "next/headers";
 import { z } from "zod";
 
 import { siteConfig } from "@/config/site";
-import { defaultLocale, isLocale, type Locale } from "@/i18n/config";
+import { isLocale, type Locale } from "@/i18n/config";
 
 export type NewsletterState = {
   status: "idle" | "success" | "invalid" | "error";
 };
 
 type NewsletterSource = "prelaunch-page" | "website-hero" | "website-footer";
+type RateLimitWindow = {
+  name: string;
+  limit: number;
+  windowMs: number;
+};
+type RateLimitBucket = {
+  count: number;
+  resetAt: number;
+};
+
+const NEWSLETTER_SOURCE_REFS = {
+  top: `${siteConfig.url}/#top`,
+  roadmap: `${siteConfig.url}/#roadmap`,
+  download: `${siteConfig.url}/#download`,
+} as const;
+
+type NewsletterSourceRef = (typeof NEWSLETTER_SOURCE_REFS)[keyof typeof NEWSLETTER_SOURCE_REFS];
 
 const STRAPI_API_BASE = process.env.STRAPI_API_BASE;
 const CONSENT_VERSION = "2026-07-10";
 const FETCH_TIMEOUT_MS = 5000;
-const MAX_SOURCE_URL_LENGTH = 2048;
+const RATE_LIMIT_CLEANUP_INTERVAL_MS = 60_000;
 const NEWSLETTER_SOURCES = new Set<NewsletterSource>([
   "prelaunch-page",
   "website-hero",
   "website-footer",
 ]);
+const NEWSLETTER_SOURCE_REFS_BY_SOURCE: Record<NewsletterSource, ReadonlySet<NewsletterSourceRef>> = {
+  "prelaunch-page": new Set([NEWSLETTER_SOURCE_REFS.roadmap]),
+  "website-hero": new Set([NEWSLETTER_SOURCE_REFS.top]),
+  "website-footer": new Set([NEWSLETTER_SOURCE_REFS.download]),
+};
+const IP_RATE_LIMITS: RateLimitWindow[] = [
+  { name: "minute", limit: 5, windowMs: 60_000 },
+  { name: "day", limit: 100, windowMs: 86_400_000 },
+];
+const rateLimitBuckets = new Map<string, RateLimitBucket>();
+let lastRateLimitCleanupAt = 0;
 
 const emailSchema = z.email();
 
@@ -31,27 +61,14 @@ function getString(formData: FormData, key: string): string {
   return typeof value === "string" ? value : "";
 }
 
-function getLocale(formData: FormData): Locale {
+function getLocale(formData: FormData): Locale | null {
   const locale = getString(formData, "locale");
-  return isLocale(locale) ? locale : defaultLocale;
+  return isLocale(locale) ? locale : null;
 }
 
-function getSource(formData: FormData): NewsletterSource {
+function getSource(formData: FormData): NewsletterSource | null {
   const source = getString(formData, "source");
-  return NEWSLETTER_SOURCES.has(source as NewsletterSource)
-    ? (source as NewsletterSource)
-    : "prelaunch-page";
-}
-
-function safeHttpUrl(value: string | null): string | null {
-  if (!value || value.length > MAX_SOURCE_URL_LENGTH) return null;
-
-  try {
-    const url = new URL(value);
-    return url.protocol === "https:" || url.protocol === "http:" ? url.toString() : null;
-  } catch {
-    return null;
-  }
+  return NEWSLETTER_SOURCES.has(source as NewsletterSource) ? (source as NewsletterSource) : null;
 }
 
 function newsletterEndpoint(): string | null {
@@ -65,12 +82,90 @@ function newsletterEndpoint(): string | null {
   }
 }
 
-function sourceUrlFromHeaders(requestHeaders: Headers): string {
+function getSourceRef(formData: FormData, source: NewsletterSource): NewsletterSourceRef | null {
+  const sourceRef = getString(formData, "sourceRef");
+  return NEWSLETTER_SOURCE_REFS_BY_SOURCE[source].has(sourceRef as NewsletterSourceRef)
+    ? (sourceRef as NewsletterSourceRef)
+    : null;
+}
+
+function stripQuotes(value: string): string {
+  return value.replace(/^"|"$/g, "");
+}
+
+function normalizeIp(value: string | null | undefined): string | null {
+  if (!value) return null;
+
+  const candidate = stripQuotes(value.trim());
+  if (isIP(candidate)) return candidate;
+
+  const bracketedIpv6 = candidate.match(/^\[([^\]]+)](?::\d+)?$/);
+  if (bracketedIpv6 && isIP(bracketedIpv6[1])) return bracketedIpv6[1];
+
+  const ipv4WithPort = candidate.match(/^(\d{1,3}(?:\.\d{1,3}){3})(?::\d+)?$/);
+  if (ipv4WithPort && isIP(ipv4WithPort[1])) return ipv4WithPort[1];
+
+  return null;
+}
+
+function forwardedHeaderIp(value: string | null): string | null {
+  if (!value) return null;
+
+  const firstEntry = value.split(",")[0];
+  const forPart = firstEntry
+    ?.split(";")
+    .map((part) => part.trim())
+    .find((part) => part.toLowerCase().startsWith("for="));
+
+  return normalizeIp(forPart?.slice(4));
+}
+
+function clientIpFromHeaders(requestHeaders: Headers): string {
+  const forwardedFor = requestHeaders.get("x-forwarded-for")?.split(",")[0];
+
   return (
-    safeHttpUrl(requestHeaders.get("referer")) ??
-    safeHttpUrl(requestHeaders.get("origin")) ??
-    siteConfig.url
+    normalizeIp(requestHeaders.get("cf-connecting-ip")) ??
+    normalizeIp(requestHeaders.get("x-real-ip")) ??
+    normalizeIp(forwardedFor) ??
+    forwardedHeaderIp(requestHeaders.get("forwarded")) ??
+    "unknown"
   );
+}
+
+function hashedRateLimitKey(scope: string, value: string): string {
+  const digest = createHash("sha256").update(value).digest("hex");
+  return `${scope}:${digest}`;
+}
+
+function cleanupRateLimitBuckets(now: number): void {
+  if (now - lastRateLimitCleanupAt < RATE_LIMIT_CLEANUP_INTERVAL_MS) return;
+  lastRateLimitCleanupAt = now;
+
+  for (const [key, bucket] of rateLimitBuckets) {
+    if (bucket.resetAt <= now) rateLimitBuckets.delete(key);
+  }
+}
+
+function consumeRateLimit(key: string, window: RateLimitWindow, now: number): boolean {
+  const bucketKey = `${key}:${window.name}`;
+  const bucket = rateLimitBuckets.get(bucketKey);
+
+  if (!bucket || bucket.resetAt <= now) {
+    rateLimitBuckets.set(bucketKey, { count: 1, resetAt: now + window.windowMs });
+    return true;
+  }
+
+  if (bucket.count >= window.limit) return false;
+  bucket.count += 1;
+  return true;
+}
+
+function isNewsletterRateLimited(requestHeaders: Headers): boolean {
+  const now = Date.now();
+  cleanupRateLimitBuckets(now);
+
+  const ipKey = hashedRateLimitKey("newsletter-ip", clientIpFromHeaders(requestHeaders));
+  return IP_RATE_LIMITS.some((window) => !consumeRateLimit(ipKey, window, now));
 }
 
 export async function subscribeToNewsletter(
@@ -81,7 +176,19 @@ export async function subscribeToNewsletter(
   // Pretend success so scripts don't retry with the field left empty.
   if (formData.get("website")) return { status: "success" };
 
-  if (getString(formData, "consent") !== "true") return { status: "invalid" };
+  const requestHeaders = await headers();
+  if (isNewsletterRateLimited(requestHeaders)) return { status: "error" };
+
+  const locale = getLocale(formData);
+  const source = getSource(formData);
+  if (getString(formData, "consent") !== "true" || !locale || !source) {
+    return { status: "error" };
+  }
+
+  const sourceRef = getSourceRef(formData, source);
+  if (!sourceRef) {
+    return { status: "error" };
+  }
 
   const parsed = emailSchema.safeParse(
     String(formData.get("email") ?? "")
@@ -97,7 +204,6 @@ export async function subscribeToNewsletter(
   }
 
   try {
-    const requestHeaders = await headers();
     const response = await fetch(endpoint, {
       method: "POST",
       headers: {
@@ -107,10 +213,10 @@ export async function subscribeToNewsletter(
       body: JSON.stringify({
         email: parsed.data,
         consent: true,
-        source: getSource(formData),
-        preferredLanguage: getLocale(formData),
+        source,
+        preferredLanguage: locale,
         consentVersion: CONSENT_VERSION,
-        sourceUrl: sourceUrlFromHeaders(requestHeaders),
+        sourceRef,
         website: "",
       }),
       cache: "no-store",
@@ -118,7 +224,6 @@ export async function subscribeToNewsletter(
     });
 
     if (response.ok) return { status: "success" };
-    if (response.status === 400) return { status: "invalid" };
 
     console.error(`Newsletter subscribe failed: ${response.status}`);
     return { status: "error" };

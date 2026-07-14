@@ -11,7 +11,7 @@ export function ShowcaseSection({ dict }: { dict: Dictionary }) {
 
   return (
     <section
-      id="aplikace"
+      id="app"
       className="flex flex-col justify-center border-y border-border/60 bg-secondary/25 px-4 py-20 sm:px-6 sm:py-24 min-h-svh lg:px-8"
     >
       <div className="mx-auto flex w-full max-w-6xl flex-col gap-14">

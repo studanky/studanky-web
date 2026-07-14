@@ -8,7 +8,7 @@ export function StepsSection({ dict }: { dict: Dictionary }) {
 
   return (
     <section
-      id="jak-to-funguje"
+      id="how-it-works"
       className="flex flex-col justify-center px-4 py-20 sm:px-6 sm:py-24 min-h-svh lg:px-8"
     >
       <div className="mx-auto flex w-full max-w-6xl flex-col gap-14">

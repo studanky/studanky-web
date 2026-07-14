@@ -7,19 +7,24 @@ import { subscribeToNewsletter, type NewsletterState } from "@/app/actions/newsl
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { siteConfig } from "@/config/site";
 import type { Locale } from "@/i18n/config";
 import type { Dictionary } from "@/i18n/dictionary";
 
 const initialState: NewsletterState = { status: "idle" };
+type NewsletterSourceRef = `${(typeof siteConfig)["url"]}/#${"top" | "roadmap" | "download"}`;
+const defaultSourceRef: NewsletterSourceRef = `${siteConfig.url}/#roadmap`;
 
 export function NewsletterForm({
   copy,
   locale,
   source = "prelaunch-page",
+  sourceRef = defaultSourceRef,
 }: {
   copy: Dictionary["roadmap"]["newsletter"];
   locale: Locale;
   source?: "prelaunch-page" | "website-hero" | "website-footer";
+  sourceRef?: NewsletterSourceRef;
 }) {
   const [state, formAction, pending] = useActionState(subscribeToNewsletter, initialState);
 
@@ -39,6 +44,7 @@ export function NewsletterForm({
     <form action={formAction} className="flex flex-col gap-3">
       <input type="hidden" name="locale" value={locale} />
       <input type="hidden" name="source" value={source} />
+      <input type="hidden" name="sourceRef" value={sourceRef} />
       <input type="hidden" name="consent" value="true" />
       {/* Honeypot — off-screen for humans, irresistible to bots. */}
       <div aria-hidden="true" style={{ position: "absolute", left: "-9999px" }}>

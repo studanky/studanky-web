@@ -21,7 +21,7 @@ export const siteConfig = {
     appStore: "" as string,
     googlePlay: "" as string,
     // Same-page anchor of the hero download block.
-    download: "#stahnout",
+    download: "#download",
   },
   // Universal download URL: detects the platform server-side and redirects to
   // the right store (see `src/app/get/route.ts`). This is what QR codes encode,
@@ -39,10 +39,10 @@ export const downloadUrl = `${siteConfig.url}${siteConfig.getPath}`;
 export const mainNav = [
   // Ordered to match the actual section order on the page (bento features
   // come before the app showcase).
-  { id: "features", href: "#funkce" },
-  { id: "app", href: "#aplikace" },
-  { id: "howItWorks", href: "#jak-to-funguje" },
-  { id: "roadmap", href: "#roadmapa" },
+  { id: "features", href: "#features" },
+  { id: "app", href: "#app" },
+  { id: "howItWorks", href: "#how-it-works" },
+  { id: "roadmap", href: "#roadmap" },
   { id: "faq", href: "#faq" },
 ] as const;
 

@@ -38,7 +38,7 @@ export function Hero({ dict }: { dict: Dictionary }) {
             {hero.description}
           </p>
 
-          <div id="stahnout" className="flex w-full scroll-mt-24 flex-col items-start gap-4">
+          <div id="download" className="flex w-full scroll-mt-24 flex-col items-start gap-4">
             {/* Phones: one primary CTA — /get resolves the right store server-side. */}
             <a
               href={siteConfig.getPath}
