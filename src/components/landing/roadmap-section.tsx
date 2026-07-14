@@ -76,7 +76,7 @@ export function RoadmapSection({ dict, locale }: { dict: Dictionary; locale: Loc
               <p className="text-sm leading-6 text-muted-foreground">
                 {roadmap.newsletter.description}
               </p>
-              <NewsletterForm copy={roadmap.newsletter} locale={locale} />
+              <NewsletterForm copy={roadmap.newsletter} locale={locale} source="prelaunch-page" />
             </div>
           </Reveal>
         </div>

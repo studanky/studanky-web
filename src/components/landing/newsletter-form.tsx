@@ -15,9 +15,11 @@ const initialState: NewsletterState = { status: "idle" };
 export function NewsletterForm({
   copy,
   locale,
+  source = "prelaunch-page",
 }: {
   copy: Dictionary["roadmap"]["newsletter"];
   locale: Locale;
+  source?: "prelaunch-page" | "website-hero" | "website-footer";
 }) {
   const [state, formAction, pending] = useActionState(subscribeToNewsletter, initialState);
 
@@ -36,6 +38,8 @@ export function NewsletterForm({
   return (
     <form action={formAction} className="flex flex-col gap-3">
       <input type="hidden" name="locale" value={locale} />
+      <input type="hidden" name="source" value={source} />
+      <input type="hidden" name="consent" value="true" />
       {/* Honeypot — off-screen for humans, irresistible to bots. */}
       <div aria-hidden="true" style={{ position: "absolute", left: "-9999px" }}>
         <label>

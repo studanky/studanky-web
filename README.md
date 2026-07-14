@@ -9,6 +9,7 @@ Feature docs describing what the web app supports:
 - [Deep Linking — Universal Links & App Links](docs/deep-linking.md) — how shared `/s/{id}` links open in the native app, with a platform-aware web fallback that previews the shared spring (fetched from Strapi) and links to the stores.
 - [App Store / Play Store Banners](docs/app-banners.md) — site-wide native-app promotion: iOS Smart App Banner, custom Android banner, and the manifest `related_applications` signal.
 - [Strapi share endpoint (backend brief)](docs/strapi-share-endpoint.md) — the contract for the public Strapi `preview` endpoint that feeds the `/s/{id}` fallback; a handoff for the backend/Strapi team.
+- [Newsletter signup](docs/newsletter.md) — frontend-to-Strapi contract for the public newsletter form and abuse-prevention notes.
 
 ## TODO (before production)
 
@@ -29,7 +30,7 @@ Deep linking (Universal Links / App Links) + `/s/*` fallback page:
   ```
 
 - [ ] **Coolify / Traefik** — ensure the apex `studankyapp.cz` serves `.well-known` **without redirecting** to `www` (otherwise deep links break); valid HTTPS cert; no basic-auth in front of `.well-known`.
-- [ ] **`STRAPI_API_BASE` env** — set it in Coolify to the public Strapi API base (incl. `/api`) so the `/s/{id}` fallback shows real spring data. Confirm the endpoint contract with the Strapi team ([docs/strapi-share-endpoint.md](docs/strapi-share-endpoint.md)).
+- [ ] **`STRAPI_API_BASE` env** — set it in Coolify to the public Strapi API base (incl. `/api`) so newsletter signup works and the `/s/{id}` fallback shows real spring data. Confirm the endpoint contracts with the Strapi team ([docs/newsletter.md](docs/newsletter.md), [docs/strapi-share-endpoint.md](docs/strapi-share-endpoint.md)).
 
 ## Stack
 
@@ -49,7 +50,7 @@ cp .env.example .env.local
 
 | Variable | Required | Purpose |
 | --- | --- | --- |
-| `STRAPI_API_BASE` | For live `/s/{id}` data | Base URL of the public Strapi API (incl. `/api`). Feeds the deep-link preview page — see [docs/strapi-share-endpoint.md](docs/strapi-share-endpoint.md). Without it the preview degrades to a generic install page; the rest of the site is unaffected. |
+| `STRAPI_API_BASE` | Yes | Base URL of the public Strapi API (incl. `/api`). Used by newsletter signup and by the deep-link preview page — see [docs/newsletter.md](docs/newsletter.md) and [docs/strapi-share-endpoint.md](docs/strapi-share-endpoint.md). Without it, newsletter signup fails and `/s/{id}` degrades to a generic install page. |
 
 Production values are configured in Coolify, not in a committed file. See
 [`.env.example`](.env.example) for the documented shape.
