@@ -1,4 +1,4 @@
-import type { Dictionary } from "@/i18n/dictionary";
+import type { DictionaryCatalog } from "@/i18n/dictionary";
 
 import cs from "./cs.json";
 import en from "./en.json";
@@ -11,4 +11,4 @@ import en from "./en.json";
  * This module is intentionally not imported at runtime — it exists purely for
  * type checking.
  */
-export const catalogs: Dictionary[] = [cs, en];
+export const catalogs: DictionaryCatalog[] = [cs, en];

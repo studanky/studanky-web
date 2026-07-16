@@ -31,7 +31,7 @@ export function LandingPage({ dict, locale }: { dict: Dictionary; locale: Locale
         <FaqSection dict={dict} />
         <DownloadSection dict={dict} />
       </main>
-      <SiteFooter dict={dict} />
+      <SiteFooter dict={dict} locale={locale} />
       <StickyDownload label={dict.nav.download} href={siteConfig.getPath} />
     </>
   );

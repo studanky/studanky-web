@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 
+import { legalRoutes } from "@/config/legal";
 import { siteConfig } from "@/config/site";
 import {
   defaultLocale,
@@ -24,11 +25,32 @@ export default function sitemap(): MetadataRoute.Sitemap {
   }
   languages["x-default"] = siteConfig.url;
 
-  return locales.map((locale) => ({
+  const entries: MetadataRoute.Sitemap = locales.map((locale) => ({
     url: absoluteUrl(locale),
     lastModified,
     changeFrequency: "weekly",
     priority: locale === defaultLocale ? 1 : 0.9,
     alternates: { languages },
   }));
+
+  for (const route of legalRoutes) {
+    const routeLanguages: Record<string, string> = {};
+    for (const locale of locales) {
+      routeLanguages[localeMeta[locale].hrefLang] =
+        `${siteConfig.url}${localizedPathname(locale, route.path)}`;
+    }
+    routeLanguages["x-default"] = `${siteConfig.url}${route.path}`;
+
+    for (const locale of locales) {
+      entries.push({
+        url: `${siteConfig.url}${localizedPathname(locale, route.path)}`,
+        lastModified,
+        changeFrequency: "monthly",
+        priority: 0.5,
+        alternates: { languages: routeLanguages },
+      });
+    }
+  }
+
+  return entries;
 }

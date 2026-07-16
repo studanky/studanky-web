@@ -1,4 +1,4 @@
-import { locales, type Locale } from "@/i18n/config";
+import { localizedPathname, locales, type Locale } from "@/i18n/config";
 import type { Dictionary } from "@/i18n/dictionary";
 import { cn } from "@/lib/utils";
 
@@ -8,15 +8,17 @@ import { cn } from "@/lib/utils";
  * default locale back to the clean URL. That keeps this a plain server component
  * that also works without JavaScript.
  *
- * (For a multi-page site the links would preserve the current sub-path; the
- * landing page is a single route, so linking to each locale root is correct.)
+ * `pathname` preserves the current sub-page for legal documents; the landing
+ * page leaves it at `/`, so links point at each locale root.
  */
 export function LanguageSwitcher({
   locale,
   labels,
+  pathname = "/",
 }: {
   locale: Locale;
   labels: Dictionary["languageSwitcher"];
+  pathname?: string;
 }) {
   return (
     <div
@@ -29,7 +31,7 @@ export function LanguageSwitcher({
         return (
           <a
             key={code}
-            href={`/${code}`}
+            href={localizedPathname(code, pathname)}
             hrefLang={code}
             aria-label={labels[code]}
             aria-current={active ? "true" : undefined}

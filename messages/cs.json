@@ -272,7 +272,356 @@
     "tagline": "Děláno s láskou k české krajině.",
     "copyright": "© {year} {name} · Komunitní open source projekt",
     "disclaimer": "Tekoucí voda neznamená pitná voda. Aplikace neověřuje zdravotní nezávadnost vody; použití je na vlastní odpovědnost.",
-    "githubLabel": "GitHub"
+    "githubLabel": "GitHub",
+    "legalAria": "Právní dokumenty",
+    "legalLinks": {
+      "privacy": "Ochrana osobních údajů",
+      "terms": "Podmínky užití",
+      "dataSources": "Zdroje dat",
+      "contact": "Kontakt"
+    }
+  },
+  "legal": {
+    "common": {
+      "eyebrow": "Studánky",
+      "home": "Úvod",
+      "effectiveDateLabel": "Účinné od",
+      "versionLabel": "Verze",
+      "documentsAria": "Další stránky",
+      "externalLinksTitle": "Odkazy",
+      "disclaimer": "Tyto informace udržujeme aktuální podle toho, jak se aplikace vyvíjí."
+    },
+    "nav": {
+      "privacy": "Ochrana osobních údajů",
+      "terms": "Podmínky užití",
+      "dataSources": "Zdroje dat",
+      "contact": "Kontakt"
+    },
+    "documents": {
+      "privacy": {
+        "metaTitle": "Zásady ochrany osobních údajů",
+        "metaDescription": "Jak Studánky pracují s osobními údaji, polohou, Mapy.com službami, newsletterem a technickými logy.",
+        "title": "Zásady ochrany osobních údajů",
+        "description": "Krátce a srozumitelně: aplikace je bez účtu, reklam a analytiky. Pro mapu může používat polohu v zařízení a služby Mapy.com, proto je tu popisujeme.",
+        "effectiveDate": "[DATUM ÚČINNOSTI]",
+        "version": "1.0",
+        "sections": [
+          {
+            "title": "Kdo za projektem stojí",
+            "items": [
+              {
+                "label": "Provozovatel",
+                "text": "[JMÉNO A PŘÍJMENÍ / OBCHODNÍ FIRMA], IČO: [IČO], se sídlem [ADRESA]."
+              },
+              {
+                "label": "Kontakt",
+                "text": "[E-MAIL]"
+              }
+            ]
+          },
+          {
+            "title": "V kostce",
+            "bullets": [
+              "Aplikace nevyžaduje registraci ani účet.",
+              "Nepoužíváme reklamu, analytiku, tracking ani crash reporting.",
+              "Poloha se používá jen po systémovém souhlasu a zůstává v zařízení.",
+              "Aplikace je read-only: neodesíláte vlastní obsah ani stav studánek.",
+              "Oblíbené studánky zůstávají uložené lokálně v zařízení."
+            ]
+          },
+          {
+            "title": "Mobilní aplikace",
+            "items": [
+              {
+                "label": "Poloha",
+                "text": "Volitelné. Po systémovém souhlasu ji aplikace používá jen pro zobrazení aktuální pozice a centrování mapy. Poloha zůstává v zařízení a neposílá se provozovateli ani backendu. Právní titul: souhlas. Retence u provozovatele: žádná. Výmaz: vypnutí oprávnění k poloze v nastavení zařízení."
+              },
+              {
+                "label": "Oblíbené studánky",
+                "text": "Volitelné. Oblíbené položky se ukládají jen v zařízení. Právní titul: provedení funkce, kterou jste si zvolili. Retence: do smazání v aplikaci, smazání dat aplikace nebo odinstalování. Příjemci: žádní, pokud oblíbené položky nesynchronizujeme."
+              },
+              {
+                "label": "Mapa a vyhledávání",
+                "text": "Součást hlavní funkce. Mapové dlaždice, našeptávání a vyhledávání poskytuje Mapy.com / Seznam.cz. Těmto službám může odcházet IP adresa, technické údaje požadavku, vyhledávací dotaz, požadavky na mapové dlaždice a zobrazený výřez mapy. Pokud mapu vycentrujete podle polohy, dlaždice nebo výřez mohou nepřímo odpovídat oblasti, kde právě jste. Seznam.cz ve svých pravidlech pro Mapy.com uvádí, že u služby zpracovává také statistické, technické a uživatelské údaje."
+              },
+              {
+                "label": "Backend a API aplikace",
+                "text": "Aplikace načítá veřejná data o studánkách z našeho backendu. Vlastní aplikační backend neukládá IP adresu, GPS polohu, mapový výřez/bbox ani technické request logy mobilní aplikace. Případný bbox se použije jen okamžitě pro vrácení odpovědi a neuchovává se. Infrastrukturní vrstvy, například hosting, reverse proxy nebo CDN, mohou podle nastavení zpracovávat technické access logy po dobu [RETENCE INFRASTRUKTURNÍCH LOGŮ / NEUKLÁDÁ SE]."
+              }
+            ]
+          },
+          {
+            "title": "Web a newsletter",
+            "items": [
+              {
+                "label": "Serverové logy",
+                "text": "Kvůli provozu a bezpečnosti můžeme krátce uchovávat IP adresu, čas požadavku, požadovanou URL, user-agent a stav odpovědi. Právní titul: oprávněný zájem na provozu a zabezpečení webu. Doba uchování: [RETENCE WEB LOGŮ, např. 30 dní]."
+              },
+              {
+                "label": "Newsletter",
+                "text": "Volitelné. Když se přihlásíte k projektovým novinkám, uložíme e-mail, čas přihlášení a související souhlas. Právní titul: souhlas. Retence: do odhlášení a poté [RETENCE DŮKAZU SOUHLASU]. Newsletter není účet v aplikaci."
+              },
+              {
+                "label": "Ochrana formuláře",
+                "text": "Kvůli ochraně newsletter formuláře před zneužitím web krátce zpracovává hash IP adresy pro rate limiting. Nejde o analytiku ani tracking. Retence: nejdéle 24 hodin nebo do restartu procesu."
+              },
+              {
+                "label": "Jazyk webu",
+                "text": "Web používá technickou cookie NEXT_LOCALE pro zapamatování jazyka a lokální úložiště pro zavřený Android banner. Právní titul: oprávněný zájem na správném fungování webu. Nejde o analytiku ani reklamu."
+              }
+            ]
+          },
+          {
+            "title": "Příjemci a předání",
+            "items": [
+              {
+                "label": "Hosting a backend",
+                "text": "[POSKYTOVATEL HOSTINGU / BACKENDU] pomáhá provozovat web, backend a infrastrukturu. Role: [ZPRACOVATEL / SAMOSTATNÝ SPRÁVCE]. Země zpracování: [ZEMĚ]. Předání mimo EU/EHP: [NE / ANO, STÁT A MECHANISMUS]."
+              },
+              {
+                "label": "Mapy.com / Seznam.cz",
+                "text": "Mapové dlaždice, vyhledávání a našeptávání se načítají ze serverů Mapy.com / Seznam.cz. Seznam.cz je u svých mapových služeb samostatným správcem a zpracovává údaje podle vlastních pravidel pro Mapy.com."
+              },
+              {
+                "label": "Newsletter",
+                "text": "[POSKYTOVATEL NEWSLETTERU / STRAPI BACKENDU] pomáhá ukládat a spravovat přihlášení k novinkám. Role: [ZPRACOVATEL / SAMOSTATNÝ SPRÁVCE]. Země zpracování: [ZEMĚ]. Předání mimo EU/EHP: [NE / ANO, STÁT A MECHANISMUS]."
+              },
+              {
+                "label": "Právní povinnosti",
+                "text": "Údaje můžeme předat orgánům veřejné moci nebo právním poradcům, pokud to vyžaduje zákon nebo ochrana práv projektu."
+              }
+            ],
+            "links": [
+              {
+                "id": "mapyPrivacy",
+                "label": "Ochrana údajů Mapy.com"
+              }
+            ]
+          },
+          {
+            "title": "Výmaz a vaše volby",
+            "paragraphs": [
+              "Přístup k poloze můžete kdykoliv změnit v nastavení zařízení. Lokální oblíbené položky smažete v aplikaci, smazáním dat aplikace nebo odinstalováním.",
+              "Newsletter smažeme po odhlášení nebo po žádosti na [E-MAIL]. Webové technické logy mažeme automaticky po uplynutí uvedené retence. Pokud potřebujete smazat něco dalšího, napište na [E-MAIL]."
+            ]
+          },
+          {
+            "title": "Vaše práva",
+            "paragraphs": [
+              "Můžete požádat o přístup, opravu, výmaz, omezení zpracování nebo vznést námitku, pokud jsou splněny zákonné podmínky. Napište na [E-MAIL].",
+              "Stížnost můžete podat také u Úřadu pro ochranu osobních údajů."
+            ],
+            "links": [
+              {
+                "id": "uoou",
+                "label": "Úřad pro ochranu osobních údajů"
+              }
+            ]
+          },
+          {
+            "title": "Změny",
+            "paragraphs": [
+              "Když zpřístupníme nové funkce, které pracují s dalšími údaji, tuto stránku upravíme před releasem. Aktuální verze je vždy tady."
+            ]
+          }
+        ]
+      },
+      "terms": {
+        "metaTitle": "Podmínky užití",
+        "metaDescription": "Podmínky používání aplikace a webu Studánky, včetně upozornění na pitnost vody, mapy a licence zdrojových dat.",
+        "title": "Podmínky užití",
+        "description": "Pravidla pro používání aplikace Studánky a webu studankyapp.cz. Služba je bezplatná a informuje o průtoku vody, nikoli o její pitnosti.",
+        "effectiveDate": "[DATUM ÚČINNOSTI]",
+        "version": "1.0",
+        "sections": [
+          {
+            "title": "Co Studánky jsou",
+            "paragraphs": [
+              "Provozovatelem je [JMÉNO A PŘÍJMENÍ / OBCHODNÍ FIRMA], IČO: [IČO], e-mail: [E-MAIL].",
+              "Studánky jsou bezplatná informační služba pro mobil a web. Ukazují studánky, prameny, průtok vody, mapu a související projektové informace."
+            ]
+          },
+          {
+            "title": "Důležité k vodě",
+            "paragraphs": [
+              "Aplikace informuje o průtoku nebo vydatnosti vody. Neříká, jestli je voda pitná nebo zdravotně nezávadná.",
+              "Kvalitu vody neověřujeme. Rozhodnutí vodu použít je vždy na vás a na vaše riziko. Stav zdroje se může změnit rychleji než data v aplikaci."
+            ]
+          },
+          {
+            "title": "Mapa a poloha",
+            "paragraphs": [
+              "Studánky nejsou zdravotní, hygienická, navigační ani záchranná služba. Berte je jako pomocnou mapu, ne jako jediný zdroj rozhodnutí v terénu.",
+              "Poloha slouží jen k orientaci na mapě a k centrování mapy, pokud ji v systému povolíte."
+            ]
+          },
+          {
+            "title": "Data, mapy a licence",
+            "items": [
+              {
+                "label": "Data ČHMÚ",
+                "text": "Data o vydatnosti pramenů pocházejí z otevřených dat Českého hydrometeorologického ústavu a licence CC BY 4.0. Pro aplikaci jsou upravena a zjednodušena. ČHMÚ aplikaci neprovozuje ani neschvaluje."
+              },
+              {
+                "label": "Mapy.com",
+                "text": "Mapové podklady a vyhledávání poskytuje Seznam.cz, a.s. jako Mapy.com. Mapové dlaždice ani výsledky API funkcí nekopírujte, neukládejte ani dále nešiřte, pokud to podmínky Mapy.com neumožňují."
+              },
+              {
+                "label": "Aplikace a web",
+                "text": "Vlastní texty, design, databáze a další části projektu patří provozovateli, není-li uvedeno jinak."
+              }
+            ],
+            "links": [
+              {
+                "id": "chmiGroundwaterNowData",
+                "label": "ČHMÚ open data: podzemní vody"
+              },
+              {
+                "id": "chmiGroundwaterNowMetadata",
+                "label": "ČHMÚ metadata: podzemní vody"
+              },
+              {
+                "id": "creativeCommonsBy40",
+                "label": "Creative Commons BY 4.0"
+              },
+              {
+                "id": "mapyAttribution",
+                "label": "Atribuce Mapy.com"
+              }
+            ]
+          },
+          {
+            "title": "Férové používání",
+            "bullets": [
+              "Nepoužívejte službu způsobem, který ji přetěžuje nebo narušuje.",
+              "Nestahujte hromadně mapová nebo jiná data mimo běžné používání aplikace.",
+              "Nezneužívejte odkazy ani budoucí komunitní funkce k uvádění nepravdivých údajů."
+            ]
+          },
+          {
+            "title": "Změny a dostupnost",
+            "paragraphs": [
+              "Služba je poskytována tak, jak je. Můžeme ji měnit, pozastavit nebo ukončit, zejména kvůli provozu, bezpečnosti, licencím nebo právním důvodům."
+            ]
+          },
+          {
+            "title": "Právo a spory",
+            "paragraphs": [
+              "Právní vztahy se řídí právem České republiky. Spotřebitel má právo na mimosoudní řešení spotřebitelského sporu prostřednictvím České obchodní inspekce."
+            ],
+            "links": [
+              {
+                "id": "coi",
+                "label": "Česká obchodní inspekce"
+              }
+            ]
+          }
+        ]
+      },
+      "dataSources": {
+        "metaTitle": "Zdroje dat",
+        "metaDescription": "Atribuce dat ČHMÚ, licence CC BY 4.0 a informace o Mapy.com podkladech používaných ve Studánkách.",
+        "title": "Zdroje dat",
+        "description": "Odkud bereme data a mapu. Stručně, aby bylo jasné, komu patří zdroje a jak s nimi pracujeme.",
+        "effectiveDate": "[DATUM ÚČINNOSTI]",
+        "version": "1.0",
+        "sections": [
+          {
+            "title": "Průtok a vydatnost pramenů",
+            "paragraphs": [
+              "Zdroj: Český hydrometeorologický ústav (ČHMÚ), otevřená data.",
+              "Licence: Creative Commons BY 4.0.",
+              "Data upravujeme pro potřeby aplikace: agregujeme je, zjednodušujeme a převádíme do stavů teče / neteče / neaktuální.",
+              "ČHMÚ aplikaci neprovozuje, nezaštiťuje ani neschvaluje."
+            ],
+            "links": [
+              {
+                "id": "chmiGroundwaterNowData",
+                "label": "ČHMÚ open data: podzemní vody"
+              },
+              {
+                "id": "chmiGroundwaterNowMetadata",
+                "label": "ČHMÚ metadata: podzemní vody"
+              },
+              {
+                "id": "creativeCommonsBy40",
+                "label": "Creative Commons BY 4.0"
+              }
+            ]
+          },
+          {
+            "title": "Mapa a vyhledávání",
+            "paragraphs": [
+              "Mapové podklady, dlaždice a vybrané mapové služby poskytuje Seznam.cz, a.s. pod značkou Mapy.com.",
+              "Atribuce Mapy.com patří přímo k mapě a musí zůstat viditelná.",
+              "Při vyhledávání nebo našeptávání může aplikace komunikovat se službami Mapy.com / Seznam.cz."
+            ],
+            "links": [
+              {
+                "id": "mapyAttribution",
+                "label": "Atribuční pravidla Mapy.com"
+              },
+              {
+                "id": "mapyCopyright",
+                "label": "Aktuální copyright Mapy.com"
+              },
+              {
+                "id": "mapyHome",
+                "label": "Mapy.com"
+              }
+            ]
+          },
+          {
+            "title": "Co z toho plyne",
+            "bullets": [
+              "Mapové dlaždice ani výsledky API funkcí se nesmí ukládat mimo oprávněné použití.",
+              "Data ze služby se nesmí scrapovat, předcachovávat ani hromadně exportovat.",
+              "Aplikace musí používat vlastní API klíč a chránit ho proti zneužití."
+            ]
+          }
+        ]
+      },
+      "contact": {
+        "metaTitle": "Kontakt",
+        "metaDescription": "Kontakt na provozovatele projektu Studánky pro právní dotazy, ochranu osobních údajů a hlášení chyb.",
+        "title": "Kontakt",
+        "description": "Potřebujete se ozvat? Tady jsou kontaktní údaje pro projekt, soukromí i hlášení chyb.",
+        "effectiveDate": "[DATUM ÚČINNOSTI]",
+        "version": "1.0",
+        "sections": [
+          {
+            "title": "Provozovatel",
+            "items": [
+              {
+                "label": "Jméno / obchodní firma",
+                "text": "[JMÉNO A PŘÍJMENÍ / OBCHODNÍ FIRMA]"
+              },
+              {
+                "label": "IČO",
+                "text": "[IČO]"
+              },
+              {
+                "label": "Sídlo",
+                "text": "[ADRESA]"
+              },
+              {
+                "label": "E-mail",
+                "text": "[E-MAIL]"
+              }
+            ]
+          },
+          {
+            "title": "K čemu kontakt slouží",
+            "bullets": [
+              "dotazy k aplikaci a webu Studánky",
+              "uplatnění práv podle GDPR",
+              "hlášení chyb v datech, mapě nebo právních dokumentech",
+              "dotazy k newsletteru a odhlášení"
+            ]
+          }
+        ]
+      }
+    }
   },
   "storeBadges": {
     "iosLabel": "Stáhnout pro iPhone",

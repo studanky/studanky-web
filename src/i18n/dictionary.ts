@@ -1,3 +1,38 @@
+export type LegalDocumentId = "privacy" | "terms" | "dataSources" | "contact";
+
+export type LegalExternalLinkId =
+  | "chmiGroundwaterNowData"
+  | "chmiGroundwaterNowMetadata"
+  | "creativeCommonsBy40"
+  | "mapyAttribution"
+  | "mapyCopyright"
+  | "mapyHome"
+  | "mapyPrivacy"
+  | "uoou"
+  | "coi";
+
+export type LegalDocument = {
+  metaTitle: string;
+  metaDescription: string;
+  title: string;
+  description: string;
+  effectiveDate: string;
+  version: string;
+  sections: {
+    title: string;
+    paragraphs?: string[];
+    bullets?: string[];
+    items?: {
+      label: string;
+      text: string;
+    }[];
+    links?: {
+      id: LegalExternalLinkId;
+      label: string;
+    }[];
+  }[];
+};
+
 /**
  * Shape of a translation catalog. Every `messages/<locale>.json` file must
  * satisfy this type (see `messages/validate.ts`), which guarantees that all
@@ -147,6 +182,21 @@ export type Dictionary = {
     copyright: string;
     disclaimer: string;
     githubLabel: string;
+    legalAria: string;
+    legalLinks: Record<LegalDocumentId, string>;
+  };
+  legal: {
+    common: {
+      eyebrow: string;
+      home: string;
+      effectiveDateLabel: string;
+      versionLabel: string;
+      documentsAria: string;
+      externalLinksTitle: string;
+      disclaimer: string;
+    };
+    nav: Record<LegalDocumentId, string>;
+    documents: Record<LegalDocumentId, LegalDocument>;
   };
   storeBadges: {
     /** aria-label for the whole link (e.g. "Download for iPhone"). */
@@ -229,5 +279,23 @@ export type Dictionary = {
     description: string;
     screenshotMap: string;
     screenshotDetail: string;
+  };
+};
+
+type LegalSectionCatalog = Omit<LegalDocument["sections"][number], "links"> & {
+  links?: {
+    id: string;
+    label: string;
+  }[];
+};
+
+export type DictionaryCatalog = Omit<Dictionary, "legal"> & {
+  legal: Omit<Dictionary["legal"], "documents"> & {
+    documents: Record<
+      LegalDocumentId,
+      Omit<LegalDocument, "sections"> & {
+        sections: LegalSectionCatalog[];
+      }
+    >;
   };
 };
