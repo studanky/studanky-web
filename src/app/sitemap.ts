@@ -10,7 +10,8 @@ import {
   type Locale,
 } from "@/i18n/config";
 
-const lastModified = new Date("2026-07-04T00:00:00.000Z");
+// Bump when page content changes meaningfully (incl. the legal documents).
+const lastModified = new Date("2026-07-16T00:00:00.000Z");
 
 function absoluteUrl(locale: Locale): string {
   return `${siteConfig.url}${localizedPathname(locale)}`;

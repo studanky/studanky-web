@@ -7,6 +7,7 @@ import { isIP } from "node:net";
 import { headers } from "next/headers";
 import { z } from "zod";
 
+import { privacyConsentVersion } from "@/config/legal";
 import { siteConfig } from "@/config/site";
 import { isLocale, type Locale } from "@/i18n/config";
 
@@ -34,7 +35,6 @@ const NEWSLETTER_SOURCE_REFS = {
 type NewsletterSourceRef = (typeof NEWSLETTER_SOURCE_REFS)[keyof typeof NEWSLETTER_SOURCE_REFS];
 
 const STRAPI_API_BASE = process.env.STRAPI_API_BASE;
-const CONSENT_VERSION = "2026-07-10";
 const FETCH_TIMEOUT_MS = 5000;
 const RATE_LIMIT_CLEANUP_INTERVAL_MS = 60_000;
 const NEWSLETTER_SOURCES = new Set<NewsletterSource>([
@@ -215,7 +215,7 @@ export async function subscribeToNewsletter(
         consent: true,
         source,
         preferredLanguage: locale,
-        consentVersion: CONSENT_VERSION,
+        consentVersion: privacyConsentVersion,
         sourceRef,
         website: "",
       }),

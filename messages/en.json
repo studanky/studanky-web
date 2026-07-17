@@ -287,9 +287,9 @@
       "home": "Home",
       "effectiveDateLabel": "Effective from",
       "versionLabel": "Version",
-      "documentsAria": "More pages",
-      "externalLinksTitle": "Links",
-      "disclaimer": "We keep this information up to date as the app evolves."
+      "documentsAria": "Legal documents and contact",
+      "externalLinksTitle": "Related links",
+      "disclaimer": "The operator keeps this document aligned with the current state of the service. The version published on this page is always authoritative."
     },
     "nav": {
       "privacy": "Privacy Policy",
@@ -300,95 +300,93 @@
     "documents": {
       "privacy": {
         "metaTitle": "Privacy Policy",
-        "metaDescription": "How Studánky handles personal data, location, Mapy.com services, the newsletter, and technical logs.",
+        "metaDescription": "Privacy policy of the Studánky service: on-device location processing, Mapy.com map services, the newsletter, and technical logs.",
         "title": "Privacy Policy",
-        "description": "A short, plain-language summary. The app has no account, ads, or analytics. It may use on-device location and Mapy.com services for the map, so we describe them here.",
-        "effectiveDate": "[EFFECTIVE DATE]",
-        "version": "1.0",
+        "description": "This document describes how the operator of the Studánky service processes personal data in the mobile app and on the website. The app requires no user account, displays no advertising, and uses no analytics tools.",
         "sections": [
           {
-            "title": "Who runs the project",
+            "title": "Data controller",
             "items": [
               {
-                "label": "Operator",
+                "label": "Controller",
                 "text": "[FULL NAME / BUSINESS NAME], ID number: [ID NUMBER], registered address: [ADDRESS]."
               },
               {
-                "label": "Contact",
+                "label": "Privacy contact",
                 "text": "[EMAIL]"
               }
             ]
           },
           {
-            "title": "In short",
+            "title": "Key principles",
             "bullets": [
-              "The app does not require registration or an account.",
-              "We do not use ads, analytics, tracking, or crash reporting.",
-              "Location is used only after system permission and stays on your device.",
-              "The app is read-only: you do not submit your own content or spring status.",
-              "Favourite springs stay stored locally on your device."
+              "The app requires no registration or user account.",
+              "The app uses no advertising systems, analytics tools, user tracking, or crash reporting.",
+              "Location is processed exclusively on the device, and only after the system permission is granted.",
+              "The app is read-only; users do not submit their own content or spring status records through it.",
+              "The list of favourite springs is stored only on the user's device."
             ]
           },
           {
-            "title": "Mobile app",
+            "title": "Processing in the mobile app",
             "items": [
               {
                 "label": "Location",
-                "text": "Optional. After system permission, the app uses location only to show your current position and center the map. Location stays on your device and is not sent to the operator or backend. Legal basis: consent. Retention by the operator: none. Deletion: turn off location permission in device settings."
+                "text": "Optional feature. After the system permission is granted, the app processes location solely to display the current position and center the map. Location does not leave the device and is not transmitted to the operator or its backend. Legal basis: consent granted through the system permission. Retention by the operator: none. Processing can be ended at any time by revoking the permission in device settings."
               },
               {
                 "label": "Favourite springs",
-                "text": "Optional. Favourites are stored only on your device. Legal basis: providing the feature you chose to use. Retention: until you delete them in the app, clear app data, or uninstall the app. Recipients: none, unless we add sync later."
+                "text": "Optional feature. The list of favourites is stored exclusively on the device. Legal basis: performance of a feature requested by the user. Retention: until removed in the app, until app data is cleared, or until the app is uninstalled. Recipients: none."
               },
               {
-                "label": "Map and search",
-                "text": "Part of the core feature. Map tiles, autocomplete, and search are provided by Mapy.com / Seznam.cz. These services may receive your IP address, technical request data, search query, map tile requests, and visible map viewport. If you center the map on your location, tile or viewport requests may indirectly correspond to the area where you are. In its Mapy.com rules, Seznam.cz states that the service also processes statistical, technical, and user-activity data."
+                "label": "Map data and search",
+                "text": "Part of the app's core functionality. Map tiles, search, and autocomplete are provided by Seznam.cz, a.s. through the Mapy.com service. When these services are used, the IP address, technical request parameters, search queries, map tile requests, and the visible map viewport are transmitted to the provider's servers. If the map is centered on the device's location, these requests may indirectly correspond to the area in which the user is located. Seznam.cz acts as an independent controller for its map services and, under its own policies, also processes statistical, technical, and user-activity data."
               },
               {
-                "label": "App backend and API",
-                "text": "The app loads public spring data from our backend. Our own application backend does not store IP address, GPS location, map viewport/bbox, or technical request logs from the mobile app. Any bbox is used only immediately to return the response and is not retained. Infrastructure layers such as hosting, reverse proxy, or CDN may, depending on configuration, process technical access logs for [INFRASTRUCTURE LOG RETENTION / NOT STORED]."
+                "label": "App backend",
+                "text": "The app loads public spring data from the operator's backend. The backend does not store IP addresses, device location, map viewport, or technical request logs of the mobile app; request parameters are processed solely to return the response and are not retained. Infrastructure layers (hosting, reverse proxy, CDN) may, depending on configuration, process technical access logs for [INFRASTRUCTURE LOG RETENTION / NOT STORED]."
               }
             ]
           },
           {
-            "title": "Website and newsletter",
+            "title": "Processing on the website",
             "items": [
               {
                 "label": "Server logs",
-                "text": "For operation and security, we may briefly keep IP address, request time, requested URL, user-agent, and response status. Legal basis: legitimate interest in operating and securing the website. Retention period: [WEB LOG RETENTION, e.g. 30 days]."
+                "text": "For operational and security purposes, the IP address, request time, requested URL, browser identification (user-agent), and response status code may be retained for a limited period. Legal basis: legitimate interest in operating and securing the website. Retention period: [WEB LOG RETENTION, e.g. 30 days]."
               },
               {
                 "label": "Newsletter",
-                "text": "Optional. If you subscribe to project updates, we store your email, signup time, and related consent. Legal basis: consent. Retention: until unsubscribe and then [CONSENT EVIDENCE RETENTION]. The newsletter is not a mobile app account."
+                "text": "Optional service. Upon subscription to project updates, the email address, time of subscription, version of the granted consent, selected language, and identification of the form used for the subscription are stored. Legal basis: consent. Retention: until consent is withdrawn (unsubscription), and thereafter for [CONSENT EVIDENCE RETENTION] to evidence the consent. Subscribing does not create a user account."
               },
               {
                 "label": "Form protection",
-                "text": "To protect the newsletter form against abuse, the website briefly processes a hash of the IP address for rate limiting. This is not analytics or tracking. Retention: at most 24 hours or until the process restarts."
+                "text": "To protect the form against abuse, a hash of the IP address is processed briefly for rate limiting. This is not an analytics or tracking tool. Retention: no longer than 24 hours, or until the server process restarts."
               },
               {
-                "label": "Website language",
-                "text": "The website uses the technical NEXT_LOCALE cookie to remember language choice and local storage to keep the Android banner hidden after dismissal. Legal basis: legitimate interest in making the website work properly. This is not analytics or advertising."
+                "label": "Language setting",
+                "text": "The website stores the technical NEXT_LOCALE cookie to preserve the selected language and a browser local-storage entry to keep an informational banner hidden. Legal basis: legitimate interest in the proper functioning of the website. These are not analytics or advertising tools."
               }
             ]
           },
           {
-            "title": "Recipients and transfers",
+            "title": "Recipients and data transfers",
             "items": [
               {
                 "label": "Hosting and backend",
-                "text": "[HOSTING / BACKEND PROVIDER] helps operate the website, backend, and infrastructure. Role: [PROCESSOR / INDEPENDENT CONTROLLER]. Processing country: [COUNTRY]. Transfer outside the EU/EEA: [NO / YES, COUNTRY AND MECHANISM]."
+                "text": "[HOSTING / BACKEND PROVIDER] supports the operation of the website, backend, and infrastructure. Role: [PROCESSOR / INDEPENDENT CONTROLLER]. Processing country: [COUNTRY]. Transfers outside the EU/EEA: [NO / YES, COUNTRY AND MECHANISM]."
               },
               {
                 "label": "Mapy.com / Seznam.cz",
-                "text": "Map tiles, search, and autocomplete are loaded from Mapy.com / Seznam.cz servers. Seznam.cz acts as an independent controller for its map services and processes data under its own Mapy.com privacy rules."
+                "text": "Map tiles, search, and autocomplete are loaded from Mapy.com / Seznam.cz servers. Seznam.cz acts as an independent controller for its map services and processes data under its own Mapy.com privacy policy."
               },
               {
                 "label": "Newsletter",
-                "text": "[NEWSLETTER / STRAPI BACKEND PROVIDER] helps store and manage newsletter subscriptions. Role: [PROCESSOR / INDEPENDENT CONTROLLER]. Processing country: [COUNTRY]. Transfer outside the EU/EEA: [NO / YES, COUNTRY AND MECHANISM]."
+                "text": "[NEWSLETTER / STRAPI BACKEND PROVIDER] supports the storage and administration of newsletter subscriptions. Role: [PROCESSOR / INDEPENDENT CONTROLLER]. Processing country: [COUNTRY]. Transfers outside the EU/EEA: [NO / YES, COUNTRY AND MECHANISM]."
               },
               {
                 "label": "Legal obligations",
-                "text": "We may disclose data to public authorities or legal advisers if required by law or to protect the project's rights."
+                "text": "Data may be disclosed to public authorities or legal advisers where required by law or necessary to protect the operator's rights."
               }
             ],
             "links": [
@@ -399,17 +397,18 @@
             ]
           },
           {
-            "title": "Deletion and choices",
+            "title": "Retention and erasure",
             "paragraphs": [
-              "You can change location permission anytime in device settings. Local favourites can be deleted in the app, by clearing app data, or by uninstalling the app.",
-              "We delete newsletter data after unsubscribe or a request to [EMAIL]. Website technical logs are deleted automatically after the stated retention period. If you need anything else deleted, contact [EMAIL]."
+              "The location permission can be changed at any time in device settings. Locally stored favourites can be removed in the app, by clearing app data, or by uninstalling the app.",
+              "Newsletter data is erased upon unsubscription or upon a request sent to [EMAIL]. Technical website logs are deleted automatically after the stated retention period. Other erasure requests may be submitted to [EMAIL]."
             ]
           },
           {
-            "title": "Your rights",
+            "title": "Rights of data subjects",
             "paragraphs": [
-              "You can request access, rectification, erasure, restriction of processing, or object to processing where the legal conditions are met. Contact us at [EMAIL].",
-              "You may also lodge a complaint with the Czech Office for Personal Data Protection."
+              "Subject to the conditions of the GDPR, data subjects have the right of access to their personal data, the right to rectification or erasure, restriction of processing, data portability, and the right to object to processing. Requests are received at [EMAIL].",
+              "Consent may be withdrawn at any time with effect for the future; the lawfulness of processing carried out before the withdrawal remains unaffected.",
+              "Data subjects also have the right to lodge a complaint with the supervisory authority, the Czech Office for Personal Data Protection."
             ],
             "links": [
               {
@@ -419,56 +418,54 @@
             ]
           },
           {
-            "title": "Changes",
+            "title": "Changes to this policy",
             "paragraphs": [
-              "If we make new features available that handle additional data, we will update this page before release. The current version is always here."
+              "If features involving the processing of additional personal data are added to the service, this policy will be updated before their release. The current version published on this page is always authoritative."
             ]
           }
         ]
       },
       "terms": {
         "metaTitle": "Terms of Use",
-        "metaDescription": "Terms for using the Studánky app and website, including water safety, maps, and source data licences.",
+        "metaDescription": "Terms of use of the Studánky app and website: nature of the service, water quality notice, source data licences, and limitation of liability.",
         "title": "Terms of Use",
-        "description": "Rules for using the Studánky app and studankyapp.cz. The service is free and reports water flow, not water drinkability.",
-        "effectiveDate": "[EFFECTIVE DATE]",
-        "version": "1.0",
+        "description": "These terms govern the use of the Studánky mobile app and the studankyapp.cz website. The service is provided free of charge and is of a purely informational nature.",
         "sections": [
           {
-            "title": "What Studánky is",
+            "title": "Operator and scope of the service",
             "paragraphs": [
-              "The operator is [FULL NAME / BUSINESS NAME], ID number: [ID NUMBER], email: [EMAIL].",
-              "Studánky is a free informational service for mobile devices and the web. It shows springs, water flow, a map, and related project information."
+              "The service is operated by [FULL NAME / BUSINESS NAME], ID number: [ID NUMBER], email: [EMAIL] (the “operator”).",
+              "Studánky is a free informational service for mobile devices and the web. It displays springs on a map together with data on water flow or spring yield and related project information."
             ]
           },
           {
-            "title": "Important note about water",
+            "title": "Notice regarding water quality",
             "paragraphs": [
-              "The app reports water flow or spring yield. It does not say whether the water is drinkable or safe.",
-              "We do not verify water quality. Any decision to use water is yours and at your own risk. A source can change faster than the data in the app."
+              "The service provides information on the flow or yield of water sources. It provides no information on the drinkability or safety of the water and makes no representation to that effect.",
+              "The operator does not verify water quality. Any decision to use the water is made by the user solely at their own responsibility and risk. The actual condition of a water source may change faster than the data in the service is updated."
             ]
           },
           {
-            "title": "Map and location",
+            "title": "Nature of the service",
             "paragraphs": [
-              "Studánky is not a health, hygiene, navigation, rescue, or safety service. Treat it as a helpful map, not as your only source of decisions outdoors.",
-              "Location is used only to orient you on the map and center the map if you allow it in system settings."
+              "The service is not a health, hygiene, navigation, or rescue service and does not replace professional assessment. It serves as a supplementary source of information, not as the sole basis for decisions outdoors.",
+              "Device location is used exclusively for orientation on the map and for centering the map, and only after the system permission is granted."
             ]
           },
           {
-            "title": "Data, maps, and licences",
+            "title": "Data sources and licensing",
             "items": [
               {
                 "label": "CHMI data",
-                "text": "Spring yield data comes from open data of the Czech Hydrometeorological Institute under the CC BY 4.0 licence. For the app, it is modified and simplified. CHMI does not operate or approve the app."
+                "text": "Spring yield data originates from open data of the Czech Hydrometeorological Institute, provided under the CC BY 4.0 licence. The data is modified and simplified for the purposes of the service. CHMI does not operate, endorse, or approve the service."
               },
               {
                 "label": "Mapy.com",
-                "text": "Map tiles and search are provided by Seznam.cz, a.s. as Mapy.com. Do not copy, store, scrape, pre-cache, or redistribute map tiles or API function results unless Mapy.com terms allow it."
+                "text": "Map data and search are provided by Seznam.cz, a.s. through the Mapy.com service. Map tiles and API outputs may not be copied, stored, or redistributed beyond the scope permitted by the Mapy.com terms."
               },
               {
-                "label": "App and website",
-                "text": "Original copy, design, databases, and other project parts belong to the operator unless stated otherwise."
+                "label": "Service content",
+                "text": "Original texts, visual design, databases, and other components of the service belong to the operator unless stated otherwise."
               }
             ],
             "links": [
@@ -491,23 +488,30 @@
             ]
           },
           {
-            "title": "Fair use",
+            "title": "Rules of use",
             "bullets": [
-              "Do not use the service in a way that overloads or disrupts it.",
-              "Do not bulk-download map or other data outside normal app use.",
-              "Do not misuse links or future community features to provide false information."
+              "The service may not be used in a manner that overloads it or disrupts its operation.",
+              "Bulk downloading of map or other data beyond ordinary use of the service is not permitted.",
+              "Links and future community features may not be misused to disseminate false information."
             ]
           },
           {
-            "title": "Changes and availability",
+            "title": "Limitation of liability",
             "paragraphs": [
-              "The service is provided as is. We may change, suspend, or end it, especially for operational, security, licensing, or legal reasons."
+              "Data displayed in the service may be incomplete, inaccurate, or outdated. To the extent permitted by law, the operator is not liable for harm arising from the use of the displayed information or from the use of water from the sources shown in the service.",
+              "Nothing in these terms affects rights of the user that cannot be contractually excluded or limited under the laws of the Czech Republic."
             ]
           },
           {
-            "title": "Law and disputes",
+            "title": "Availability and changes to the service",
             "paragraphs": [
-              "Legal relationships are governed by the law of the Czech Republic. Consumers may use out-of-court consumer dispute resolution through the Czech Trade Inspection Authority."
+              "The service is provided as available. The operator may modify, suspend, or discontinue the service, in particular for operational, security, licensing, or legal reasons."
+            ]
+          },
+          {
+            "title": "Governing law and dispute resolution",
+            "paragraphs": [
+              "Legal relationships arising in connection with the use of the service are governed by the laws of the Czech Republic. Consumers are entitled to out-of-court resolution of consumer disputes before the Czech Trade Inspection Authority."
             ],
             "links": [
               {
@@ -520,19 +524,17 @@
       },
       "dataSources": {
         "metaTitle": "Data Sources",
-        "metaDescription": "Attribution for CHMI data, the CC BY 4.0 licence, and Mapy.com map data used by Studánky.",
+        "metaDescription": "Overview of the data sources of the Studánky service: CHMI open data under the CC BY 4.0 licence and Mapy.com map data.",
         "title": "Data Sources",
-        "description": "Where the data and map come from, in plain terms.",
-        "effectiveDate": "[EFFECTIVE DATE]",
-        "version": "1.0",
+        "description": "An overview of the data sources and map data used by the Studánky service, including licensing terms and attribution.",
         "sections": [
           {
-            "title": "Spring flow data",
+            "title": "Spring yield data",
             "paragraphs": [
               "Source: Czech Hydrometeorological Institute (CHMI), open data.",
               "Licence: Creative Commons BY 4.0.",
-              "We modify the data for the app: aggregate it, simplify it, and convert it into flowing / not flowing / outdated states.",
-              "CHMI does not operate, endorse, or approve this app."
+              "The data is modified for the purposes of the service: it is aggregated, simplified, and converted into the states flowing / not flowing / outdated.",
+              "CHMI does not operate, endorse, or approve the service."
             ],
             "links": [
               {
@@ -550,11 +552,11 @@
             ]
           },
           {
-            "title": "Map and search",
+            "title": "Map data and search",
             "paragraphs": [
-              "Map tiles and selected map services are provided by Seznam.cz, a.s. under the Mapy.com brand.",
-              "Mapy.com attribution belongs directly next to the map and must stay visible.",
-              "When using search or autocomplete, the app may communicate with Mapy.com / Seznam.cz services."
+              "Map data, tiles, and selected map services are provided by Seznam.cz, a.s. under the Mapy.com brand.",
+              "Mapy.com attribution is displayed directly next to the map and must remain visible.",
+              "When search or autocomplete is used, the app may communicate with Mapy.com / Seznam.cz services."
             ],
             "links": [
               {
@@ -572,22 +574,20 @@
             ]
           },
           {
-            "title": "What follows from that",
+            "title": "Licensing restrictions",
             "bullets": [
-              "Map tiles and API function results must not be stored outside authorised use.",
-              "Service data must not be scraped, pre-cached, or bulk-exported.",
-              "The app must use its own API key and protect it against misuse."
+              "Map tiles and API outputs may not be stored beyond authorised use.",
+              "Service data may not be scraped, pre-cached, or bulk-exported.",
+              "The app uses its own API key, which is protected against misuse."
             ]
           }
         ]
       },
       "contact": {
         "metaTitle": "Contact",
-        "metaDescription": "Contact details for the Studánky project operator for legal questions, privacy requests, and bug reports.",
+        "metaDescription": "Contact details of the operator of the Studánky service for legal matters, personal data protection, and error reports.",
         "title": "Contact",
-        "description": "Need to reach us? Here are the contact details for the project, privacy, and bug reports.",
-        "effectiveDate": "[EFFECTIVE DATE]",
-        "version": "1.0",
+        "description": "Contact details of the operator of the Studánky service and an overview of the matters handled through them.",
         "sections": [
           {
             "title": "Operator",
@@ -611,12 +611,12 @@
             ]
           },
           {
-            "title": "What this contact is for",
+            "title": "Matters handled",
             "bullets": [
-              "questions about the Studánky app and website",
-              "exercising GDPR rights",
-              "reporting errors in data, maps, or legal documents",
-              "newsletter questions and unsubscribe requests"
+              "enquiries regarding the Studánky app and website",
+              "exercising rights under the GDPR",
+              "reports of errors in data, map content, or documents",
+              "newsletter matters, including unsubscription"
             ]
           }
         ]

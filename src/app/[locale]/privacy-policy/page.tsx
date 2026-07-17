@@ -6,6 +6,6 @@ export function generateMetadata(props: { params: Promise<{ locale: string }> })
   return generateLegalMetadata(props, documentId);
 }
 
-export default async function Page(props: { params: Promise<{ locale: string }> }) {
-  return LegalRoutePage({ ...props, documentId });
+export default function Page(props: { params: Promise<{ locale: string }> }) {
+  return <LegalRoutePage {...props} documentId={documentId} />;
 }

@@ -16,8 +16,6 @@ export type LegalDocument = {
   metaDescription: string;
   title: string;
   description: string;
-  effectiveDate: string;
-  version: string;
   sections: {
     title: string;
     paragraphs?: string[];

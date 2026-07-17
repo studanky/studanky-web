@@ -1,10 +1,22 @@
 import { DropletsIcon } from "lucide-react";
 
 import { LanguageSwitcher } from "@/components/layout/language-switcher";
-import { legalExternalLinks, legalRoutes, localizedLegalPath } from "@/config/legal";
+import {
+  legalDocumentMeta,
+  legalExternalLinks,
+  legalRouteById,
+  legalRoutes,
+  localizedLegalPath,
+} from "@/config/legal";
 import { siteConfig } from "@/config/site";
 import { localizedPathname, type Locale } from "@/i18n/config";
 import type { Dictionary, LegalDocumentId } from "@/i18n/dictionary";
+
+/** Localizes ISO `YYYY-MM-DD` dates; anything else (a placeholder) renders verbatim. */
+function formatEffectiveDate(value: string, locale: Locale): string {
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(value)) return value;
+  return new Intl.DateTimeFormat(locale, { dateStyle: "long" }).format(new Date(value));
+}
 
 export function LegalPage({
   dict,
@@ -16,8 +28,8 @@ export function LegalPage({
   documentId: LegalDocumentId;
 }) {
   const document = dict.legal.documents[documentId];
-  const currentRoute = legalRoutes.find((route) => route.id === documentId);
-  const pathname = currentRoute?.path ?? "/";
+  const meta = legalDocumentMeta[documentId];
+  const pathname = legalRouteById[documentId].path;
 
   return (
     <>
@@ -61,8 +73,9 @@ export function LegalPage({
               {document.description}
             </p>
             <p className="mt-5 text-sm text-muted-foreground">
-              {dict.legal.common.effectiveDateLabel}: {document.effectiveDate} ·{" "}
-              {dict.legal.common.versionLabel}: {document.version}
+              {dict.legal.common.effectiveDateLabel}:{" "}
+              {formatEffectiveDate(meta.effectiveDate, locale)} ·{" "}
+              {dict.legal.common.versionLabel}: {meta.version}
             </p>
           </div>
         </section>

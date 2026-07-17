@@ -28,6 +28,26 @@ export function localizedLegalPath(locale: Locale, id: LegalDocumentId): string 
   return `/${locale}${legalRouteById[id].path}`;
 }
 
+/**
+ * Locale-independent document facts, shown in every locale's header. Once the
+ * documents take effect, `effectiveDate` holds an ISO `YYYY-MM-DD` date that is
+ * localized at render time; until then the bracketed placeholder renders
+ * verbatim. Bump `version` and `effectiveDate` together on every change.
+ */
+export const legalDocumentMeta = {
+  privacy: { version: "1.0", effectiveDate: "[EFFECTIVE DATE]" },
+  terms: { version: "1.0", effectiveDate: "[EFFECTIVE DATE]" },
+  dataSources: { version: "1.0", effectiveDate: "[EFFECTIVE DATE]" },
+  contact: { version: "1.0", effectiveDate: "[EFFECTIVE DATE]" },
+} as const satisfies Record<LegalDocumentId, { version: string; effectiveDate: string }>;
+
+/**
+ * Consent version stored with every newsletter subscription. Lives next to
+ * `legalDocumentMeta` so a privacy-policy change and the consent tag get
+ * bumped in one place — update it whenever `legalDocumentMeta.privacy` changes.
+ */
+export const privacyConsentVersion = "2026-07-10";
+
 export const legalExternalLinks = {
   chmiGroundwaterNowData:
     "https://opendata.chmi.cz/hydrology/groundwater/now/data/",
