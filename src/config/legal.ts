@@ -29,16 +29,15 @@ export function localizedLegalPath(locale: Locale, id: LegalDocumentId): string 
 }
 
 /**
- * Locale-independent document facts, shown in every locale's header. Once the
- * documents take effect, `effectiveDate` holds an ISO `YYYY-MM-DD` date that is
- * localized at render time; until then the bracketed placeholder renders
- * verbatim. Bump `version` and `effectiveDate` together on every change.
+ * Locale-independent document facts, shown in every locale's header.
+ * `effectiveDate` is an ISO `YYYY-MM-DD` date localized at render time.
+ * Bump `version` and `effectiveDate` together on every change.
  */
 export const legalDocumentMeta = {
-  privacy: { version: "1.0", effectiveDate: "[EFFECTIVE DATE]" },
-  terms: { version: "1.0", effectiveDate: "[EFFECTIVE DATE]" },
-  dataSources: { version: "1.0", effectiveDate: "[EFFECTIVE DATE]" },
-  contact: { version: "1.0", effectiveDate: "[EFFECTIVE DATE]" },
+  privacy: { version: "1.0", effectiveDate: "2026-07-17" },
+  terms: { version: "1.0", effectiveDate: "2026-07-17" },
+  dataSources: { version: "1.0", effectiveDate: "2026-07-17" },
+  contact: { version: "1.0", effectiveDate: "2026-07-17" },
 } as const satisfies Record<LegalDocumentId, { version: string; effectiveDate: string }>;
 
 /**
@@ -46,13 +45,14 @@ export const legalDocumentMeta = {
  * `legalDocumentMeta` so a privacy-policy change and the consent tag get
  * bumped in one place — update it whenever `legalDocumentMeta.privacy` changes.
  */
-export const privacyConsentVersion = "2026-07-10";
+export const privacyConsentVersion = "2026-07-17";
 
 export const legalExternalLinks = {
   chmiGroundwaterNowData:
     "https://opendata.chmi.cz/hydrology/groundwater/now/data/",
   chmiGroundwaterNowMetadata:
     "https://opendata.chmi.cz/hydrology/groundwater/now/metadata/",
+  cloudflarePrivacy: "https://www.cloudflare.com/privacypolicy/",
   creativeCommonsBy40: "https://creativecommons.org/licenses/by/4.0/",
   mapyAttribution: "https://developer.mapy.com/rest-api-mapy-cz/atribution/",
   mapyCopyright: "https://api.mapy.com/copyright",

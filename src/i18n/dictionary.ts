@@ -3,6 +3,7 @@ export type LegalDocumentId = "privacy" | "terms" | "dataSources" | "contact";
 export type LegalExternalLinkId =
   | "chmiGroundwaterNowData"
   | "chmiGroundwaterNowMetadata"
+  | "cloudflarePrivacy"
   | "creativeCommonsBy40"
   | "mapyAttribution"
   | "mapyCopyright"

@@ -309,11 +309,11 @@
             "items": [
               {
                 "label": "Správce",
-                "text": "[JMÉNO A PŘÍJMENÍ / OBCHODNÍ FIRMA], IČO: [IČO], se sídlem [ADRESA]."
+                "text": "Ing. Jakub Smolík, IČO: 21712107, se sídlem Vysoké 50, 591 01 Vysoké."
               },
               {
                 "label": "Kontakt pro ochranu osobních údajů",
-                "text": "[E-MAIL]"
+                "text": "smolik.ja@protonmail.com"
               }
             ]
           },
@@ -344,7 +344,7 @@
               },
               {
                 "label": "Backend aplikace",
-                "text": "Aplikace načítá veřejná data o studánkách z backendu provozovatele. Backend neukládá IP adresy, polohu zařízení, výřez mapy ani technické záznamy požadavků mobilní aplikace; parametry požadavku jsou zpracovány výhradně za účelem vrácení odpovědi a nejsou uchovávány. Infrastrukturní vrstvy (hosting, reverzní proxy, CDN) mohou v závislosti na konfiguraci zpracovávat technické přístupové záznamy po dobu [RETENCE INFRASTRUKTURNÍCH LOGŮ / NEUKLÁDÁ SE]."
+                "text": "Aplikace načítá veřejná data o studánkách z backendu provozovatele. Backend neukládá IP adresy, polohu zařízení, výřez mapy ani technické záznamy požadavků mobilní aplikace; parametry požadavku jsou zpracovány výhradně za účelem vrácení odpovědi a nejsou uchovávány. Síťové a infrastrukturní vrstvy (služby Cloudflare, reverzní proxy provozovatele) mohou zpracovávat technické přístupové záznamy po dobu nejvýše 30 dnů."
               }
             ]
           },
@@ -353,11 +353,11 @@
             "items": [
               {
                 "label": "Serverové záznamy",
-                "text": "Pro účely provozu a zabezpečení mohou být po omezenou dobu uchovávány IP adresa, čas požadavku, požadovaná URL, identifikace prohlížeče (user-agent) a stavový kód odpovědi. Právní titul: oprávněný zájem na provozu a zabezpečení webu. Doba uchování: [RETENCE WEB LOGŮ, např. 30 dní]."
+                "text": "Pro účely provozu a zabezpečení mohou být po omezenou dobu uchovávány IP adresa, čas požadavku, požadovaná URL, identifikace prohlížeče (user-agent) a stavový kód odpovědi. Právní titul: oprávněný zájem na provozu a zabezpečení webu. Doba uchování: nejdéle 30 dnů."
               },
               {
                 "label": "Newsletter",
-                "text": "Volitelná služba. Při přihlášení k odběru novinek jsou uchovávány e-mailová adresa, čas přihlášení, verze uděleného souhlasu, zvolený jazyk a označení formuláře, jehož prostřednictvím k přihlášení došlo. Právní titul: souhlas. Doba uchování: do odvolání souhlasu (odhlášení), poté po dobu [RETENCE DŮKAZU SOUHLASU] za účelem doložení souhlasu. Přihlášení k odběru nezakládá uživatelský účet."
+                "text": "Volitelná služba. Při přihlášení k odběru novinek jsou uchovávány e-mailová adresa, čas přihlášení, verze uděleného souhlasu, zvolený jazyk a označení formuláře, jehož prostřednictvím k přihlášení došlo. Právní titul: souhlas. Doba uchování: do odvolání souhlasu (odhlášení), poté po dobu 3 let za účelem doložení souhlasu. Přihlášení k odběru nezakládá uživatelský účet."
               },
               {
                 "label": "Ochrana formuláře",
@@ -374,7 +374,11 @@
             "items": [
               {
                 "label": "Hosting a backend",
-                "text": "[POSKYTOVATEL HOSTINGU / BACKENDU] zajišťuje provoz webu, backendu a infrastruktury. Role: [ZPRACOVATEL / SAMOSTATNÝ SPRÁVCE]. Země zpracování: [ZEMĚ]. Předávání mimo EU/EHP: [NE / ANO, STÁT A MECHANISMUS]."
+                "text": "Web, backend i databáze běží na vlastní infrastruktuře provozovatele umístěné v České republice; externí poskytovatel hostingu se na provozu nepodílí. Země zpracování: Česká republika. Předávání mimo EU/EHP: ne."
+              },
+              {
+                "label": "Cloudflare, Inc.",
+                "text": "Síťové služby (DNS a reverzní proxy) před webem a backendem poskytuje společnost Cloudflare, Inc. (USA). Při zprostředkování provozu zpracovává IP adresy a technické údaje požadavků. Role: zpracovatel. Předávání mimo EU/EHP: ano, do USA — na základě certifikace Cloudflare v rámci EU–U.S. Data Privacy Framework a standardních smluvních doložek."
               },
               {
                 "label": "Mapy.com / Seznam.cz",
@@ -382,7 +386,7 @@
               },
               {
                 "label": "Newsletter",
-                "text": "[POSKYTOVATEL NEWSLETTERU / STRAPI BACKENDU] zajišťuje ukládání a správu přihlášení k odběru novinek. Role: [ZPRACOVATEL / SAMOSTATNÝ SPRÁVCE]. Země zpracování: [ZEMĚ]. Předávání mimo EU/EHP: [NE / ANO, STÁT A MECHANISMUS]."
+                "text": "Přihlášení k odběru novinek jsou ukládána a spravována výhradně na vlastní infrastruktuře provozovatele v České republice; externí poskytovatel se na zpracování nepodílí. Předávání mimo EU/EHP: ne."
               },
               {
                 "label": "Právní povinnosti",
@@ -393,6 +397,10 @@
               {
                 "id": "mapyPrivacy",
                 "label": "Ochrana údajů Mapy.com"
+              },
+              {
+                "id": "cloudflarePrivacy",
+                "label": "Zásady ochrany soukromí Cloudflare"
               }
             ]
           },
@@ -400,13 +408,13 @@
             "title": "Doba uchování a výmaz",
             "paragraphs": [
               "Oprávnění k poloze lze kdykoli změnit v nastavení zařízení. Lokálně uložené oblíbené položky lze odstranit v aplikaci, smazáním dat aplikace nebo odinstalací aplikace.",
-              "Údaje spojené s newsletterem jsou vymazány po odhlášení, případně na žádost zaslanou na [E-MAIL]. Technické záznamy webu jsou mazány automaticky po uplynutí uvedené doby uchování. Ostatní žádosti o výmaz lze uplatnit na adrese [E-MAIL]."
+              "Údaje spojené s newsletterem jsou vymazány po odhlášení, případně na žádost zaslanou na smolik.ja@protonmail.com. Technické záznamy webu jsou mazány automaticky po uplynutí uvedené doby uchování. Ostatní žádosti o výmaz lze uplatnit na adrese smolik.ja@protonmail.com."
             ]
           },
           {
             "title": "Práva subjektů údajů",
             "paragraphs": [
-              "Subjekt údajů má za podmínek stanovených nařízením GDPR právo na přístup k osobním údajům, jejich opravu nebo výmaz, omezení zpracování, přenositelnost údajů a právo vznést námitku proti zpracování. Žádosti přijímáme na adrese [E-MAIL].",
+              "Subjekt údajů má za podmínek stanovených nařízením GDPR právo na přístup k osobním údajům, jejich opravu nebo výmaz, omezení zpracování, přenositelnost údajů a právo vznést námitku proti zpracování. Žádosti přijímáme na adrese smolik.ja@protonmail.com.",
               "Udělený souhlas lze kdykoli odvolat s účinky do budoucna; zákonnost zpracování provedeného před odvoláním tím není dotčena.",
               "Subjekt údajů má rovněž právo podat stížnost u dozorového úřadu, kterým je Úřad pro ochranu osobních údajů."
             ],
@@ -434,7 +442,7 @@
           {
             "title": "Provozovatel a předmět služby",
             "paragraphs": [
-              "Provozovatelem služby je [JMÉNO A PŘÍJMENÍ / OBCHODNÍ FIRMA], IČO: [IČO], e-mail: [E-MAIL] (dále jen „provozovatel“).",
+              "Provozovatelem služby je Ing. Jakub Smolík, IČO: 21712107, e-mail: smolik.ja@protonmail.com (dále jen „provozovatel“).",
               "Studánky jsou bezplatná informační služba pro mobilní zařízení a web. Zobrazuje studánky a prameny na mapě spolu s údaji o průtoku, respektive vydatnosti vody, a souvisejícími informacemi o projektu."
             ]
           },
@@ -594,19 +602,19 @@
             "items": [
               {
                 "label": "Jméno / obchodní firma",
-                "text": "[JMÉNO A PŘÍJMENÍ / OBCHODNÍ FIRMA]"
+                "text": "Ing. Jakub Smolík"
               },
               {
                 "label": "IČO",
-                "text": "[IČO]"
+                "text": "21712107"
               },
               {
                 "label": "Sídlo",
-                "text": "[ADRESA]"
+                "text": "Vysoké 50, 591 01 Vysoké"
               },
               {
                 "label": "E-mail",
-                "text": "[E-MAIL]"
+                "text": "smolik.ja@protonmail.com"
               }
             ]
           },

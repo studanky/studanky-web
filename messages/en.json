@@ -309,11 +309,11 @@
             "items": [
               {
                 "label": "Controller",
-                "text": "[FULL NAME / BUSINESS NAME], ID number: [ID NUMBER], registered address: [ADDRESS]."
+                "text": "Ing. Jakub Smolík, ID number: 21712107, registered address: Vysoké 50, 591 01 Vysoké, Czech Republic."
               },
               {
                 "label": "Privacy contact",
-                "text": "[EMAIL]"
+                "text": "smolik.ja@protonmail.com"
               }
             ]
           },
@@ -344,7 +344,7 @@
               },
               {
                 "label": "App backend",
-                "text": "The app loads public spring data from the operator's backend. The backend does not store IP addresses, device location, map viewport, or technical request logs of the mobile app; request parameters are processed solely to return the response and are not retained. Infrastructure layers (hosting, reverse proxy, CDN) may, depending on configuration, process technical access logs for [INFRASTRUCTURE LOG RETENTION / NOT STORED]."
+                "text": "The app loads public spring data from the operator's backend. The backend does not store IP addresses, device location, map viewport, or technical request logs of the mobile app; request parameters are processed solely to return the response and are not retained. Network and infrastructure layers (Cloudflare services, the operator's reverse proxy) may process technical access logs for no longer than 30 days."
               }
             ]
           },
@@ -353,11 +353,11 @@
             "items": [
               {
                 "label": "Server logs",
-                "text": "For operational and security purposes, the IP address, request time, requested URL, browser identification (user-agent), and response status code may be retained for a limited period. Legal basis: legitimate interest in operating and securing the website. Retention period: [WEB LOG RETENTION, e.g. 30 days]."
+                "text": "For operational and security purposes, the IP address, request time, requested URL, browser identification (user-agent), and response status code may be retained for a limited period. Legal basis: legitimate interest in operating and securing the website. Retention period: no longer than 30 days."
               },
               {
                 "label": "Newsletter",
-                "text": "Optional service. Upon subscription to project updates, the email address, time of subscription, version of the granted consent, selected language, and identification of the form used for the subscription are stored. Legal basis: consent. Retention: until consent is withdrawn (unsubscription), and thereafter for [CONSENT EVIDENCE RETENTION] to evidence the consent. Subscribing does not create a user account."
+                "text": "Optional service. Upon subscription to project updates, the email address, time of subscription, version of the granted consent, selected language, and identification of the form used for the subscription are stored. Legal basis: consent. Retention: until consent is withdrawn (unsubscription), and thereafter for 3 years to evidence the consent. Subscribing does not create a user account."
               },
               {
                 "label": "Form protection",
@@ -374,7 +374,11 @@
             "items": [
               {
                 "label": "Hosting and backend",
-                "text": "[HOSTING / BACKEND PROVIDER] supports the operation of the website, backend, and infrastructure. Role: [PROCESSOR / INDEPENDENT CONTROLLER]. Processing country: [COUNTRY]. Transfers outside the EU/EEA: [NO / YES, COUNTRY AND MECHANISM]."
+                "text": "The website, backend, and database run on the operator's own infrastructure located in the Czech Republic; no external hosting provider is involved. Processing country: Czech Republic. Transfers outside the EU/EEA: none."
+              },
+              {
+                "label": "Cloudflare, Inc.",
+                "text": "Network services (DNS and reverse proxy) in front of the website and backend are provided by Cloudflare, Inc. (USA). While routing traffic, it processes IP addresses and technical request data. Role: processor. Transfers outside the EU/EEA: yes, to the USA — based on Cloudflare's certification under the EU–U.S. Data Privacy Framework and on Standard Contractual Clauses."
               },
               {
                 "label": "Mapy.com / Seznam.cz",
@@ -382,7 +386,7 @@
               },
               {
                 "label": "Newsletter",
-                "text": "[NEWSLETTER / STRAPI BACKEND PROVIDER] supports the storage and administration of newsletter subscriptions. Role: [PROCESSOR / INDEPENDENT CONTROLLER]. Processing country: [COUNTRY]. Transfers outside the EU/EEA: [NO / YES, COUNTRY AND MECHANISM]."
+                "text": "Newsletter subscriptions are stored and administered exclusively on the operator's own infrastructure in the Czech Republic; no external provider is involved. Transfers outside the EU/EEA: none."
               },
               {
                 "label": "Legal obligations",
@@ -393,6 +397,10 @@
               {
                 "id": "mapyPrivacy",
                 "label": "Mapy.com privacy information"
+              },
+              {
+                "id": "cloudflarePrivacy",
+                "label": "Cloudflare Privacy Policy"
               }
             ]
           },
@@ -400,13 +408,13 @@
             "title": "Retention and erasure",
             "paragraphs": [
               "The location permission can be changed at any time in device settings. Locally stored favourites can be removed in the app, by clearing app data, or by uninstalling the app.",
-              "Newsletter data is erased upon unsubscription or upon a request sent to [EMAIL]. Technical website logs are deleted automatically after the stated retention period. Other erasure requests may be submitted to [EMAIL]."
+              "Newsletter data is erased upon unsubscription or upon a request sent to smolik.ja@protonmail.com. Technical website logs are deleted automatically after the stated retention period. Other erasure requests may be submitted to smolik.ja@protonmail.com."
             ]
           },
           {
             "title": "Rights of data subjects",
             "paragraphs": [
-              "Subject to the conditions of the GDPR, data subjects have the right of access to their personal data, the right to rectification or erasure, restriction of processing, data portability, and the right to object to processing. Requests are received at [EMAIL].",
+              "Subject to the conditions of the GDPR, data subjects have the right of access to their personal data, the right to rectification or erasure, restriction of processing, data portability, and the right to object to processing. Requests are received at smolik.ja@protonmail.com.",
               "Consent may be withdrawn at any time with effect for the future; the lawfulness of processing carried out before the withdrawal remains unaffected.",
               "Data subjects also have the right to lodge a complaint with the supervisory authority, the Czech Office for Personal Data Protection."
             ],
@@ -434,7 +442,7 @@
           {
             "title": "Operator and scope of the service",
             "paragraphs": [
-              "The service is operated by [FULL NAME / BUSINESS NAME], ID number: [ID NUMBER], email: [EMAIL] (the “operator”).",
+              "The service is operated by Ing. Jakub Smolík, ID number: 21712107, email: smolik.ja@protonmail.com (the “operator”).",
               "Studánky is a free informational service for mobile devices and the web. It displays springs on a map together with data on water flow or spring yield and related project information."
             ]
           },
@@ -594,19 +602,19 @@
             "items": [
               {
                 "label": "Name / business name",
-                "text": "[FULL NAME / BUSINESS NAME]"
+                "text": "Ing. Jakub Smolík"
               },
               {
                 "label": "ID number",
-                "text": "[ID NUMBER]"
+                "text": "21712107"
               },
               {
                 "label": "Registered address",
-                "text": "[ADDRESS]"
+                "text": "Vysoké 50, 591 01 Vysoké, Czech Republic"
               },
               {
                 "label": "Email",
-                "text": "[EMAIL]"
+                "text": "smolik.ja@protonmail.com"
               }
             ]
           },

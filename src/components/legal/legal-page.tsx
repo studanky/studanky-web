@@ -15,7 +15,9 @@ import type { Dictionary, LegalDocumentId } from "@/i18n/dictionary";
 /** Localizes ISO `YYYY-MM-DD` dates; anything else (a placeholder) renders verbatim. */
 function formatEffectiveDate(value: string, locale: Locale): string {
   if (!/^\d{4}-\d{2}-\d{2}$/.test(value)) return value;
-  return new Intl.DateTimeFormat(locale, { dateStyle: "long" }).format(new Date(value));
+  return new Intl.DateTimeFormat(locale, { dateStyle: "long", timeZone: "UTC" }).format(
+    new Date(value),
+  );
 }
 
 export function LegalPage({
