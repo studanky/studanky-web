@@ -2,6 +2,7 @@ import { SearchXIcon } from "lucide-react";
 
 import { DownloadPanel } from "@/components/app-links/download-panel";
 import { ShareShell } from "@/components/app-links/share-shell";
+import type { Locale } from "@/i18n/config";
 import type { Dictionary } from "@/i18n/dictionary";
 import type { Platform } from "@/lib/platform";
 
@@ -12,10 +13,12 @@ import type { Platform } from "@/lib/platform";
  */
 export function SpringNotFound({
   platform,
+  locale,
   copy,
   storeBadges,
 }: {
   platform: Platform;
+  locale: Locale;
   copy: Dictionary["springNotFound"];
   storeBadges: Dictionary["storeBadges"];
 }) {
@@ -35,6 +38,7 @@ export function SpringNotFound({
 
         <DownloadPanel
           platform={platform}
+          locale={locale}
           storeBadges={storeBadges}
           qrTitle={copy.qrTitle}
           qrNote={copy.qrNote}

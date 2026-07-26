@@ -1,6 +1,7 @@
 import { QrCode } from "@/components/qr-code";
 import { StoreButtons } from "@/components/store-buttons";
 import { downloadUrl, siteConfig } from "@/config/site";
+import type { Locale } from "@/i18n/config";
 import type { Dictionary } from "@/i18n/dictionary";
 import { Reveal } from "./reveal";
 
@@ -9,7 +10,7 @@ import { Reveal } from "./reveal";
  * atmosphere. Phones get the single /get button (the QR makes no sense on the
  * device it would install to); desktop gets the big scannable QR + badges.
  */
-export function DownloadSection({ dict }: { dict: Dictionary }) {
+export function DownloadSection({ dict, locale }: { dict: Dictionary; locale: Locale }) {
   const download = dict.download;
 
   return (
@@ -42,7 +43,12 @@ export function DownloadSection({ dict }: { dict: Dictionary }) {
             <span className="font-semibold text-foreground">{download.qrTitle}</span>
             <span className="text-sm text-muted-foreground">{download.qrNote}</span>
           </span>
-          <StoreButtons labels={dict.storeBadges} width={168} className="justify-center" />
+          <StoreButtons
+            labels={dict.storeBadges}
+            locale={locale}
+            height={50}
+            className="justify-center"
+          />
         </div>
 
         <p className="text-xs text-muted-foreground">{download.disclaimer}</p>

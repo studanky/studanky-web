@@ -116,7 +116,7 @@ export type Dictionary = {
       stale: string;
     };
   };
-  /** App showcase — two phone mocks with captions. */
+  /** App showcase — real app screenshots with captions. */
   showcase: {
     title: string;
     description: string;
@@ -124,6 +124,7 @@ export type Dictionary = {
     screens: {
       map: { title: string; caption: string };
       detail: { title: string; caption: string };
+      history: { title: string; caption: string };
     };
   };
   steps: {
@@ -204,6 +205,10 @@ export type Dictionary = {
     /** alt text of the official badge image. */
     iosAlt: string;
     androidAlt: string;
+    /** Disabled Android badge while the Play listing is not public. */
+    androidStoreName: string;
+    androidComingSoon: string;
+    androidComingSoonAria: string;
   };
   /** Generic `/s/*` fallback when Strapi is unreachable. */
   deepLink: {
@@ -278,6 +283,7 @@ export type Dictionary = {
     description: string;
     screenshotMap: string;
     screenshotDetail: string;
+    screenshotHistory: string;
   };
 };
 

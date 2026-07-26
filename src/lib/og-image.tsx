@@ -1,3 +1,7 @@
+/* eslint-disable @next/next/no-img-element */
+
+import { readFileSync } from "node:fs";
+import { join } from "node:path";
 import { ImageResponse } from "next/og";
 
 export const OG_SIZE = { width: 1200, height: 630 };
@@ -9,6 +13,59 @@ const STATUS_TONE = {
   is_not_flowing: "#EE5521",
   unknown: "rgba(255,255,255,0.22)",
 } as const;
+
+function getAppIconDataUrl() {
+  try {
+    const icon = readFileSync(join(process.cwd(), "public/brand/app-icon/icon-192.png"));
+    return `data:image/png;base64,${icon.toString("base64")}`;
+  } catch {
+    return "";
+  }
+}
+
+const appIconDataUrl = getAppIconDataUrl();
+
+function OgAppIcon({
+  size,
+  radius,
+  background,
+}: {
+  size: number;
+  radius: number;
+  background: string;
+}) {
+  return (
+    <div
+      style={{
+        width: size,
+        height: size,
+        borderRadius: radius,
+        background,
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+      }}
+    >
+      {appIconDataUrl ? (
+        <img
+          src={appIconDataUrl}
+          alt=""
+          style={{ width: size, height: size, objectFit: "contain" }}
+        />
+      ) : (
+        <div
+          style={{
+            color: "#0B97D2",
+            fontSize: Math.round(size * 0.58),
+            fontWeight: 800,
+          }}
+        >
+          S
+        </div>
+      )}
+    </div>
+  );
+}
 
 /**
  * Per-spring social card for `/s/{id}` shares. Uses the spring photo as the
@@ -39,7 +96,6 @@ export function renderSpringOgImage(opts: {
       >
         {opts.photoUrl ? (
           // Rendered by Satori inside ImageResponse, not the DOM — next/image N/A.
-          // eslint-disable-next-line @next/next/no-img-element
           <img
             src={opts.photoUrl}
             alt=""
@@ -71,22 +127,7 @@ export function renderSpringOgImage(opts: {
           }}
         >
           <div style={{ display: "flex", alignItems: "center", gap: 18 }}>
-            <div
-              style={{
-                width: 64,
-                height: 64,
-                borderRadius: 18,
-                background: "#ffffff",
-                color: "#0B97D2",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                fontSize: 38,
-                fontWeight: 800,
-              }}
-            >
-              S
-            </div>
+            <OgAppIcon size={64} radius={18} background="#ffffff" />
             <div style={{ fontSize: 30, fontWeight: 700 }}>Studánky</div>
           </div>
 
@@ -160,22 +201,7 @@ export function renderOgImage(strings: {
           }}
         >
           <div style={{ display: "flex", alignItems: "center", gap: 18 }}>
-            <div
-              style={{
-                width: 72,
-                height: 72,
-                borderRadius: 20,
-                background: "#0B97D2",
-                color: "#ffffff",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                fontSize: 42,
-                fontWeight: 700,
-              }}
-            >
-              S
-            </div>
+            <OgAppIcon size={72} radius={20} background="#E7F5FB" />
             <div style={{ display: "flex", flexDirection: "column" }}>
               <div style={{ fontSize: 34, fontWeight: 700 }}>{strings.name}</div>
               <div style={{ color: "#4A6478", fontSize: 24 }}>{strings.subtitle}</div>

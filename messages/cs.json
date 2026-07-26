@@ -125,7 +125,7 @@
   "showcase": {
     "title": "Jak aplikace vypadá",
     "description": "Vyhledávání, špendlíky, detail — jako v mapách, na které jste zvyklí. Jen modré jako voda a čitelné i na ostrém slunci.",
-    "note": "Ilustrační rozhraní — finální podoba aplikace se může lišit.",
+    "note": "Skutečné screenshoty z iOS aplikace.",
     "screens": {
       "map": {
         "title": "Mapa",
@@ -134,6 +134,10 @@
       "detail": {
         "title": "Detail studánky",
         "caption": "Stav, stáří měření a historie pohromadě."
+      },
+      "history": {
+        "title": "Historie měření",
+        "caption": "Průtok a síla pramene v čase."
       }
     }
   },
@@ -635,7 +639,10 @@
     "iosLabel": "Stáhnout pro iPhone",
     "androidLabel": "Stáhnout pro Android",
     "iosAlt": "Stáhnout v App Store",
-    "androidAlt": "Stáhnout na Google Play"
+    "androidAlt": "Stáhnout na Google Play",
+    "androidStoreName": "Google Play",
+    "androidComingSoon": "Coming soon",
+    "androidComingSoonAria": "Aplikace pro Android bude na Google Play dostupná brzy"
   },
   "deepLink": {
     "metaTitle": "Otevřít v aplikaci",
@@ -714,6 +721,7 @@
   "manifest": {
     "description": "Mapa studánek, která ví, kde právě teče voda. Data z měření ČHMÚ, každou noc čerstvá.",
     "screenshotMap": "Mapa studánek v okolí",
-    "screenshotDetail": "Detail studánky se stavem vody"
+    "screenshotDetail": "Detail studánky se stavem vody",
+    "screenshotHistory": "Historie měření studánky"
   }
 }

@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 
+import { appIcons, appScreenshots } from "@/config/assets";
 import { siteConfig } from "@/config/site";
 import { defaultLocale, localeMeta } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionaries";
@@ -23,43 +24,51 @@ export default async function manifest(): Promise<MetadataRoute.Manifest> {
     categories: ["navigation", "travel", "utilities"],
     icons: [
       {
-        src: "/icon.svg",
-        sizes: "any",
-        type: "image/svg+xml",
-        purpose: "any",
+        src: appIcons.pwa192.src,
+        sizes: appIcons.pwa192.sizes,
+        type: appIcons.pwa192.type,
+        purpose: appIcons.pwa192.purpose,
       },
       {
-        src: "/favicon.ico",
-        sizes: "48x48",
-        type: "image/x-icon",
+        src: appIcons.pwa512.src,
+        sizes: appIcons.pwa512.sizes,
+        type: appIcons.pwa512.type,
+        purpose: appIcons.pwa512.purpose,
       },
     ],
     screenshots: [
       {
-        src: "/app/screenshot-map.svg",
-        sizes: "390x844",
-        type: "image/svg+xml",
+        src: appScreenshots.map.src,
+        sizes: `${appScreenshots.map.width}x${appScreenshots.map.height}`,
+        type: "image/png",
         form_factor: "narrow",
         label: dict.manifest.screenshotMap,
       },
       {
-        src: "/app/screenshot-detail.svg",
-        sizes: "390x844",
-        type: "image/svg+xml",
+        src: appScreenshots.detail.src,
+        sizes: `${appScreenshots.detail.width}x${appScreenshots.detail.height}`,
+        type: "image/png",
         form_factor: "narrow",
         label: dict.manifest.screenshotDetail,
+      },
+      {
+        src: appScreenshots.history.src,
+        sizes: `${appScreenshots.history.width}x${appScreenshots.history.height}`,
+        type: "image/png",
+        form_factor: "narrow",
+        label: dict.manifest.screenshotHistory,
       },
     ],
     // Android equivalent of the Smart App Banner: tells Chrome to prefer the
     // native Google Play app (verified via assetlinks.json) over installing the PWA.
-    ...(siteConfig.androidPackageId
+    ...(siteConfig.androidPackageId && siteConfig.links.googlePlay
       ? {
           prefer_related_applications: true,
           related_applications: [
             {
               platform: "play",
               id: siteConfig.androidPackageId,
-              url: `https://play.google.com/store/apps/details?id=${siteConfig.androidPackageId}`,
+              url: siteConfig.links.googlePlay,
             },
           ],
         }

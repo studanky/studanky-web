@@ -1,6 +1,7 @@
 import { QrCode } from "@/components/qr-code";
 import { StoreButton, StoreButtons } from "@/components/store-buttons";
 import { downloadUrl } from "@/config/site";
+import type { Locale } from "@/i18n/config";
 import type { Dictionary } from "@/i18n/dictionary";
 import type { Platform } from "@/lib/platform";
 
@@ -12,6 +13,7 @@ import type { Platform } from "@/lib/platform";
  */
 export function DownloadPanel({
   platform,
+  locale,
   storeBadges,
   qrTitle,
   qrNote,
@@ -20,6 +22,7 @@ export function DownloadPanel({
   alreadyInstalled,
 }: {
   platform: Platform;
+  locale: Locale;
   storeBadges: Dictionary["storeBadges"];
   qrTitle: string;
   qrNote: string;
@@ -39,12 +42,18 @@ export function DownloadPanel({
             <p className="text-lg font-semibold text-foreground">{qrTitle}</p>
             <p className="text-sm text-muted-foreground">{qrNote}</p>
           </div>
-          <StoreButtons labels={storeBadges} width={140} />
+          <StoreButtons labels={storeBadges} locale={locale} height={42} />
         </>
       ) : (
         <>
           {storeTitle && <p className="text-lg font-semibold text-foreground">{storeTitle}</p>}
-          <StoreButton platform={platform} labels={storeBadges} width={210} priority />
+          <StoreButton
+            platform={platform}
+            labels={storeBadges}
+            locale={locale}
+            height={62}
+            priority
+          />
         </>
       )}
       {alreadyInstalled && <p className="text-xs text-muted-foreground">{alreadyInstalled}</p>}

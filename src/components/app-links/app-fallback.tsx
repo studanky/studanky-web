@@ -1,7 +1,7 @@
-import { DropletsIcon } from "lucide-react";
-
+import { AppIcon } from "@/components/app-icon";
 import { DownloadPanel } from "@/components/app-links/download-panel";
 import { ShareShell } from "@/components/app-links/share-shell";
+import type { Locale } from "@/i18n/config";
 import type { Dictionary } from "@/i18n/dictionary";
 import type { Platform } from "@/lib/platform";
 
@@ -11,10 +11,12 @@ import type { Platform } from "@/lib/platform";
  */
 export function AppFallback({
   platform,
+  locale,
   copy,
   storeBadges,
 }: {
   platform: Platform;
+  locale: Locale;
   copy: Dictionary["deepLink"];
   storeBadges: Dictionary["storeBadges"];
 }) {
@@ -25,9 +27,7 @@ export function AppFallback({
           <span className="text-xs font-semibold tracking-[0.22em] text-primary uppercase">
             {copy.badge}
           </span>
-          <span className="flex size-12 items-center justify-center rounded-2xl bg-gradient-to-b from-water to-primary text-white shadow-md shadow-water/25">
-            <DropletsIcon aria-hidden="true" className="size-6" />
-          </span>
+          <AppIcon className="size-14 drop-shadow-md" priority />
           <h1 className="text-4xl font-semibold tracking-tight text-balance text-foreground sm:text-5xl">
             {copy.title}
           </h1>
@@ -38,6 +38,7 @@ export function AppFallback({
 
         <DownloadPanel
           platform={platform}
+          locale={locale}
           storeBadges={storeBadges}
           qrTitle={copy.qrTitle}
           qrNote={copy.qrNote}

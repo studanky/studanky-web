@@ -1,7 +1,7 @@
 import type { ReactNode } from "react";
 import Link from "next/link";
-import { DropletsIcon } from "lucide-react";
 
+import { AppIcon } from "@/components/app-icon";
 import { siteConfig } from "@/config/site";
 
 /**
@@ -37,9 +37,7 @@ export function ShareShell({
           href="/"
           className="flex items-center gap-2 rounded-full text-sm font-semibold tracking-tight outline-none focus-visible:ring-3 focus-visible:ring-ring/50"
         >
-          <span className="inline-flex size-7 items-center justify-center rounded-full bg-gradient-to-b from-water to-primary text-white">
-            <DropletsIcon aria-hidden="true" className="size-4" />
-          </span>
+          <AppIcon className="size-9" priority />
           {siteConfig.name}
         </Link>
       </header>

@@ -1,5 +1,4 @@
-import { DropletsIcon } from "lucide-react";
-
+import { AppIcon } from "@/components/app-icon";
 import { GithubIcon } from "@/components/icons/github-icon";
 import { legalRoutes, localizedLegalPath } from "@/config/legal";
 import { mainNav, siteConfig } from "@/config/site";
@@ -12,9 +11,7 @@ export function SiteFooter({ dict, locale }: { dict: Dictionary; locale: Locale 
     <footer className="border-t border-border/60 px-4 py-12 sm:px-6 lg:px-8">
       <div className="mx-auto flex w-full max-w-6xl flex-col items-center gap-7 text-center">
         <div className="flex items-center gap-2 font-semibold tracking-tight">
-          <span className="inline-flex size-8 items-center justify-center rounded-full bg-gradient-to-b from-water to-primary text-white">
-            <DropletsIcon aria-hidden="true" className="size-4.5" />
-          </span>
+          <AppIcon className="size-10" />
           {siteConfig.name}
         </div>
         <p className="text-sm text-muted-foreground">{dict.footer.tagline}</p>

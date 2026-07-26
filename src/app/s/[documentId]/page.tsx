@@ -76,6 +76,7 @@ export default async function SpringDeepLinkPage({ params }: PageProps) {
     return (
       <SpringNotFound
         platform={platform}
+        locale={locale}
         copy={dict.springNotFound}
         storeBadges={dict.storeBadges}
       />
@@ -83,5 +84,12 @@ export default async function SpringDeepLinkPage({ params }: PageProps) {
   }
 
   // Strapi temporarily unavailable — never crash; show the generic install page.
-  return <AppFallback platform={platform} copy={dict.deepLink} storeBadges={dict.storeBadges} />;
+  return (
+    <AppFallback
+      platform={platform}
+      locale={locale}
+      copy={dict.deepLink}
+      storeBadges={dict.storeBadges}
+    />
+  );
 }

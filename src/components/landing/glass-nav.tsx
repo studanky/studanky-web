@@ -1,8 +1,8 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { DropletsIcon } from "lucide-react";
 
+import { AppIcon } from "@/components/app-icon";
 import { LanguageSwitcher } from "@/components/layout/language-switcher";
 import { mainNav, siteConfig } from "@/config/site";
 import type { Locale } from "@/i18n/config";
@@ -46,9 +46,7 @@ export function GlassNav({ dict, locale }: { dict: Dictionary; locale: Locale })
           href="#top"
           className="flex items-center gap-2 rounded-full text-[15px] font-semibold tracking-tight outline-none focus-visible:ring-3 focus-visible:ring-ring/50"
         >
-          <span className="inline-flex size-7.5 items-center justify-center rounded-full bg-gradient-to-b from-water to-primary text-white shadow-sm">
-            <DropletsIcon aria-hidden="true" className="size-4" />
-          </span>
+          <AppIcon className="size-9" priority />
           {siteConfig.name}
         </a>
 

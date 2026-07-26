@@ -1,14 +1,14 @@
 import { DropletIcon } from "lucide-react";
 
-import { DetailMock } from "@/components/mock/detail-mock";
-import { MapMock } from "@/components/mock/map-mock";
-import { PhoneFrame } from "@/components/mock/phone-frame";
 import { QrCode } from "@/components/qr-code";
 import { StoreButtons } from "@/components/store-buttons";
+import { appScreenshots } from "@/config/assets";
 import { downloadUrl, siteConfig } from "@/config/site";
+import type { Locale } from "@/i18n/config";
 import type { Dictionary } from "@/i18n/dictionary";
+import { AppScreenshotFrame } from "./app-screenshot-frame";
 
-export function Hero({ dict }: { dict: Dictionary }) {
+export function Hero({ dict, locale }: { dict: Dictionary; locale: Locale }) {
   const hero = dict.hero;
 
   return (
@@ -49,7 +49,7 @@ export function Hero({ dict }: { dict: Dictionary }) {
 
             {/* Desktop: official badges + live QR (dark-on-white for scanning). */}
             <div className="hidden items-center gap-6 md:flex">
-              <StoreButtons labels={dict.storeBadges} priority />
+              <StoreButtons labels={dict.storeBadges} locale={locale} priority />
               <div className="flex items-center gap-3.5 rounded-2xl border border-border/70 bg-white p-3 pr-5 shadow-sm">
                 <QrCode data={downloadUrl} label={hero.qrAlt} className="size-18 text-black" />
                 <span className="flex max-w-36 flex-col gap-0.5">
@@ -70,25 +70,25 @@ export function Hero({ dict }: { dict: Dictionary }) {
           </p>
         </div>
 
-        {/* Crafted app mocks — the map screen front, detail sheet peeking behind. */}
+        {/* Real app screenshots — the map screen front, detail sheet peeking behind. */}
         <div className="relative mx-auto w-full max-w-md">
           <div
             aria-hidden="true"
             className="absolute -inset-10 -z-10 rounded-full bg-water/20 blur-3xl"
           />
           <div className="relative flex justify-center">
-            <PhoneFrame
-              label={dict.mock.detailAria}
+            <AppScreenshotFrame
+              src={appScreenshots.detail.src}
+              alt={dict.mock.detailAria}
               className="absolute top-10 -right-2 hidden max-w-[240px] rotate-6 opacity-90 sm:block"
-            >
-              <DetailMock copy={dict.mock} />
-            </PhoneFrame>
-            <PhoneFrame
-              label={dict.mock.mapAria}
+              sizes="240px"
+            />
+            <AppScreenshotFrame
+              src={appScreenshots.map.src}
+              alt={dict.mock.mapAria}
+              priority
               className="relative z-10 -rotate-2 motion-safe:animate-float sm:-translate-x-8"
-            >
-              <MapMock copy={dict.mock} />
-            </PhoneFrame>
+            />
           </div>
         </div>
       </div>

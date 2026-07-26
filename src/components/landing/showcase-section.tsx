@@ -1,13 +1,18 @@
-import { DetailMock } from "@/components/mock/detail-mock";
-import { MapMock } from "@/components/mock/map-mock";
-import { PhoneFrame } from "@/components/mock/phone-frame";
+import { appScreenshots } from "@/config/assets";
 import type { Dictionary } from "@/i18n/dictionary";
+import { cn } from "@/lib/utils";
+import { AppScreenshotFrame } from "./app-screenshot-frame";
 import { Reveal } from "./reveal";
 import { SectionIntro } from "./section-intro";
 
-/** App showcase — two crafted screens side by side (map + detail sheet). */
+/** App showcase — real app screenshots with stable iPhone 17 Pro Max ratio. */
 export function ShowcaseSection({ dict }: { dict: Dictionary }) {
   const showcase = dict.showcase;
+  const screens = [
+    { id: "map", image: appScreenshots.map, copy: showcase.screens.map },
+    { id: "detail", image: appScreenshots.detail, copy: showcase.screens.detail },
+    { id: "history", image: appScreenshots.history, copy: showcase.screens.history },
+  ] as const;
 
   return (
     <section
@@ -22,28 +27,27 @@ export function ShowcaseSection({ dict }: { dict: Dictionary }) {
           />
         </Reveal>
 
-        <div className="mx-auto grid w-full max-w-2xl grid-cols-1 items-start gap-12 sm:grid-cols-2 sm:gap-10">
-          <Reveal className="flex flex-col items-center gap-5">
-            <PhoneFrame label={dict.mock.mapAria}>
-              <MapMock copy={dict.mock} />
-            </PhoneFrame>
-            <figcaption className="flex flex-col items-center gap-1 text-center">
-              <span className="font-semibold text-foreground">{showcase.screens.map.title}</span>
-              <span className="text-sm text-muted-foreground">{showcase.screens.map.caption}</span>
-            </figcaption>
-          </Reveal>
-
-          <Reveal delay={0.12} className="flex flex-col items-center gap-5 sm:translate-y-10">
-            <PhoneFrame label={dict.mock.detailAria}>
-              <DetailMock copy={dict.mock} />
-            </PhoneFrame>
-            <figcaption className="flex flex-col items-center gap-1 text-center">
-              <span className="font-semibold text-foreground">{showcase.screens.detail.title}</span>
-              <span className="text-sm text-muted-foreground">
-                {showcase.screens.detail.caption}
-              </span>
-            </figcaption>
-          </Reveal>
+        <div className="mx-auto grid w-full max-w-4xl grid-cols-1 items-start gap-12 sm:grid-cols-3 sm:gap-8">
+          {screens.map((screen, index) => (
+            <Reveal
+              key={screen.id}
+              delay={index * 0.1}
+              className={cn(
+                "flex flex-col items-center gap-5",
+                index === 1 && "sm:translate-y-10",
+              )}
+            >
+              <AppScreenshotFrame
+                src={screen.image.src}
+                alt={screen.copy.title}
+                sizes="(max-width: 640px) 76vw, (max-width: 1024px) 28vw, 260px"
+              />
+              <div className="flex flex-col items-center gap-1 text-center">
+                <span className="font-semibold text-foreground">{screen.copy.title}</span>
+                <span className="text-sm text-muted-foreground">{screen.copy.caption}</span>
+              </div>
+            </Reveal>
+          ))}
         </div>
 
         <p className="text-center text-xs text-muted-foreground sm:mt-10">{showcase.note}</p>

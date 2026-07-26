@@ -158,6 +158,7 @@ export function SpringPreview({
         {/* The conversion panel — QR on desktop, the platform's button on phones. */}
         <DownloadPanel
           platform={platform}
+          locale={locale}
           storeBadges={storeBadges}
           qrTitle={copy.qrTitle}
           qrNote={copy.qrNote}

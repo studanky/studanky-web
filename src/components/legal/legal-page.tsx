@@ -1,5 +1,4 @@
-import { DropletsIcon } from "lucide-react";
-
+import { AppIcon } from "@/components/app-icon";
 import { LanguageSwitcher } from "@/components/layout/language-switcher";
 import {
   legalDocumentMeta,
@@ -41,9 +40,7 @@ export function LegalPage({
             href={localizedPathname(locale)}
             className="inline-flex items-center gap-2 rounded-full font-semibold tracking-tight outline-none focus-visible:ring-3 focus-visible:ring-ring/50"
           >
-            <span className="inline-flex size-8 items-center justify-center rounded-full bg-gradient-to-b from-water to-primary text-white">
-              <DropletsIcon aria-hidden="true" className="size-4.5" />
-            </span>
+            <AppIcon className="size-10" priority />
             {siteConfig.name}
           </a>
           <div className="flex flex-wrap items-center gap-3">

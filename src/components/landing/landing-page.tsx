@@ -20,7 +20,7 @@ export function LandingPage({ dict, locale }: { dict: Dictionary; locale: Locale
     <>
       <GlassNav dict={dict} locale={locale} />
       <main className="flex flex-1 flex-col">
-        <Hero dict={dict} />
+        <Hero dict={dict} locale={locale} />
         <StorySection dict={dict} />
         <FeaturesSection dict={dict} />
         <ShowcaseSection dict={dict} />
@@ -29,7 +29,7 @@ export function LandingPage({ dict, locale }: { dict: Dictionary; locale: Locale
         <RoadmapSection dict={dict} locale={locale} />
         <CommunitySection dict={dict} />
         <FaqSection dict={dict} />
-        <DownloadSection dict={dict} />
+        <DownloadSection dict={dict} locale={locale} />
       </main>
       <SiteFooter dict={dict} locale={locale} />
       <StickyDownload label={dict.nav.download} href={siteConfig.getPath} />
