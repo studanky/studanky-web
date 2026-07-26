@@ -7,18 +7,18 @@ export const siteConfig = {
   name: "Studánky",
   url: "https://studankyapp.cz",
   // Numeric App Store ID (not the bundle ID) for the iOS Smart App Banner.
-  // Empty = banner is not rendered. Fill in once the app is on the App Store.
-  appStoreId: "" as string,
+  // Empty = banner is not rendered.
+  appStoreId: "6778837458" as string,
   // Android package (must match package_name in assetlinks.json) for the
-  // manifest related_applications + our own Android app banner.
-  // Empty = disables both the manifest signal and the banner.
+  // manifest related_applications + our own Android app banner once Google Play
+  // is live.
   androidPackageId: "cz.studankyapp.studanky" as string,
   links: {
-    // TODO: point at the real org/repo once it is public.
-    github: "https://github.com/",
-    // Store URLs. Empty = /get falls back to the homepage download section and
-    // store badges keep pointing at the on-page anchor.
-    appStore: "" as string,
+    github: "https://github.com/studanky",
+    appStore: "https://apps.apple.com/us/app/*/id6778837458" as string,
+    // TODO(Android release): paste the public Google Play listing URL here.
+    // Empty = Android is shown as "coming soon"; /get falls back to the
+    // localized download section for Android visitors.
     googlePlay: "" as string,
     // Same-page anchor of the hero download block.
     download: "#download",

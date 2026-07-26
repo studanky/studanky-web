@@ -1,8 +1,9 @@
 "use client";
 
 import { useSyncExternalStore } from "react";
-import { DropletsIcon, XIcon } from "lucide-react";
+import { XIcon } from "lucide-react";
 
+import { AppIcon } from "@/components/app-icon";
 import { buttonVariants } from "@/components/ui/button";
 import { siteConfig } from "@/config/site";
 import type { Dictionary } from "@/i18n/dictionary";
@@ -23,6 +24,7 @@ function subscribe(callback: () => void) {
 
 function getSnapshot() {
   if (!siteConfig.androidPackageId) return false;
+  if (!siteConfig.links.googlePlay) return false;
   if (!/android/i.test(navigator.userAgent)) return false;
   // User already "has" the site as an app (added to home screen / TWA) → banner is pointless.
   if (window.matchMedia("(display-mode: standalone)").matches) return false;
@@ -60,7 +62,7 @@ export function AndroidAppBanner({
 
   if (!visible) return null;
 
-  const playUrl = `https://play.google.com/store/apps/details?id=${siteConfig.androidPackageId}`;
+  const playUrl = siteConfig.links.googlePlay;
 
   const dismiss = () => {
     // Set the in-memory flag first so the banner closes even if persistence fails.
@@ -89,9 +91,7 @@ export function AndroidAppBanner({
           <XIcon className="size-4" aria-hidden="true" />
         </button>
 
-        <span className="inline-flex size-9 shrink-0 items-center justify-center rounded-xl bg-primary text-primary-foreground">
-          <DropletsIcon className="size-5" aria-hidden="true" />
-        </span>
+        <AppIcon className="size-9" />
 
         <div className="flex min-w-0 flex-1 flex-col">
           <span className="truncate text-sm font-semibold tracking-tight">

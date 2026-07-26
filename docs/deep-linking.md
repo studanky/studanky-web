@@ -93,8 +93,9 @@ The page fetches a **teaser-level** payload for the shared spring from Strapi
 | iOS `TeamID.BundleID` | [`apple-app-site-association/route.ts`](../src/app/.well-known/apple-app-site-association/route.ts) |
 | Matched path pattern (`/s/*`) | same file, `components` |
 | Android package + fingerprints | [`assetlinks.json/route.ts`](../src/app/.well-known/assetlinks.json/route.ts) |
-| Store links (badges) | [`src/config/site.ts`](../src/config/site.ts) → `links.appStore`, `links.googlePlay` |
-| iOS App Store numeric ID (Smart App Banner) | [`src/config/site.ts`](../src/config/site.ts) → `appStoreId` (empty until published) |
+| Store links (badges + `/get`) | [`src/config/site.ts`](../src/config/site.ts) → `links.appStore`, `links.googlePlay` |
+| iOS App Store numeric ID (Smart App Banner) | [`src/config/site.ts`](../src/config/site.ts) → `appStoreId` |
+| Android pre-release state | Empty `links.googlePlay` keeps Android as "coming soon"; paste the public Play URL there to enable Android redirects, badges, banner, and manifest signal |
 | Strapi preview API base | `STRAPI_API_BASE` env var (e.g. Coolify) |
 
 ## Verification

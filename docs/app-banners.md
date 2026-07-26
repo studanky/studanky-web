@@ -46,18 +46,21 @@ mounted site-wide in the [root layout](../src/app/layout.tsx).
 - **Client-only detection** via `useSyncExternalStore`: the server snapshot is
   always `false`, so there is no hydration mismatch and pages stay statically
   renderable. The banner appears only in the browser, after checking the platform.
-- **Shown when**: the user is on Android, `androidPackageId` is set, the site is
-  not already running as an installed app (`display-mode: standalone`), and the
-  banner has not been dismissed.
+- **Shown when**: the user is on Android, `androidPackageId` is set,
+  `links.googlePlay` points at a public Play listing, the site is not already
+  running as an installed app (`display-mode: standalone`), and the banner has
+  not been dismissed.
 - **Dismissible**: closing persists to `localStorage`, with an in-memory
   session flag as a fallback so it also closes when storage is blocked
   (e.g. private mode).
-- **Gated on configuration**: renders only when
-  [`siteConfig.androidPackageId`](../src/config/site.ts) is set.
+- **Gated on configuration**: renders only when both
+  [`siteConfig.androidPackageId`](../src/config/site.ts) and
+  [`siteConfig.links.googlePlay`](../src/config/site.ts) are set.
 
 ### Manifest signal
 
-The [web app manifest](../src/app/manifest.ts) also declares the native app via
+When the Play listing URL is configured, the
+[web app manifest](../src/app/manifest.ts) also declares the native app via
 `related_applications` + `prefer_related_applications: true`. This is the
 standards-based way to tell Chrome to prefer the native Google Play app (verified
 through [`assetlinks.json`](../src/app/.well-known/assetlinks.json/route.ts)) over
@@ -68,10 +71,11 @@ installing the PWA. It is a signal only — it does not render a visible banner.
 | Value | Location | Effect when empty |
 | --- | --- | --- |
 | `appStoreId` (numeric) | [`src/config/site.ts`](../src/config/site.ts) | iOS Smart App Banner is not rendered |
-| `androidPackageId` | [`src/config/site.ts`](../src/config/site.ts) | Android banner **and** manifest `related_applications` are disabled |
+| `androidPackageId` | [`src/config/site.ts`](../src/config/site.ts) | Android App Links association stays disabled if empty |
+| `links.googlePlay` | [`src/config/site.ts`](../src/config/site.ts) | Android badge shows "coming soon"; Android banner and manifest `related_applications` are disabled |
 
-Both banners are therefore feature-flagged by config: fill in the value to
-enable, clear it to disable.
+Both banners are therefore feature-flagged by config. For Android release, keep
+`androidPackageId` and paste the public Play listing URL into `links.googlePlay`.
 
 ## Best-practice notes
 
