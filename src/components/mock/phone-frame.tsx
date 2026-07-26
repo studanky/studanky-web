@@ -5,7 +5,7 @@ import { cn } from "@/lib/utils";
 /**
  * Device frame for the hand-crafted app mocks. Metallic gradient body, deep
  * shadow, notch — the app UI renders inside as plain markup, so the whole
- * "screenshot" is code until real captures replace it (see docs/landing-roadmap.md).
+ * Legacy coded screenshot frame retained for local mock experiments.
  */
 export function PhoneFrame({
   children,

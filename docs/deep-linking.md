@@ -98,6 +98,18 @@ The page fetches a **teaser-level** payload for the shared spring from Strapi
 | Android pre-release state | Empty `links.googlePlay` keeps Android as "coming soon"; paste the public Play URL there to enable Android redirects, badges, banner, and manifest signal |
 | Strapi preview API base | `STRAPI_API_BASE` env var (e.g. Coolify) |
 
+## Native app promotion
+
+- iOS Safari reads the site-wide `apple-itunes-app` meta tag from
+  `metadata.itunes`. Per-spring `/s/*` pages add `app-argument` so the native
+  banner opens the shared spring.
+- Android has no equivalent automatic native banner in Chrome. The custom
+  `AndroidAppBanner` renders only when `androidPackageId` and
+  `links.googlePlay` are configured, the visitor is on Android, and the banner
+  has not been dismissed.
+- When `links.googlePlay` is configured, `manifest.webmanifest` also includes
+  `related_applications` / `prefer_related_applications` as a native-app signal.
+
 ## Verification
 
 Run after every deploy — all three must show `200`, `application/json`, `redirs=0`:
