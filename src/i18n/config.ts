@@ -8,6 +8,19 @@ export const locales = ["cs", "en"] as const;
 
 export type Locale = (typeof locales)[number];
 
+export type LanguagePreference = {
+  /** Supported locale used for the web UI and its dictionary. */
+  locale: Locale;
+  /** Complete client language tag forwarded to APIs that support locale fallback. */
+  languageTag: string;
+};
+
+type RankedLanguageTag = {
+  languageTag: string;
+  quality: number;
+  index: number;
+};
+
 /**
  * Fallback locale. Every locale is prefixed in the URL (`/cs`, `/en`), so the
  * default is *not* privileged in the routing — it is only the locale that the
@@ -61,32 +74,91 @@ export function splitLocale(pathname: string): {
   return { locale: defaultLocale, pathname };
 }
 
-/**
- * Zero-dependency `Accept-Language` matcher. Parses the header, respects quality
- * order, and returns the first supported locale (matching either the full tag or
- * its primary subtag), falling back to the default locale. Pure and
- * framework-agnostic so it is safe to import from the proxy.
- */
-export function matchAcceptLanguage(header: string | null | undefined): Locale {
-  if (!header) return defaultLocale;
+const QVALUE_RE = /^(?:0(?:\.\d{0,3})?|1(?:\.0{0,3})?)$/;
+const MAX_ACCEPT_LANGUAGE_ENTRIES = 20;
 
-  const ranked = header
-    .split(",")
-    .map((part) => {
-      const [tag, ...params] = part.trim().split(";");
-      const q = params.map((p) => p.trim()).find((p) => p.startsWith("q="));
-      const quality = q ? Number.parseFloat(q.slice(2)) : 1;
-      return { tag: tag.trim().toLowerCase(), quality: Number.isNaN(quality) ? 0 : quality };
-    })
-    // Drop entries with q=0 — per RFC 9110 that means "not acceptable".
-    .filter((entry) => entry.tag.length > 0 && entry.quality > 0)
-    .sort((a, b) => b.quality - a.quality);
+/** Returns one canonical BCP 47 tag or null for malformed/unbounded input. */
+export function canonicalLanguageTag(tag: string): string | null {
+  if (tag.length === 0 || tag.length > 255) return null;
 
-  for (const { tag } of ranked) {
-    const primary = tag.split("-")[0];
-    const match = locales.find((locale) => locale === tag || locale === primary);
-    if (match) return match;
+  try {
+    return Intl.getCanonicalLocales(tag)[0] ?? null;
+  } catch {
+    return null;
+  }
+}
+
+function qualityFromParameters(parameters: readonly string[]): number | null {
+  const parameter = parameters
+    .map((value) => value.trim())
+    .find((value) => value.toLowerCase().startsWith("q="));
+  if (!parameter) return 1;
+
+  const rawQuality = parameter.slice(2);
+  return QVALUE_RE.test(rawQuality) ? Number(rawQuality) : null;
+}
+
+/** Parses, canonicalizes, and stably ranks valid `Accept-Language` entries. */
+function rankedLanguageTags(
+  header: string | null | undefined,
+): RankedLanguageTag[] {
+  if (!header) return [];
+
+  const ranked: RankedLanguageTag[] = [];
+  // Bound synchronous Intl parsing in the proxy hot path for hostile headers.
+  for (const [index, part] of header.split(",", MAX_ACCEPT_LANGUAGE_ENTRIES).entries()) {
+    const [rawTag, ...parameters] = part.trim().split(";");
+    const languageTag = canonicalLanguageTag(rawTag.trim());
+    const quality = qualityFromParameters(parameters);
+    // q=0 means "not acceptable"; malformed qvalues invalidate that entry.
+    if (!languageTag || quality === null || quality === 0) continue;
+    ranked.push({ languageTag, quality, index });
   }
 
-  return defaultLocale;
+  return ranked.sort((a, b) => b.quality - a.quality || a.index - b.index);
+}
+
+function localeForLanguageTag(languageTag: string): Locale | null {
+  const normalizedTag = languageTag.toLowerCase();
+  const primary = normalizedTag.split("-")[0];
+  return (
+    locales.find((candidate) => candidate === normalizedTag || candidate === primary) ??
+    null
+  );
+}
+
+/**
+ * Resolves both the supported UI locale and the complete matching language tag.
+ * Keeping the full tag lets the Strapi preview API try `en-AU` before `en`
+ * without changing which local dictionary the page renders.
+ */
+export function matchAcceptLanguagePreference(
+  header: string | null | undefined,
+): LanguagePreference {
+  for (const { languageTag } of rankedLanguageTags(header)) {
+    const locale = localeForLanguageTag(languageTag);
+    if (locale) return { locale, languageTag };
+  }
+
+  return { locale: defaultLocale, languageTag: defaultLocale };
+}
+
+/**
+ * Finds the best complete browser language tag for an explicitly selected UI
+ * locale. Falls back to the locale itself when the header has no matching tag.
+ */
+export function matchLanguageTagForLocale(
+  header: string | null | undefined,
+  locale: Locale,
+): string {
+  return (
+    rankedLanguageTags(header).find(
+      ({ languageTag }) => localeForLanguageTag(languageTag) === locale,
+    )?.languageTag ?? locale
+  );
+}
+
+/** Resolves only the supported UI locale for routing and localized dictionaries. */
+export function matchAcceptLanguage(header: string | null | undefined): Locale {
+  return matchAcceptLanguagePreference(header).locale;
 }
