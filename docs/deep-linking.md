@@ -70,7 +70,10 @@ The page fetches a **teaser-level** payload for the shared spring from Strapi
 - **Contract & data source:** the public Strapi endpoint is documented in
   [`docs/strapi-share-endpoint.md`](./strapi-share-endpoint.md); its base URL comes
   from the `STRAPI_API_BASE` env var. Fetches are cached (`revalidate: 300`) so
-  preview crawlers don't hammer the backend.
+  preview crawlers don't hammer the backend. The request preserves the complete
+  active language tag (for example `en-AU`); Strapi owns locale fallback and the
+  web accepts a valid returned locale without making another request and marks
+  the Strapi-provided description with the corresponding HTML `lang` attribute.
 - **OG card:** a per-spring social card is generated server-side at
   [`s/[documentId]/opengraph-image.tsx`](../src/app/s/%5BdocumentId%5D/opengraph-image.tsx)
   (spring photo as background when present, branded gradient otherwise) so shares

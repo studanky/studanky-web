@@ -8,7 +8,7 @@ Long-term project docs:
 
 - [TODO](docs/todo.md) — release checklist and future work that must survive across sessions.
 - [Deep Linking — Universal Links & App Links](docs/deep-linking.md) — how shared `/s/{id}` links open in the native app, with a platform-aware web fallback.
-- [Strapi share endpoint (backend brief)](docs/strapi-share-endpoint.md) — the contract for the public Strapi `preview` endpoint that feeds the `/s/{id}` fallback; a handoff for the backend/Strapi team.
+- [Strapi Spring preview API](docs/strapi-share-endpoint.md) — the current contract for the public Strapi `preview` endpoint that feeds the `/s/{id}` fallback.
 - [Newsletter signup](docs/newsletter.md) — frontend-to-Strapi contract for the public newsletter form and abuse-prevention notes.
 - [Store privacy declarations](docs/store-privacy-declarations.md) — Apple App Privacy / Google Play Data Safety answers kept consistent with the published privacy policy.
 - [Web assets](docs/assets.md) — source app icon, store badges, screenshot locations, and regeneration notes.
