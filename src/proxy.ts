@@ -53,11 +53,11 @@ export function proxy(request: NextRequest): NextResponse {
 
 export const config = {
   // Run only on localizable page routes. Exclude Next internals, API routes, the
-  // `/s/*` deep-link fallback, the `/get` universal-download redirect (encoded
-  // in QR codes — must never be locale-prefixed), `.well-known`, the OpenGraph
-  // image route (at any depth), and any path with a file extension (metadata
-  // files + public assets).
+  // `/s/*` deep-link fallback and the `/download` universal-download redirect
+  // (encoded in QR codes — must never be locale-prefixed). Also exclude
+  // `.well-known`, the OpenGraph image route (at any depth), and paths with a
+  // file extension (metadata files + public assets).
   matcher: [
-    "/((?!api|_next|s(?:/|$)|get(?:/|$)|\\.well-known|.*opengraph-image|.*\\.[\\w]+$).*)",
+    "/((?!api|_next|s(?:/|$)|download(?:/|$)|\\.well-known|.*opengraph-image|.*\\.[\\w]+$).*)",
   ],
 };

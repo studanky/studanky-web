@@ -1,10 +1,9 @@
 import { encode } from "uqr";
 
 /**
- * Live QR code rendered as inline SVG (server-side, zero client JS). Encoding
- * the URL at render time — instead of shipping a pre-made image — means every
- * QR on the site always matches `downloadUrl` and restyles with the theme via
- * `currentColor`.
+ * QR code rendered server-side as inline SVG. Encoding at render time instead
+ * of shipping a pre-made image keeps the payload configurable and lets the
+ * code restyle with the theme via `currentColor`, without client JavaScript.
  */
 export function QrCode({
   data,

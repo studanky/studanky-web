@@ -7,12 +7,11 @@ import type { Dictionary } from "@/i18n/dictionary";
 import type { StorePlatform } from "@/types/landing";
 import { cn } from "@/lib/utils";
 
-// Until the real store URLs are configured, fall back to the universal /get
+// Until the real store URLs are configured, fall back to the universal /download
 // redirect for iOS. Android stays explicitly disabled until the Play listing is
-// live; once `siteConfig.links.googlePlay` is filled in, it becomes a normal
-// store badge automatically.
+// live.
 const badgeHref: Record<StorePlatform, string | null> = {
-  ios: siteConfig.links.appStore || siteConfig.getPath,
+  ios: siteConfig.links.appStore || siteConfig.downloadPath,
   android: siteConfig.links.googlePlay || null,
 };
 
@@ -61,7 +60,7 @@ export function StoreButton({
 
   return (
     <a
-      href={href ?? siteConfig.getPath}
+      href={href ?? siteConfig.downloadPath}
       aria-label={label}
       className={cn(
         "inline-flex items-center rounded-xl outline-none transition-opacity hover:opacity-85 focus-visible:ring-3 focus-visible:ring-ring/50",

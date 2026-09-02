@@ -87,7 +87,7 @@ export type Dictionary = {
     /** Second headline line, rendered as a water-gradient accent. */
     titleLine2: string;
     description: string;
-    /** Single primary CTA on phones — links to the /get platform redirect. */
+    /** Single primary CTA on phones — links to the /download platform redirect. */
     ctaMobile: string;
     chips: string[];
     qrTitle: string;

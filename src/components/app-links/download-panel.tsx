@@ -1,6 +1,5 @@
-import { QrCode } from "@/components/qr-code";
+import { DownloadQrCode } from "@/components/download-qr-code";
 import { StoreButton, StoreButtons } from "@/components/store-buttons";
-import { downloadUrl } from "@/config/site";
 import type { Locale } from "@/i18n/config";
 import type { Dictionary } from "@/i18n/dictionary";
 import type { Platform } from "@/lib/platform";
@@ -36,7 +35,7 @@ export function DownloadPanel({
         <>
           {/* Desktop: the QR is the hero. Dark-on-white for reliable scanning. */}
           <span className="rounded-3xl border border-border/70 bg-white p-4 shadow-xl shadow-primary/10">
-            <QrCode data={downloadUrl} label={qrAlt} className="size-40 text-black sm:size-48" />
+            <DownloadQrCode label={qrAlt} className="size-40 text-black sm:size-48" />
           </span>
           <div className="flex flex-col gap-1">
             <p className="text-lg font-semibold text-foreground">{qrTitle}</p>

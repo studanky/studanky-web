@@ -8,7 +8,13 @@ import { cn } from "@/lib/utils";
  * Mobile-only glass download bar that slides in once the visitor scrolls past
  * the hero, keeping the primary CTA in thumb reach for the rest of the page.
  */
-export function StickyDownload({ label, href }: { label: string; href: string }) {
+export function StickyDownload({
+  label,
+  href,
+}: {
+  label: string;
+  href: string;
+}) {
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {

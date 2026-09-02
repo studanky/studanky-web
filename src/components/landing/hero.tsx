@@ -1,12 +1,12 @@
 import { DropletIcon } from "lucide-react";
 
-import { QrCode } from "@/components/qr-code";
+import { DownloadQrCode } from "@/components/download-qr-code";
 import { StoreButtons } from "@/components/store-buttons";
 import { appScreenshots } from "@/config/assets";
-import { downloadUrl, siteConfig } from "@/config/site";
 import type { Locale } from "@/i18n/config";
 import type { Dictionary } from "@/i18n/dictionary";
 import { AppScreenshotFrame } from "./app-screenshot-frame";
+import { MobileDownloadCta } from "./mobile-download-cta";
 
 export function Hero({ dict, locale }: { dict: Dictionary; locale: Locale }) {
   const hero = dict.hero;
@@ -38,20 +38,19 @@ export function Hero({ dict, locale }: { dict: Dictionary; locale: Locale }) {
             {hero.description}
           </p>
 
-          <div id="download" className="flex w-full scroll-mt-24 flex-col items-start gap-4">
-            {/* Phones: one primary CTA — /get resolves the right store server-side. */}
-            <a
-              href={siteConfig.getPath}
-              className="flex h-13 w-full max-w-sm items-center justify-center rounded-2xl bg-primary text-base font-semibold text-primary-foreground shadow-lg shadow-primary/25 outline-none focus-visible:ring-3 focus-visible:ring-ring/50 active:translate-y-px md:hidden"
-            >
-              {hero.ctaMobile}
-            </a>
+          <div className="flex w-full flex-col items-start gap-4">
+            {/* Phones: one primary CTA — /download resolves the right store server-side. */}
+            <MobileDownloadCta
+              label={hero.ctaMobile}
+              labels={dict.storeBadges}
+              locale={locale}
+            />
 
             {/* Desktop: official badges + live QR (dark-on-white for scanning). */}
             <div className="hidden items-center gap-6 md:flex">
               <StoreButtons labels={dict.storeBadges} locale={locale} priority />
               <div className="flex items-center gap-3.5 rounded-2xl border border-border/70 bg-white p-3 pr-5 shadow-sm">
-                <QrCode data={downloadUrl} label={hero.qrAlt} className="size-18 text-black" />
+                <DownloadQrCode label={hero.qrAlt} className="size-18 text-black" />
                 <span className="flex max-w-36 flex-col gap-0.5">
                   <span className="text-sm font-semibold text-foreground">{hero.qrTitle}</span>
                   <span className="text-xs text-muted-foreground">{hero.qrNote}</span>

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, type ReactNode } from "react";
 
 import { AppIcon } from "@/components/app-icon";
 import { LanguageSwitcher } from "@/components/layout/language-switcher";
@@ -15,7 +15,15 @@ import { cn } from "@/lib/utils";
  * up — the standard pattern for long marketing pages. On mobile it stays
  * minimal (logo, language, download); section links are desktop-only.
  */
-export function GlassNav({ dict, locale }: { dict: Dictionary; locale: Locale }) {
+export function GlassNav({
+  dict,
+  locale,
+  mobileDownloadCta,
+}: {
+  dict: Dictionary;
+  locale: Locale;
+  mobileDownloadCta: ReactNode;
+}) {
   const [hidden, setHidden] = useState(false);
   const lastY = useRef(0);
 
@@ -64,9 +72,10 @@ export function GlassNav({ dict, locale }: { dict: Dictionary; locale: Locale })
 
         <div className="flex items-center gap-2">
           <LanguageSwitcher locale={locale} labels={dict.languageSwitcher} />
+          {mobileDownloadCta}
           <a
-            href={siteConfig.links.download}
-            className="inline-flex h-10 items-center rounded-full bg-primary px-4.5 text-sm font-semibold text-primary-foreground shadow-md shadow-primary/25 outline-none transition-transform hover:bg-primary/90 focus-visible:ring-3 focus-visible:ring-ring/50 active:translate-y-px"
+            href="#download"
+            className="hidden h-10 items-center rounded-full bg-primary px-4.5 text-sm font-semibold text-primary-foreground shadow-md shadow-primary/25 outline-none transition-transform hover:bg-primary/90 focus-visible:ring-3 focus-visible:ring-ring/50 active:translate-y-px md:inline-flex"
           >
             {dict.nav.download}
           </a>

@@ -6,7 +6,7 @@ const nextConfig: NextConfig = {
     // Enables `app/global-not-found.tsx` — the documented way to render a
     // consistent 404 when the root layout lives under a dynamic segment
     // (`app/[locale]/layout.tsx`). Lets the 404 be fully server-rendered with
-    // its own <html lang> while the homepage stays statically prerendered.
+    // its own localized <html lang> document.
     globalNotFound: true,
     serverActions: {
       // Newsletter signup is the only Server Action and its payload is tiny.

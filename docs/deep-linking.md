@@ -81,6 +81,7 @@ The page fetches a **teaser-level** payload for the shared spring from Strapi
 - **Platform detection is server-side** via [`detectPlatform()`](../src/lib/platform.ts):
   iOS → App Store badge, Android → Google Play, desktop → both + QR. There is no
   auto-redirect (an installed app would have intercepted the link already).
+  iPadOS in desktop-site mode is still classified as iOS.
 - The page is `robots: noindex, nofollow` (per-share links are not indexed) and,
   because it reads headers, renders dynamically per request.
 - **Future `/r/{id}` (QR → report)** reuses the same `fetchSpringPreview` layer;
@@ -93,9 +94,9 @@ The page fetches a **teaser-level** payload for the shared spring from Strapi
 | iOS `TeamID.BundleID` | [`apple-app-site-association/route.ts`](../src/app/.well-known/apple-app-site-association/route.ts) |
 | Matched path pattern (`/s/*`) | same file, `components` |
 | Android package + fingerprints | [`assetlinks.json/route.ts`](../src/app/.well-known/assetlinks.json/route.ts) |
-| Store links (badges + `/get`) | [`src/config/site.ts`](../src/config/site.ts) → `links.appStore`, `links.googlePlay` |
+| Store links (badges + `/download`) | [`src/config/site.ts`](../src/config/site.ts) → `links.appStore`, `links.googlePlay` |
 | iOS App Store numeric ID (Smart App Banner) | [`src/config/site.ts`](../src/config/site.ts) → `appStoreId` |
-| Android pre-release state | Empty `links.googlePlay` keeps Android as "coming soon"; paste the public Play URL there to enable Android redirects, badges, banner, and manifest signal |
+| Android pre-release state | Empty `links.googlePlay` keeps Android redirects on the download section, hides landing-page nav/sticky CTAs, and shows a non-clickable "coming soon" badge on both the landing and deep-link pages. At release, paste the public Play URL; the affected UI enables and the landing page returns to SSG automatically. |
 | Strapi preview API base | `STRAPI_API_BASE` env var (e.g. Coolify) |
 
 ## Native app promotion
@@ -109,6 +110,9 @@ The page fetches a **teaser-level** payload for the shared spring from Strapi
   has not been dismissed.
 - When `links.googlePlay` is configured, `manifest.webmanifest` also includes
   `related_applications` / `prefer_related_applications` as a native-app signal.
+- Download QR codes are rendered into the server HTML. Production and preview
+  builds always encode `https://studankyapp.cz/download`; local `next dev`
+  derives the origin, including a custom port, from the current request.
 
 ## Verification
 
@@ -133,6 +137,10 @@ curl -s "https://digitalassetlinks.googleapis.com/v1/statements:list?source.web.
 
 ## Caveats
 
+- **Android pre-release caching**: localized landing HTML varies by User-Agent
+  and is served with `Cache-Control: private, no-cache, no-store`. Do not
+  override this with a CDN "Cache Everything" rule. Configuring the public
+  Google Play URL removes platform detection and restores SSG automatically.
 - **AASA must be unsigned JSON** (iOS 9.3+) and the file has **no extension**.
 - **Apple CDN cache**: Apple fetches the AASA via its CDN and caches it (up to
   ~24 h for production/TestFlight). For testing on an installed app, enable

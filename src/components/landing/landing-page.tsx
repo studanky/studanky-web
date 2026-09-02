@@ -1,4 +1,3 @@
-import { siteConfig } from "@/config/site";
 import type { Locale } from "@/i18n/config";
 import type { Dictionary } from "@/i18n/dictionary";
 import { CommunitySection } from "./community-section";
@@ -8,17 +7,35 @@ import { FaqSection } from "./faq-section";
 import { FeaturesSection } from "./features-section";
 import { GlassNav } from "./glass-nav";
 import { Hero } from "./hero";
+import { MobileDownloadCta, MobileStickyDownload } from "./mobile-download-cta";
 import { RoadmapSection } from "./roadmap-section";
 import { ShowcaseSection } from "./showcase-section";
 import { SiteFooter } from "./site-footer";
 import { StepsSection } from "./steps-section";
-import { StickyDownload } from "./sticky-download";
 import { StorySection } from "./story-section";
 
-export function LandingPage({ dict, locale }: { dict: Dictionary; locale: Locale }) {
+export function LandingPage({
+  dict,
+  locale,
+}: {
+  dict: Dictionary;
+  locale: Locale;
+}) {
   return (
     <>
-      <GlassNav dict={dict} locale={locale} />
+      <GlassNav
+        dict={dict}
+        locale={locale}
+        mobileDownloadCta={
+          <MobileDownloadCta
+            label={dict.nav.download}
+            labels={dict.storeBadges}
+            locale={locale}
+            variant="nav"
+            renderComingSoonBadge={false}
+          />
+        }
+      />
       <main className="flex flex-1 flex-col">
         <Hero dict={dict} locale={locale} />
         <StorySection dict={dict} />
@@ -32,7 +49,7 @@ export function LandingPage({ dict, locale }: { dict: Dictionary; locale: Locale
         <DownloadSection dict={dict} locale={locale} />
       </main>
       <SiteFooter dict={dict} locale={locale} />
-      <StickyDownload label={dict.nav.download} href={siteConfig.getPath} />
+      <MobileStickyDownload label={dict.nav.download} />
     </>
   );
 }

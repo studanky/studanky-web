@@ -15,22 +15,17 @@ export const siteConfig = {
   androidPackageId: "cz.studankyapp.studanky" as string,
   links: {
     github: "https://github.com/studanky",
-    appStore: "https://apps.apple.com/us/app/*/id6778837458" as string,
+    appStore: "https://apps.apple.com/app/id6778837458" as string,
     // TODO(Android release): paste the public Google Play listing URL here.
-    // Empty = Android is shown as "coming soon"; /get falls back to the
+    // Empty = Android download CTAs stay hidden; /download falls back to the
     // localized download section for Android visitors.
     googlePlay: "" as string,
-    // Same-page anchor of the hero download block.
-    download: "#download",
   },
   // Universal download URL: detects the platform server-side and redirects to
-  // the right store (see `src/app/get/route.ts`). This is what QR codes encode,
+  // the right store (see `src/app/download/route.ts`). This is what QR codes encode,
   // so printed/rendered codes stay valid even before the store URLs exist.
-  getPath: "/get",
+  downloadPath: "/download",
 } as const;
-
-/** Absolute universal-download URL — the payload of every download QR code. */
-export const downloadUrl = `${siteConfig.url}${siteConfig.getPath}`;
 
 /**
  * Primary navigation. `id` keys into `dict.nav.items[id]` for the label; `href`
@@ -47,13 +42,3 @@ export const mainNav = [
 ] as const;
 
 export type NavItemId = (typeof mainNav)[number]["id"];
-
-/**
- * Store call-to-actions. `platform` selects the badge asset and the localized
- * label (`dict.storeBadges`); `href` falls back to the on-page anchor until the
- * real store URL is configured.
- */
-export const primaryCtas = [
-  { platform: "ios", href: siteConfig.links.appStore || siteConfig.links.download },
-  { platform: "android", href: siteConfig.links.googlePlay || siteConfig.links.download },
-] as const;

@@ -19,8 +19,12 @@ Long-lived release checklist for the web and store-facing integration.
 ## Android Release
 
 - [ ] Paste the public Google Play listing URL into
-  `siteConfig.links.googlePlay`. This enables Android `/get` redirects, the
-  Google Play badge, Android banner, and manifest `related_applications`.
+  `siteConfig.links.googlePlay`. This enables Android `/download` redirects, the
+  landing-page CTAs and badges, Android banner, and manifest
+  `related_applications`; it also automatically returns the landing page to
+  static generation because User-Agent detection is no longer needed.
+- [ ] After configuring Google Play, run `pnpm build` and verify that the route
+  table reports `● /[locale]` (SSG), not `ƒ /[locale]` (dynamic rendering).
 - [ ] Verify Android fingerprints in `assetlinks.json` use the Play App Signing
   SHA-256 certificate, not only upload/debug keys.
 - [ ] Verify the Android package id still matches `cz.studankyapp.studanky`.
