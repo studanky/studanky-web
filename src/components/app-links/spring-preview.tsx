@@ -127,7 +127,12 @@ export function SpringPreview({
             </span>
           </div>
 
-          <p className="max-w-md text-sm leading-6 text-muted-foreground">{description}</p>
+          <p
+            lang={spring.description && spring.locale ? spring.locale : undefined}
+            className="max-w-md text-sm leading-6 text-muted-foreground"
+          >
+            {description}
+          </p>
 
           <CopyCoordinates
             value={formatCoordinates(spring.latitude, spring.longitude)}

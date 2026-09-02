@@ -6,8 +6,10 @@ import { fetchSpringPreview } from "@/lib/springs";
 
 // Per-share social card for `/s/{documentId}`. Crawlers fetch this separately
 // from the HTML and never run JS, so the card is fully generated server-side.
-// Kept in the default locale for a stable image; resolves against the
-// `metadataBase` set in `s/layout.tsx`.
+// Deliberately kept in the default locale: this route has no locale in its URL
+// and crawler Accept-Language headers are inconsistent. A stable Czech API/cache
+// entry and status label are preferable to varying the same image URL by request.
+// The generated URL resolves against the `metadataBase` set in `s/layout.tsx`.
 
 const domain = siteConfig.url.replace("https://", "");
 

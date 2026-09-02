@@ -1,11 +1,13 @@
 import "server-only";
 
-import type { Locale } from "@/i18n/config";
+import { cache } from "react";
+
+import { canonicalLanguageTag, defaultLocale } from "@/i18n/config";
 
 // Data access for the public Strapi "share/preview" endpoint that backs the
 // `/s/{documentId}` deep-link fallback (and, later, `/r/{documentId}`).
 //
-//   GET {STRAPI_API_BASE}/springs/:documentId/preview?locale=cs
+//   GET {STRAPI_API_BASE}/springs/:documentId/preview?locale=en-AU
 //
 // The endpoint returns a deliberately minimal, teaser-level payload (name,
 // coordinates, description, photo, current flow status + when it was updated).
@@ -15,7 +17,7 @@ import type { Locale } from "@/i18n/config";
 const STRAPI_API_BASE = process.env.STRAPI_API_BASE;
 
 // How long a fetched spring stays in Next's Data Cache. Preview crawlers hit
-// these URLs repeatedly, so caching protects Strapi and cuts latency (spec C.4).
+// these URLs repeatedly, so caching protects Strapi and cuts latency.
 const REVALIDATE_SECONDS = 300;
 const FETCH_TIMEOUT_MS = 5000;
 
@@ -35,6 +37,11 @@ export type SpringPhoto = {
 
 export type SpringPreview = {
   documentId: string;
+  /**
+   * Locale actually served by Strapi after its whole-document fallback, or
+   * `null` when Strapi omits it or returns an invalid value.
+   */
+  locale: string | null;
   name: string;
   latitude: number;
   longitude: number;
@@ -96,15 +103,45 @@ function normalizePhoto(raw: unknown, strapiOrigin: string | undefined): SpringP
   };
 }
 
-function normalize(data: Record<string, unknown>, strapiOrigin: string | undefined): SpringPreview | null {
+function responseMetadata(
+  data: Record<string, unknown>,
+  requestedDocumentId: string,
+): Pick<SpringPreview, "documentId" | "locale"> {
+  const issues: string[] = [];
+  const responseDocumentId = toNullableString(data.documentId);
+  const responseLocale = toNullableString(data.locale);
+  const locale = responseLocale ? canonicalLanguageTag(responseLocale) : null;
+
+  if (responseDocumentId !== requestedDocumentId) {
+    issues.push(responseDocumentId === null ? "missing documentId" : "unexpected documentId");
+  }
+  if (!locale) issues.push("missing or invalid locale");
+
+  if (issues.length > 0) {
+    console.warn(
+      `Spring preview metadata fallback for ${requestedDocumentId}: ${issues.join("; ")}.`,
+    );
+  }
+
+  return {
+    documentId: requestedDocumentId,
+    locale,
+  };
+}
+
+function normalize(
+  data: Record<string, unknown>,
+  strapiOrigin: string,
+  requestedDocumentId: string,
+): SpringPreview | null {
   const name = toNullableString(data.name);
   const latitude = toNullableNumber(data.lat);
   const longitude = toNullableNumber(data.lng);
-  // name/lat/lng/current_status are required per the contract; bail if malformed.
+  // Only fields required to render a useful preview make the whole payload fail.
   if (name === null || latitude === null || longitude === null) return null;
 
   return {
-    documentId: toNullableString(data.documentId) ?? "",
+    ...responseMetadata(data, requestedDocumentId),
     name,
     latitude,
     longitude,
@@ -115,32 +152,51 @@ function normalize(data: Record<string, unknown>, strapiOrigin: string | undefin
   };
 }
 
-/**
- * Fetches the share/preview payload for a spring. Never throws — resolves to a
- * discriminated result so callers can render the right page for every case.
- */
-export async function fetchSpringPreview(
+function previewRequest(
+  documentId: string,
+  requestedLanguageTag: string,
+): { url: string; strapiOrigin: string } | null {
+  if (!STRAPI_API_BASE) return null;
+
+  const canonicalRequestedLanguageTag = canonicalLanguageTag(requestedLanguageTag);
+  const effectiveLanguageTag = canonicalRequestedLanguageTag ?? defaultLocale;
+  if (!canonicalRequestedLanguageTag) {
+    const loggedLanguageTag = JSON.stringify(requestedLanguageTag.slice(0, 64));
+    console.warn(
+      `Invalid Spring preview language tag ${loggedLanguageTag} for ${documentId}; using the default locale ${defaultLocale}.`,
+    );
+  }
+
+  try {
+    // STRAPI_API_BASE includes `/api`. Keep a trailing slash so URL resolution
+    // appends the endpoint instead of replacing that path segment.
+    const apiBase = new URL(
+      STRAPI_API_BASE.endsWith("/") ? STRAPI_API_BASE : `${STRAPI_API_BASE}/`,
+    );
+    const url = new URL(`springs/${encodeURIComponent(documentId)}/preview`, apiBase);
+    url.searchParams.set("locale", effectiveLanguageTag);
+    return {
+      url: url.toString(),
+      strapiOrigin: apiBase.origin,
+    };
+  } catch {
+    return null;
+  }
+}
+
+async function fetchSpringPreviewUncached(
   documentId: string | undefined,
-  locale: Locale,
+  requestedLanguageTag: string,
 ): Promise<SpringPreviewResult> {
   if (!isValidDocumentId(documentId)) return { status: "not_found" };
-  if (!STRAPI_API_BASE) {
-    console.error("STRAPI_API_BASE is not set — cannot fetch spring preview.");
+  const request = previewRequest(documentId, requestedLanguageTag);
+  if (!request) {
+    console.error("STRAPI_API_BASE is missing or invalid — cannot fetch spring preview.");
     return { status: "error" };
   }
 
-  const strapiOrigin = (() => {
-    try {
-      return new URL(STRAPI_API_BASE).origin;
-    } catch {
-      return undefined;
-    }
-  })();
-
-  const url = `${STRAPI_API_BASE}/springs/${encodeURIComponent(documentId)}/preview?locale=${encodeURIComponent(locale)}`;
-
   try {
-    const response = await fetch(url, {
+    const response = await fetch(request.url, {
       headers: { Accept: "application/json" },
       signal: AbortSignal.timeout(FETCH_TIMEOUT_MS),
       next: { revalidate: REVALIDATE_SECONDS },
@@ -155,7 +211,7 @@ export async function fetchSpringPreview(
     const body = (await response.json()) as { data?: Record<string, unknown> | null };
     if (!body?.data) return { status: "not_found" };
 
-    const spring = normalize(body.data, strapiOrigin);
+    const spring = normalize(body.data, request.strapiOrigin, documentId);
     if (!spring) {
       console.error(`Spring preview payload was malformed for ${documentId}`);
       return { status: "error" };
@@ -166,6 +222,17 @@ export async function fetchSpringPreview(
     return { status: "error" };
   }
 }
+
+/**
+ * Fetches the share/preview payload for a spring.
+ *
+ * React's request-scoped cache shares the complete loader—including response
+ * parsing, normalization, and diagnostics—between `generateMetadata` and the
+ * page render. The underlying request retains its timeout and five-minute Data
+ * Cache policy. Never throws, so callers receive a discriminated result for
+ * each renderable outcome.
+ */
+export const fetchSpringPreview = cache(fetchSpringPreviewUncached);
 
 /** `"50.18000, 17.05000"` — a decimal pair that pastes into any map's search. */
 export function formatCoordinates(latitude: number, longitude: number): string {

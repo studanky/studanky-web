@@ -6,7 +6,7 @@ import { SpringPreview } from "@/components/app-links/spring-preview";
 import { siteConfig } from "@/config/site";
 import { getDictionary } from "@/i18n/dictionaries";
 import { format } from "@/i18n/format";
-import { getRequestLocale } from "@/i18n/request-locale";
+import { getRequestLanguagePreference } from "@/i18n/request-locale";
 import { detectPlatform } from "@/lib/platform";
 import { fetchSpringPreview } from "@/lib/springs";
 
@@ -18,9 +18,9 @@ type PageProps = { params: Promise<{ documentId: string }> };
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { documentId } = await params;
-  const locale = await getRequestLocale();
+  const { locale, languageTag } = await getRequestLanguagePreference();
   const dict = await getDictionary(locale);
-  const result = await fetchSpringPreview(documentId, locale);
+  const result = await fetchSpringPreview(documentId, languageTag);
 
   // Per-share links are never indexed.
   const base: Metadata = { robots: { index: false, follow: false } };
@@ -56,9 +56,12 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 export default async function SpringDeepLinkPage({ params }: PageProps) {
   const { documentId } = await params;
 
-  const [platform, locale] = await Promise.all([detectPlatform(), getRequestLocale()]);
+  const [platform, { locale, languageTag }] = await Promise.all([
+    detectPlatform(),
+    getRequestLanguagePreference(),
+  ]);
   const dict = await getDictionary(locale);
-  const result = await fetchSpringPreview(documentId, locale);
+  const result = await fetchSpringPreview(documentId, languageTag);
 
   if (result.status === "ok") {
     return (
