@@ -1,96 +1,92 @@
 # Studánky Web
 
-Landing page for the Studánky mobile app, built with Next.js App Router and Tailwind CSS.
+Public web frontend for the Studánky mobile app. It provides the localized
+marketing and legal pages, native-app download flow, shared-spring previews,
+and newsletter signup.
+
+The application uses the Next.js App Router, React, TypeScript, Tailwind CSS,
+and pnpm. `package.json` is the source of truth for framework and dependency
+versions.
 
 ## Documentation
 
-Long-term project docs:
+- [Architecture](docs/architecture.md) — route families, component boundaries,
+  data flows, and source-code ownership.
+- [Localization](docs/localization.md) — typed dictionaries, adding copy or a
+  locale, and locale-aware routing.
+- [Strapi integrations](docs/strapi-integrations.md) — Spring Preview and
+  newsletter API contracts and failure handling.
+- [Deep linking and app downloads](docs/deep-linking.md) — Universal Links,
+  App Links, association files, `/s/*`, and `/download`.
+- [Deployment](docs/deployment.md) — standalone build, Coolify/Nixpacks
+  configuration, and release checks.
+- [Web assets](docs/assets.md) — source icons, generated icons, screenshots, and
+  localized store badges.
+- [Store privacy declarations](docs/store-privacy-declarations.md) — release
+  runbook for Apple App Privacy and Google Play Data Safety.
 
-- [TODO](docs/todo.md) — release checklist and future work that must survive across sessions.
-- [Deep Linking — Universal Links & App Links](docs/deep-linking.md) — how shared `/s/{id}` links open in the native app, with a platform-aware web fallback.
-- [Strapi Spring preview API](docs/strapi-share-endpoint.md) — the current contract for the public Strapi `preview` endpoint that feeds the `/s/{id}` fallback.
-- [Newsletter signup](docs/newsletter.md) — frontend-to-Strapi contract for the public newsletter form and abuse-prevention notes.
-- [Store privacy declarations](docs/store-privacy-declarations.md) — Apple App Privacy / Google Play Data Safety answers kept consistent with the published privacy policy.
-- [Web assets](docs/assets.md) — source app icon, store badges, screenshot locations, and regeneration notes.
+Keep durable contracts, operational procedures, and non-obvious architectural
+decisions in these documents. Active work belongs in the issue tracker, and
+implementation details that are clear from the code should stay in the code.
 
-## Stack
+## Requirements
 
-- Next.js 16
-- React 19
-- TypeScript
-- Tailwind CSS 4
-- pnpm
+- Node.js `>=20.19.0`
+- pnpm 11, pinned by the `packageManager` field in `package.json`
+- Corepack, recommended for activating the pinned pnpm version
 
-## Environment variables
-
-Local values go in `.env.local` (git-ignored). Copy the template and fill it in:
+## Local development
 
 ```bash
+corepack enable
+pnpm install
 cp .env.example .env.local
-```
-
-| Variable | Required | Purpose |
-| --- | --- | --- |
-| `STRAPI_API_BASE` | Yes | Base URL of the public Strapi API (incl. `/api`). Used by newsletter signup and by the deep-link preview page — see [docs/newsletter.md](docs/newsletter.md) and [docs/strapi-share-endpoint.md](docs/strapi-share-endpoint.md). Without it, newsletter signup fails and `/s/{id}` degrades to a generic install page. |
-
-Production values are configured in Coolify, not in a committed file. See
-[`.env.example`](.env.example) for the documented shape.
-
-## Deployment
-
-The production build uses Next.js standalone output and starts the traced server
-with `node .next/standalone/server.js`.
-
-Coolify Nixpacks settings:
-
-- `Build Pack`: `Nixpacks`
-- `Ports Exposes`: `3000`
-- `Is it a static site?`: disabled
-- `STRAPI_API_BASE`: set as a runtime environment variable
-
-The repository `nixpacks.toml` pins Node.js 22, activates pnpm 11 via Corepack,
-copies the standalone static assets, and overrides the start command.
-
-## Development
-
-```bash
-cp .env.example .env.local   # first time only
 pnpm dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000). The bare `/` redirects to
+the preferred localized route, such as `/cs` or `/en`.
 
-## Quality Checks
+## Environment
 
-```bash
-pnpm lint
-pnpm typecheck
-pnpm check
-pnpm build
-```
+Local values belong in `.env.local`, which is git-ignored. Production values
+are configured in Coolify.
 
-## Project Structure
+| Variable | Production requirement | Purpose |
+| --- | --- | --- |
+| `STRAPI_API_BASE` | Required for complete functionality | Public Strapi base URL including `/api`. Newsletter signup fails without it; shared-spring pages fall back to the generic app screen. |
 
-```text
-src/
-├── app/                 # App Router; localized routes under app/[locale]/
-├── components/
-│   ├── landing/         # Marketing page composition and sections
-│   ├── layout/          # Shared layout primitives such as the language switcher
-│   └── ui/              # shadcn/ui source components
-├── config/              # Site URL, navigation, global links
-├── i18n/                # Locale config, dictionary loading, request helpers
-├── lib/                 # Shared utilities and server helpers
-├── types/               # Shared TypeScript contracts
-└── proxy.ts             # Locale detection + prefix redirects (Next.js proxy)
+See [`.env.example`](.env.example) and the
+[Strapi integration contracts](docs/strapi-integrations.md) for the expected
+shape and behavior.
 
-messages/                # Translation catalogs, one JSON per locale — see messages/README.md
+## Commands
 
-public/
-├── app/                 # Screenshots, store badges, QR code
-└── brand/               # App icon and derived PWA icons
+| Command | Purpose |
+| --- | --- |
+| `pnpm dev` | Start the development server. |
+| `pnpm build` | Create a production build. |
+| `pnpm start` | Run a regular production build locally. |
+| `pnpm lint` | Run ESLint. |
+| `pnpm typecheck` | Run TypeScript without emitting files. |
+| `pnpm test` | Run the Vitest suite once. |
+| `pnpm docs:check` | Validate relative links in project Markdown files. |
+| `pnpm check` | Run lint, type checking, tests, and documentation validation. |
 
-docs/                    # Long-term contracts, release notes, and TODOs
-```
+The deployed standalone server uses a different start command; see
+[Deployment](docs/deployment.md).
 
-Landing copy is localized: all user-facing text lives in `messages/<locale>.json` (typed by `Dictionary` in `src/i18n/`) and is rendered from Server Components, so catalogs never reach the client bundle. Dynamic Strapi-backed content can be added later from Server Components without exposing API tokens to the browser.
+## Architecture at a glance
+
+- `src/app/` owns routes, layouts, metadata, route handlers, and the newsletter
+  Server Action.
+- Server Components are the default. Small Client Component islands own browser
+  interactions such as forms, dialogs, navigation, and banner dismissal.
+- `src/components/` is organized by subsystem rather than by route file.
+- `src/config/`, `src/i18n/`, and `src/lib/` hold structural configuration,
+  localization, and shared server/domain logic respectively.
+- `messages/` contains one typed JSON catalog per supported locale.
+- `public/` contains source and generated web assets.
+
+See [Architecture](docs/architecture.md) for the route map, dependency
+boundaries, and documentation rules.

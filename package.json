@@ -10,7 +10,8 @@
     "typecheck": "tsc --noEmit --incremental false",
     "test": "vitest run",
     "test:watch": "vitest",
-    "check": "pnpm lint && pnpm typecheck && pnpm test"
+    "docs:check": "node scripts/check-docs.mjs",
+    "check": "pnpm lint && pnpm typecheck && pnpm test && pnpm docs:check"
   },
   "dependencies": {
     "@base-ui/react": "^1.6.0",

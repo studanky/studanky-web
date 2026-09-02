@@ -12,7 +12,7 @@ import { canonicalLanguageTag, defaultLocale } from "@/i18n/config";
 // The endpoint returns a deliberately minimal, teaser-level payload (name,
 // coordinates, description, photo, current flow status + when it was updated).
 // It withholds flow strength, water quality and report history — those stay
-// app-only. See docs/strapi-share-endpoint.md for the contract.
+// app-only. See docs/strapi-integrations.md for the contract.
 
 const STRAPI_API_BASE = process.env.STRAPI_API_BASE;
 

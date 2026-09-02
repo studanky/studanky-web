@@ -6,6 +6,6 @@ This version has breaking changes — APIs, conventions, and file structure may 
 
 ## Localization
 
-All user-facing copy lives in `messages/<locale>.json`, typed by `Dictionary` (`src/i18n/`). Never hardcode strings — including `aria-label` and `alt` — in components; add a key and pass it in via props. See `messages/README.md`.
+All user-facing copy lives in `messages/<locale>.json`, typed by `Dictionary` (`src/i18n/`). Never hardcode strings — including `aria-label` and `alt` — in components; add a key and pass it in via props. See `docs/localization.md`.
 
 Routing is always-prefixed (`/cs`, `/en`); `src/proxy.ts` (must stay in `src/`) redirects the bare `/`. Deep-link routes (`/s/*`) and `.well-known/*` stay outside `app/[locale]/` — don't move them.
