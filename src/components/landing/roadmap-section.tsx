@@ -1,6 +1,5 @@
 import { MailIcon } from "lucide-react";
 
-import { siteConfig } from "@/config/site";
 import type { Locale } from "@/i18n/config";
 import type { Dictionary } from "@/i18n/dictionary";
 import { cn } from "@/lib/utils";
@@ -77,12 +76,7 @@ export function RoadmapSection({ dict, locale }: { dict: Dictionary; locale: Loc
               <p className="text-sm leading-6 text-muted-foreground">
                 {roadmap.newsletter.description}
               </p>
-              <NewsletterForm
-                copy={roadmap.newsletter}
-                locale={locale}
-                source="prelaunch-page"
-                sourceRef={`${siteConfig.url}/#roadmap`}
-              />
+              <NewsletterForm copy={roadmap.newsletter} locale={locale} />
             </div>
           </Reveal>
         </div>

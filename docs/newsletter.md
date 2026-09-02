@@ -30,11 +30,10 @@ POST {STRAPI_API_BASE}/newsletter/subscribe
 - `consent` is sent as `true`; missing or tampered consent is rejected before
   Strapi is called.
 - `preferredLanguage` is the active locale (`cs`, `en`).
-- `source` is whitelisted in the action. The current landing-page form uses
-  `prelaunch-page`.
-- `sourceRef` is whitelisted in the action. The current landing-page form uses
-  `https://studankyapp.cz/#roadmap`. Do not put secrets, tokens, session data,
-  or free user text into it.
+- `source` and `sourceRef` are server-owned constants. The browser does not send
+  them; the action assigns `prelaunch-page` and
+  `https://studankyapp.cz/#roadmap` directly. Do not put secrets, tokens,
+  session data, or free user text into `sourceRef`.
 - `consentVersion` is pinned to `2026-07-10`; update it whenever the consent
   wording materially changes.
 - The Strapi request is a plain top-level object, never a REST envelope such as

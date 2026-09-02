@@ -8,14 +8,13 @@ import { headers } from "next/headers";
 import { z } from "zod";
 
 import { privacyConsentVersion } from "@/config/legal";
-import { siteConfig } from "@/config/site";
+import { newsletterSource } from "@/config/newsletter";
 import { isLocale, type Locale } from "@/i18n/config";
 
 export type NewsletterState = {
   status: "idle" | "success" | "invalid" | "error";
 };
 
-type NewsletterSource = "prelaunch-page" | "website-hero" | "website-footer";
 type RateLimitWindow = {
   name: string;
   limit: number;
@@ -26,27 +25,9 @@ type RateLimitBucket = {
   resetAt: number;
 };
 
-const NEWSLETTER_SOURCE_REFS = {
-  top: `${siteConfig.url}/#top`,
-  roadmap: `${siteConfig.url}/#roadmap`,
-  download: `${siteConfig.url}/#download`,
-} as const;
-
-type NewsletterSourceRef = (typeof NEWSLETTER_SOURCE_REFS)[keyof typeof NEWSLETTER_SOURCE_REFS];
-
 const STRAPI_API_BASE = process.env.STRAPI_API_BASE;
 const FETCH_TIMEOUT_MS = 5000;
 const RATE_LIMIT_CLEANUP_INTERVAL_MS = 60_000;
-const NEWSLETTER_SOURCES = new Set<NewsletterSource>([
-  "prelaunch-page",
-  "website-hero",
-  "website-footer",
-]);
-const NEWSLETTER_SOURCE_REFS_BY_SOURCE: Record<NewsletterSource, ReadonlySet<NewsletterSourceRef>> = {
-  "prelaunch-page": new Set([NEWSLETTER_SOURCE_REFS.roadmap]),
-  "website-hero": new Set([NEWSLETTER_SOURCE_REFS.top]),
-  "website-footer": new Set([NEWSLETTER_SOURCE_REFS.download]),
-};
 const IP_RATE_LIMITS: RateLimitWindow[] = [
   { name: "minute", limit: 5, windowMs: 60_000 },
   { name: "day", limit: 100, windowMs: 86_400_000 },
@@ -66,11 +47,6 @@ function getLocale(formData: FormData): Locale | null {
   return isLocale(locale) ? locale : null;
 }
 
-function getSource(formData: FormData): NewsletterSource | null {
-  const source = getString(formData, "source");
-  return NEWSLETTER_SOURCES.has(source as NewsletterSource) ? (source as NewsletterSource) : null;
-}
-
 function newsletterEndpoint(): string | null {
   if (!STRAPI_API_BASE) return null;
 
@@ -80,13 +56,6 @@ function newsletterEndpoint(): string | null {
   } catch {
     return null;
   }
-}
-
-function getSourceRef(formData: FormData, source: NewsletterSource): NewsletterSourceRef | null {
-  const sourceRef = getString(formData, "sourceRef");
-  return NEWSLETTER_SOURCE_REFS_BY_SOURCE[source].has(sourceRef as NewsletterSourceRef)
-    ? (sourceRef as NewsletterSourceRef)
-    : null;
 }
 
 function stripQuotes(value: string): string {
@@ -180,13 +149,7 @@ export async function subscribeToNewsletter(
   if (isNewsletterRateLimited(requestHeaders)) return { status: "error" };
 
   const locale = getLocale(formData);
-  const source = getSource(formData);
-  if (getString(formData, "consent") !== "true" || !locale || !source) {
-    return { status: "error" };
-  }
-
-  const sourceRef = getSourceRef(formData, source);
-  if (!sourceRef) {
+  if (getString(formData, "consent") !== "true" || !locale) {
     return { status: "error" };
   }
 
@@ -213,10 +176,10 @@ export async function subscribeToNewsletter(
       body: JSON.stringify({
         email: parsed.data,
         consent: true,
-        source,
+        source: newsletterSource.id,
         preferredLanguage: locale,
         consentVersion: privacyConsentVersion,
-        sourceRef,
+        sourceRef: newsletterSource.ref,
         website: "",
       }),
       cache: "no-store",
