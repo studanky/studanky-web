@@ -5,7 +5,7 @@
  */
 export const siteConfig = {
   name: "Studánky",
-  url: "https://studankyapp.cz",
+  url: "https://studanky.cz",
   // Numeric App Store ID (not the bundle ID) for the iOS Smart App Banner.
   // Empty = banner is not rendered.
   appStoreId: "6778837458" as string,
